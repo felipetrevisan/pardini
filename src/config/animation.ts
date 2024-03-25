@@ -36,25 +36,6 @@ export const headerVariants: Variants = {
 
 export const footerVariants: Variants = headerVariants;
 
-export const menuMobileVariants: Variants = {
-  closed: {
-    transition: {
-      staggerChildren: 0.2,
-      staggerDirection: -1,
-    },
-    visibility: "hidden",
-    opacity: 0,
-  },
-  open: {
-    transition: {
-      staggerChildren: 0.2,
-      staggerDirection: 1,
-    },
-    visibility: "visible",
-    opacity: 1,
-  },
-};
-
 export const headerItemsVariants: Variants = {
   enter: {
     transition: {
@@ -124,6 +105,27 @@ export const slideUpVariants: Variants = {
     transition: {
       delay: 0.5,
       duration: 1,
+      type: "spring",
+      stiffness: 100,
+    },
+  },
+};
+
+export const aboutSectionVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.7,
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
     },
   },
 };
