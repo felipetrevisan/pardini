@@ -1,102 +1,225 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import clsx from "clsx";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { MailIcon } from "lucide-react";
 import { useApp } from "@/hooks/useApp";
 import { slideUpVariants } from "@/config/animation";
-import { Logo } from "@/components/Logo";
-import Image from "next/image";
-import Autoplay from "embla-carousel-autoplay";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
+import { ContactFormDrawer } from "@/components/contact-form-drawer";
+import { Featured } from "@/types/site";
+import { urlForImage } from "@/sanity/lib/utils";
+import Image from "next/image";
 
-export function Home() {
+export function Home({ images }: { images: Featured[] }) {
   const refHome = useRef<HTMLDivElement>(null);
-  const { setCurrentSection, getSection, isMenuOpen } = useApp();
+  const { setCurrentSection, getSection } = useApp();
 
   useEffect(() => {
     setCurrentSection(getSection("/"));
   }, [getSection, setCurrentSection]);
 
-  const classes = clsx("w-screen", {
-    "backdrop-blur-sm": !isMenuOpen,
-    "backdrop-blur-lg": isMenuOpen,
-  });
-
   return (
-    <>
-      {/* <TransitionEffect /> */}
-      <motion.div layout ref={refHome} className={classes} data-section="home">
-        <div className="aspect-video md:aspect-[16/7] flex items-center justify-start space-y-1 relative before:w-full before:h-full before:bg-gradient-to-r before:from-black/70 before:via-secondary/40 before:to-transparent before:z-40">
-          <Carousel
-            className="w-full h-full"
-            opts={{
-              loop: true,
-            }}
-            plugins={[Autoplay()]}
-          >
-            <CarouselContent>
-              <CarouselItem>
+    <motion.div layout ref={refHome} className="w-screen" data-section="home">
+      <div className="aspect-[1] md:aspect-[16/7] flex items-center justify-start space-y-1 relative bg-white shadow-xl">
+        <Swiper
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: true,
+          }}
+          modules={[Autoplay]}
+          className="w-full h-full"
+        >
+          {images?.map(({ id, title, subtitle, image }) => (
+            <SwiperSlide
+              key={id}
+              className="relative before:absolute before:z-[2] before:bg-gradient-to-r before:from-black/70 before:via-secondary/40 before:to-black/10 before:w-full before:h-full bg-primary"
+            >
+              {image && (
                 <Image
-                  src={`/assets/bg/bg-0.jpg`}
+                  className="h-auto w-full z-[1]"
                   alt=""
+                  src={urlForImage(image).url()}
+                  sizes="100vw"
                   fill
-                  className="z-30"
                 />
-              </CarouselItem>
-              <CarouselItem>
-                <Image
-                  src={`/assets/bg/bg-1.jpg`}
-                  alt=""
-                  fill
-                  className="z-30"
-                />
-              </CarouselItem>
-            </CarouselContent>
-          </Carousel>
-
-          <motion.div className="absolute flex items-start w-full z-50 px-20">
-            <div className="flex flex-col space-y-6 md:items-start items-center justify-center">
-              <motion.h4
-                className="text-3xl text-secondary-foreground lg:text-5xl font-bold text-center md:text-start"
-                variants={slideUpVariants}
-                initial="initial"
-                animate="animate"
-              >
-                Bem vindo à Pardini Cidadania
-              </motion.h4>
-              <motion.h2
-                className="text-xl font-light text-secondary-foreground lg:text-3xl text-center md:text-start"
-                variants={slideUpVariants}
-                initial="initial"
-                animate="animate"
-              >
-                Se torne um cidadão italiano <br /> e realize o seu sonho de
-                viver na Europa
-              </motion.h2>
-              <Link href="/contact" passHref>
-                <Button
-                  variant="secondary"
-                  size="xl"
-                  rounded="full"
-                  hover="effect"
-                  className="flex items-center justify-center gap-2"
+              )}
+              <div className="w-full h-full flex flex-row items-center px-10 md:px-20">
+                <motion.div
+                  className="flex flex-col items-start justify-start md:justify-center space-y-6 z-[3]"
+                  variants={slideUpVariants}
+                  initial="initial"
+                  animate="animate"
                 >
-                  <MailIcon fontSize={10} />
-                  Entre em contato
-                </Button>
-              </Link>
+                  <motion.h2 className="text-2xl text-secondary-foreground md:text-5xl font-bold md:text-start drop-shadow-text shadow-black">
+                    {title}
+                  </motion.h2>
+                  <motion.h3 className="text-xl font-medium text-secondary-foreground md:text-3xl md:text-start drop-shadow-text shadow-black line-clamp-2 max-w-2xl">
+                    {subtitle}
+                  </motion.h3>
+                  <Drawer>
+                    <DrawerTrigger asChild>
+                      <Button
+                        variant="secondary"
+                        size="xl"
+                        rounded="full"
+                        hover="effect"
+                        shadow
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <MailIcon fontSize={10} />
+                        Entre em contato
+                      </Button>
+                    </DrawerTrigger>
+                    <ContactFormDrawer onRequestClose={() => null} />
+                  </Drawer>
+                </motion.div>
+              </div>
+            </SwiperSlide>
+          ))}
+          {/* <SwiperSlide className="from-black/70 via-primary/40 to-black/10 bg-[linear-gradient(to_right,var(--tw-gradient-stops)),url(/assets/bg/bg-1.jpg)] bg-cover bg-center px-20">
+            <div className="w-full h-full flex flex-row items-center">
+              <motion.div
+                className="flex flex-col items-start justify-center space-y-6"
+                variants={slideUpVariants}
+                initial="initial"
+                animate="animate"
+              >
+                <motion.h2 className="text-3xl text-secondary-foreground lg:text-5xl font-bold text-center md:text-start drop-shadow-text shadow-black">
+                  Bem vindo à Pardini Cidadania
+                </motion.h2>
+                <motion.h3 className="text-xl font-medium text-secondary-foreground lg:text-3xl text-center md:text-start drop-shadow-text shadow-black">
+                  Sua cidadania italiana de forma simple. <br />
+                  Nós cuidamos de toda burocracia para você.
+                </motion.h3>
+                <Drawer>
+                  <DrawerTrigger>
+                    <Button
+                      variant="secondary"
+                      size="xl"
+                      rounded="full"
+                      hover="effect"
+                      shadow
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <MailIcon fontSize={10} />
+                      Entre em contato
+                    </Button>
+                  </DrawerTrigger>
+                  <ContactFormDrawer onRequestClose={() => null} />
+                </Drawer>
+              </motion.div>
             </div>
-          </motion.div>
-        </div>
-      </motion.div>
-    </>
+          </SwiperSlide>
+
+          <SwiperSlide className="from-black/70 via-secondary/40 to-black/10 bg-[linear-gradient(to_right,var(--tw-gradient-stops)),url(/assets/bg/bg-2.jpg)] bg-cover bg-center px-20">
+            <div className="w-full h-full flex flex-row items-center">
+              <motion.div
+                className="flex flex-col items-start justify-center space-y-6"
+                variants={slideUpVariants}
+                initial="initial"
+                animate="animate"
+              >
+                <motion.h2 className="text-3xl text-secondary-foreground lg:text-5xl font-bold text-center md:text-start drop-shadow-text shadow-black">
+                  Bem vindo à Pardini Cidadania
+                </motion.h2>
+                <motion.h3 className="text-xl font-medium text-secondary-foreground lg:text-3xl text-center md:text-start drop-shadow-text shadow-black">
+                  Se torne um cidadão italiano <br /> e realize o seu sonho de viver na Europa.
+                </motion.h3>
+                <Drawer>
+                  <DrawerTrigger>
+                    <Button
+                      variant="secondary"
+                      size="xl"
+                      rounded="full"
+                      hover="effect"
+                      shadow
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <MailIcon fontSize={10} />
+                      Entre em contato
+                    </Button>
+                  </DrawerTrigger>
+                  <ContactFormDrawer onRequestClose={() => null} />
+                </Drawer>
+              </motion.div>
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide className="from-black/70 via-secondary/40 to-black/10 bg-[linear-gradient(to_right,var(--tw-gradient-stops)),url(/assets/bg/bg-3.jpg)] bg-cover bg-center px-20">
+            <div className="w-full h-full flex flex-row items-center">
+              <motion.div
+                className="flex flex-col items-start justify-center space-y-6"
+                variants={slideUpVariants}
+                initial="initial"
+                animate="animate"
+              >
+                <motion.h2 className="text-3xl text-secondary-foreground lg:text-5xl font-bold text-center md:text-start drop-shadow-text shadow-black">
+                  Bem vindo à Pardini Cidadania
+                </motion.h2>
+                <motion.h3 className="text-xl font-medium text-secondary-foreground lg:text-3xl text-center md:text-start drop-shadow-text shadow-black">
+                  Se torne um cidadão italiano <br /> e realize o seu sonho de viver na Europa.
+                </motion.h3>
+                <Drawer>
+                  <DrawerTrigger>
+                    <Button
+                      variant="secondary"
+                      size="xl"
+                      rounded="full"
+                      hover="effect"
+                      shadow
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <MailIcon fontSize={10} />
+                      Entre em contato
+                    </Button>
+                  </DrawerTrigger>
+                  <ContactFormDrawer onRequestClose={() => null} />
+                </Drawer>
+              </motion.div>
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide className="from-black/70 via-secondary/40 to-black/10 bg-[linear-gradient(to_right,var(--tw-gradient-stops)),url(/assets/bg/bg-4.jpg)] bg-cover bg-center px-20">
+            <div className="w-full h-full flex flex-row items-center">
+              <motion.div
+                className="flex flex-col items-start justify-center space-y-6"
+                variants={slideUpVariants}
+                initial="initial"
+                animate="animate"
+              >
+                <motion.h2 className="text-3xl text-secondary-foreground lg:text-5xl font-bold text-center md:text-start drop-shadow-text shadow-black">
+                  Bem vindo à Pardini Cidadania
+                </motion.h2>
+                <motion.h3 className="text-xl font-medium text-secondary-foreground lg:text-3xl text-center md:text-start drop-shadow-text shadow-black">
+                  Se torne um cidadão italiano <br /> e realize o seu sonho de viver na Europa.
+                </motion.h3>
+                <Drawer>
+                  <DrawerTrigger>
+                    <Button
+                      variant="secondary"
+                      size="xl"
+                      rounded="full"
+                      hover="effect"
+                      shadow
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <MailIcon fontSize={10} />
+                      Entre em contato
+                    </Button>
+                  </DrawerTrigger>
+                  <ContactFormDrawer onRequestClose={() => null} />
+                </Drawer>
+              </motion.div>
+            </div>
+          </SwiperSlide> */}
+        </Swiper>
+      </div>
+    </motion.div>
   );
 }

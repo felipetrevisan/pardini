@@ -1,30 +1,22 @@
-import { Suspense } from "react";
-import { getTestimonialsFromNotion } from "@/lib/notion-client";
-import { Title } from "@/components/ui/Title";
+import * as App from "@/components/app";
 import { Items } from "./items";
 
-export async function Testimonials() {
-  const { content } = await getTestimonialsFromNotion();
-
+export function Testimonials() {
   return (
-    <>
-      {/* <TransitionEffect /> */}
-      <div className="h-full w-screen flex my-20" data-section="testimonials">
-        <div className="container flex items-center justify-start gap-1">
-          <div className="w-full flex flex-col">
-            <Title className="uppercase">Depoimentos</Title>
-            <h2 className="ms-7 text-2xl font-semibold">
-              O que <span className="text-secondary">nossos clientes</span>{" "}
-              dizem sobre nós
-            </h2>
-            <div className="w-full mt-10">
-              <Suspense fallback={<p>Loading</p>}>
-                <Items data={content.filter(faq => faq.showInHome) ?? []} />
-              </Suspense>
-            </div>
-          </div>
+    <div className="h-full w-screen flex my-20" data-section="testimonials">
+      <div className="container w-full flex flex-col gap-14">
+        <div className="flex flex-col">
+          <App.Title>Depoimentos</App.Title>
+          <App.Subtitle>
+            O que{" "}
+            <span className="text-primary drop-shadow-[0px_1px_2px_var(--tw-shadow-color)] shadow-slate-200">
+              nossos clientes
+            </span>{" "}
+            dizem sobre nós
+          </App.Subtitle>
         </div>
+        <Items />
       </div>
-    </>
+    </div>
   );
 }

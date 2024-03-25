@@ -1,0 +1,13 @@
+[data-section="testimonials"] {
+  & .swiper-slide {
+    &:has(.swiper-slide-active) {
+      @apply shadow-2xl;
+    }
+
+    &:not(.swiper-slide-fully-visible) {
+      @apply relative before:z-30 before:absolute before:h-full before:w-full before:bg-secondary/30;
+
+      opacity: 0.5;
+    }
+  }
+}
