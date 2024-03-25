@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 114.55deg 64.71% 20%;
+    --primary: 106.15deg 61.9% 20.59%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 356.74deg 68.66% 26.27%;
@@ -30,11 +30,15 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
+    --success: 145.61deg 63.05% 48.82%;
+    --success-foreground: 0 0% 98%;
+
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
+    --header-height: 98px;
   }
 
   .dark {
@@ -49,7 +53,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 114.55deg 64.71% 20%;
+    --primary: 106.15deg 61.9% 20.59%;
     --primary-foreground: 240 5.9% 10%;
 
     --secondary: 356.74deg 68.66% 26.27%;
@@ -63,6 +67,9 @@
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
+
+    --success: 145.61deg 63.05% 48.82%;
+    --success-foreground: 0 0% 98%;
 
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
@@ -81,6 +88,6 @@
   }
 
   section:last-of-type {
-    @apply rounded-bl-[90px] mb-[90px];
+    @apply rounded-bl-[90px] rounded-br-[90px];
   }
 }
