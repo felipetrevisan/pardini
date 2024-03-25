@@ -1,5 +1,3 @@
-import type { Config } from "tailwindcss";
-
 const config = {
   darkMode: "media",
   content: [
@@ -37,6 +35,10 @@ const config = {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
@@ -62,14 +64,9 @@ const config = {
       backgroundImage: {
         vacation: 'url("/assets/bg-vacation.jpg")',
         honeycomb: 'url("/assets/bg-honeycomb.png")',
+        "page-header": 'url("/assets/bg-page-title.jpg")',
         pattern: 'url("/assets/bg-pattern.png")',
-        about: 'url("/assets/bg-pattern-1.jpg")',
-        "arrow-overlay": 'url("/assets/bg-overlay.png")',
         item: 'url("/assets/item-shape.png")',
-        "menu-item":
-          "linear-gradient(to left, #fefffa, var(--secondary), var(--primary))",
-        "section-divider":
-          "linear-gradient(135deg, #eceef5 25%, transparent 25%), linear-gradient(225deg, #eceef5 25%, transparent 25%)",
         fade: "linear-gradient(transparent 150px, #fefffa)",
         separator: "linear-gradient(15deg, #fff 50%, transparent 50%)",
       },
@@ -94,9 +91,12 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      dropShadow: {
+        text: "0px 1px 2px var(--tw-shadow-color)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+};
 
 export default config;
