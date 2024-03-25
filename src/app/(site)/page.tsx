@@ -23,14 +23,12 @@ export default async function Page() {
       >
         <AboutComponent />
       </section>
-      {/* <TriangleDivider transparent={false} /> */}
       <section
         id="services"
         className="section relative flex min-h-full items-center justify-center bg-pattern bg-cover bg-no-repeat bg-white"
       >
         <ServicesComponent />
       </section>
-      {/* <TriangleDivider transparent={false} /> */}
       <section
         id="testimonials"
         className="section relative flex min-h-full items-center justify-center bg-white"

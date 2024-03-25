@@ -1,9 +1,11 @@
+import { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import { Inter } from "next/font/google";
 import * as App from "@/components/app";
 
 import "../globals.css";
 import Providers from "./providers";
-import { Metadata } from "next";
 import { getSiteConfig } from "@/server/get-site-config";
 
 const inter = Inter({
@@ -43,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <App.Content>{children}</App.Content>
           <App.Footer />
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
