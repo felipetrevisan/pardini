@@ -1,20 +1,21 @@
 export enum MenuTypes {
-  drawer,
-  top,
+  "drawer",
+  "top",
 }
 
 export enum Sections {
-  home,
-  about,
-  services,
-  testimonials,
-  contact,
+  "home",
+  "about",
+  "services",
+  "testimonials",
+  "contact",
 }
 
 export type Section = {
   name: keyof typeof Sections;
   label: string;
   path: string;
+  hasSubmenu?: boolean;
 };
 
 export type SectionsKey = keyof typeof Sections;
@@ -34,6 +35,7 @@ export const defaultSections: Section[] = [
     name: "services",
     label: "Serviços",
     path: "/services",
+    hasSubmenu: true,
   },
   {
     name: "testimonials",
@@ -45,9 +47,9 @@ export const defaultSections: Section[] = [
     label: "Contato",
     path: "/contact",
   },
-];
+] satisfies Section[];
 
 export enum ContentArea {
-  header = "header",
-  footer = "footer",
+  "header" = "header",
+  "footer" = "footer",
 }

@@ -2,13 +2,29 @@ import { icons } from "lucide-react";
 
 export type Service = {
   id: string;
-  icon: keyof typeof icons;
   title: string;
+  icon: keyof typeof icons;
+  type: keyof typeof ServiceType;
   excerpt: string;
   description: string;
+  buttons: ServiceButton;
 };
 
+type ServiceButton = {
+  hasSeeMoreButton?: boolean;
+  linkSeeMore?: string;
+  hasWhatsappButton?: boolean;
+  whatsappButtonLabel?: keyof typeof WhatsappButtonLabel;
+  linkWhatsappButton?: string;
+};
+
+export enum WhatsappButtonLabel {
+  TALK_WITH_SPECIALIST = "Fale com um especialista",
+  MORE_INFORMATION = "Saiba mais",
+  GET_QUOTE = "Solicite um orçamento",
+}
+
 export enum ServiceType {
-  HAVING = "9416cbb3332e47a297773db1a6e7beca",
-  NOT_HAVING = "0bc5916dd8c04285a87cede0667f63b2",
+  HAVING = "HAVING",
+  NOT_HAVING = "NOT_HAVING",
 }

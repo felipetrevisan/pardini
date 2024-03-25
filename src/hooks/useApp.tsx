@@ -10,21 +10,30 @@ import {
 } from "react";
 import { Cycle, useCycle } from "framer-motion";
 import { defaultSections, type Section } from "@/types/global";
+import { Service } from "@/types/services";
 
 type AppContextProps = {
   isMenuOpen: boolean;
   sections: Section[];
   currentSection: Section;
-  isInHome: () => boolean;
   getSection: (sectionName: string) => Section;
   setCurrentSection: Dispatch<SetStateAction<Section>>;
   toogleMenu: Cycle;
+  serviceDetailsDialogOpen: boolean;
+  setServiceDetailsDialogOpen: Dispatch<SetStateAction<boolean>>;
+  selectedServiceDetails: Service | null;
+  setSelectedServiceDetails: Dispatch<SetStateAction<Service | null>>;
 };
 
 const AppContext = createContext({} as AppContextProps);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, toogleMenu] = useCycle(false, true);
+  const [serviceDetailsDialogOpen, setServiceDetailsDialogOpen] =
+    useState(false);
+  const [selectedServiceDetails, setSelectedServiceDetails] =
+    useState<Service | null>(null);
+
   const [sections, setSections] = useState<Section[]>(defaultSections);
 
   const [currentSection, setCurrentSection] = useState<Section>(() => {
@@ -33,7 +42,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const isInHome = useCallback(
     () => currentSection.path === "/",
-    [currentSection]
+    [currentSection],
   );
 
   const getSection = useCallback(
@@ -42,7 +51,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
       return sections.find((section) => section?.path === path)!;
     },
-    [sections]
+    [sections],
   );
 
   return (
@@ -52,9 +61,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         isMenuOpen,
         sections,
         currentSection,
-        isInHome,
         getSection,
         setCurrentSection,
+        serviceDetailsDialogOpen,
+        setServiceDetailsDialogOpen,
+        selectedServiceDetails,
+        setSelectedServiceDetails,
       }}
     >
       {children}

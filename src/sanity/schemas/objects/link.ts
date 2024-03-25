@@ -57,8 +57,6 @@ export default defineType({
       validation: (rule) =>
         rule
           .custom((field, context) => {
-            // This would crash if we didn't check
-            // for undefined values first
             return context?.document?.link_type === "EXTERNAL" &&
               context?.document?.use_page_path_uri &&
               !field?.startsWith("/")
