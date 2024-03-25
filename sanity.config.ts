@@ -5,7 +5,6 @@ import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { schema } from "@/sanity/schema";
-import { assistWithPresets } from "@/sanity/plugins/assist";
 import structure from "@/sanity/structures";
 
 export default defineConfig({
@@ -37,9 +36,6 @@ export default defineConfig({
     }),
     // Add an image asset source for Unsplash
     unsplashImageAsset(),
-    // Sets up AI Assist with preset prompts
-    // https://www.sanity.io/docs/ai-assist
-    assistWithPresets(),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     process.env.NODE_ENV === "development" && visionTool({ defaultApiVersion: apiVersion }),
