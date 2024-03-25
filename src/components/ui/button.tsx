@@ -5,28 +5,27 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "relative overflow-hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-[1] duration-500",
+  "relative overflow-hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-[1] duration-500 ",
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90 outline outline-2 outline-primary",
+        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-secondary bg-accent shadow-sm hover:bg-secondary hover:text-secondary-foreground",
+          "border border-white bg-accent shadow-sm hover:bg-secondary hover:text-secondary-foreground outline outline-2 outline-secondary",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          "bg-secondary text-secondary-foreground shadow hover:bg-secondary/80 outline outline-2 outline-secondary",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        whatsapp: "bg-[#2ecb71] border-2 border-green-400 text-white font-bold",
+        whatsapp:
+          "bg-success border-2 border-white text-white font-bold hover:bg-white hover:text-success hover:border-white outline outline-2 outline-success hover:outline-white hover:border-success",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 px-3 text-xs",
         lg: "h-10 px-8",
-        xl: "h-14 text-md px-10",
-        "2xl": "h-16 text-md px-10",
+        xl: "h-14 text-md px-6",
+        "2xl": "h-16 text-md px-8",
         icon: "size-9",
       },
       rounded: {
@@ -35,6 +34,9 @@ const buttonVariants = cva(
         lg: "rounded-lg",
         xl: "rounded-2xl",
         "2xl": "rounded-3xl",
+      },
+      shadow: {
+        true: "shadow-[-.2rem_.35rem]",
       },
       hover: {
         effect:
@@ -46,6 +48,7 @@ const buttonVariants = cva(
       size: "default",
       rounded: "none",
       hover: null,
+      shadow: false,
     },
     compoundVariants: [
       {
@@ -56,20 +59,26 @@ const buttonVariants = cva(
         hover: "effect",
         variant: "default",
         className:
-          "transition-all ease-in-out duration-500 before:bg-secondary hover:text-secondary-foreground",
+          "transition-all ease-in-out duration-500 before:bg-accent hover:text-primary",
       },
       {
         hover: "effect",
         variant: "secondary",
-        className:
-          "transition-all ease-in-out duration-500 before:bg-accent hover:text-primary-foreground",
+        className: "transition-all ease-in-out duration-500 before:bg-accent hover:text-secondary",
       },
-      // {
-      //   hover: "effect",
-      //   className: "rounded-full"
-      // },
+      {
+        shadow: true,
+        variant: "default",
+        className:
+          "shadow-primary/40 hover:shadow-black transition-shadow ease-in-out duration-500",
+      },
+      {
+        shadow: true,
+        variant: "secondary",
+        className: "shadow-secondary/40 hover:shadow-black transition-shadow ease-in-out duration-500",
+      },
     ],
-  },
+  }
 );
 
 export interface ButtonProps
@@ -79,21 +88,16 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    { className, variant, size, rounded, hover, asChild = false, ...props },
-    ref,
-  ) => {
+  ({ className, variant, size, rounded, hover, shadow, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(
-          buttonVariants({ variant, size, rounded, hover, className }),
-        )}
+        className={cn(buttonVariants({ variant, size, rounded, hover, shadow, className }))}
         ref={ref}
         {...props}
       />
     );
-  },
+  }
 );
 Button.displayName = "Button";
 
