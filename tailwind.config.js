@@ -63,11 +63,8 @@ const config = {
       },
       backgroundImage: {
         vacation: 'url("/assets/bg-vacation.jpg")',
-        honeycomb: 'url("/assets/bg-honeycomb.png")',
         "page-header": 'url("/assets/bg-page-title.jpg")',
         pattern: 'url("/assets/bg-pattern.png")',
-        item: 'url("/assets/item-shape.png")',
-        fade: "linear-gradient(transparent 150px, #fefffa)",
         separator: "linear-gradient(15deg, #fff 50%, transparent 50%)",
       },
       backgroundSize: {
