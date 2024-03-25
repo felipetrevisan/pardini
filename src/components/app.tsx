@@ -23,7 +23,6 @@ import {
   NavigationListItem,
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
@@ -43,7 +42,6 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
     const { data: serviceData, isLoading } = useServices();
     const { data: siteConfigData, isLoading: isSiteConfigLoading } = useSite();
 
-    const MotionLink = motion(Link);
     const MotionSocialNetworks = motion(SocialNetworks);
 
     const { scrollY } = useScroll();
@@ -105,7 +103,7 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
           >
             <Fragment>
               <Navbar.Brand>
-                <MotionLink
+                <motion.a
                   href="/"
                   className="relative w-full h-[60px]"
                   style={{
@@ -116,14 +114,12 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
                   <Image
                     src="/assets/logo-pardini.png"
                     alt="Logo Pardini"
-                    // width="440"
-                    // height="130"
                     className="w-[240px] h-full max-w-[240px] max-h-max md:max-w-[440px] md:max-h-max"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority
                     fill
                   />
-                </MotionLink>
+                </motion.a>
               </Navbar.Brand>
               {!isSiteConfigLoading && (
                 <Fragment>

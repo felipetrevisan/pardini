@@ -37,7 +37,7 @@ export function Blog({ pageIndex, pageSize }: BlogPostQuery) {
     >
       <App.PageHeader>Blog</App.PageHeader>
       <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {data?.map((post) => <Post {...post} />)}
+        {data?.map((post) => <Post {...post} key={post.id} />)}
       </div>
     </motion.div>
   );
