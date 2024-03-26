@@ -39,7 +39,7 @@ export const siteConfigQuery = groq`
       "id": _id,
       title,
       subtitle,
-      background_image
+      "image": background_image
     }
   }
 `;
