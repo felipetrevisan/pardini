@@ -15,14 +15,14 @@ export const siteConfigQuery = groq`
             "type": link_type,
             "path": path_uri,
             "usePath": use_page_path_uri,
-            "externalUrl": url
+            "externalUrl": external_url
           }
         },
         "url": navigation_item_url {
           "type": link_type,
           "path": path_uri,
           "usePath": use_page_path_uri,
-          "externalUrl": url
+          "externalUrl": external_url
         }
       }
     },
