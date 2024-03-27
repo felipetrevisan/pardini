@@ -113,7 +113,7 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
                   <Image
                     src="/assets/logo-pardini.png"
                     alt="Logo Pardini"
-                    className="w-[240px] h-full max-w-[240px] max-h-max md:max-w-[440px] md:max-h-max"
+                    className="w-[240px] h-full max-w-[240px] md:max-w-[440px]"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority
                     fill
