@@ -51,7 +51,6 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
     const logoSizeHeight = useTransform(scrollY, scrollYRange, ["60px", "40px", "40px"]);
     const logoSizeWidth = useTransform(scrollY, scrollYRange, ["220px", "140px", "140px"]);
     const iconScale = useTransform(scrollY, scrollYRange, ["1", ".75", ".75"]);
-    const fontSize = useTransform(scrollY, scrollYRange, ["3rem", "1.5rem", "1.5rem"]);
     const paddingHeaderX = useTransform(scrollY, scrollYRange, ["30px", "20px", "20px"]);
     const paddingHeaderY = useTransform(scrollY, scrollYRange, ["1.2rem", "1rem", "1rem"]);
 
@@ -93,7 +92,6 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
               hidden: { top: "0px" },
             }}
             style={{
-              //height: containerHeight,
               paddingLeft: paddingHeaderX,
               paddingRight: paddingHeaderX,
               paddingTop: paddingHeaderY,
