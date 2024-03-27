@@ -48,11 +48,10 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
 
     const scrollYRange = [0, 100, 100];
 
-    const imageSizeHeight = useTransform(scrollY, scrollYRange, ["60px", "40px", "40px"]);
-    const imageSizeWidth = useTransform(scrollY, scrollYRange, ["220px", "140px", "140px"]);
+    const logoSizeHeight = useTransform(scrollY, scrollYRange, ["60px", "40px", "40px"]);
+    const logoSizeWidth = useTransform(scrollY, scrollYRange, ["220px", "140px", "140px"]);
     const iconScale = useTransform(scrollY, scrollYRange, ["1", ".75", ".75"]);
     const fontSize = useTransform(scrollY, scrollYRange, ["3rem", "1.5rem", "1.5rem"]);
-    const opacity = useTransform(scrollY, scrollYRange, [0, 1, 1]);
     const paddingHeaderX = useTransform(scrollY, scrollYRange, ["30px", "20px", "20px"]);
     const paddingHeaderY = useTransform(scrollY, scrollYRange, ["1.2rem", "1rem", "1rem"]);
 
@@ -77,7 +76,7 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
     });
 
     return (
-      <AnimatePresence>
+      <AnimatePresence mode="sync">
         <motion.header
           className={cn(
             `max-w-screen-xl h-[var(--header-height)] max-h-[var(--header-height)] flex flex-wrap items-center justify-between mx-auto`,
@@ -107,8 +106,8 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
                   href="/"
                   className="relative w-full h-[60px]"
                   style={{
-                    height: imageSizeHeight,
-                    width: imageSizeWidth,
+                    height: logoSizeHeight,
+                    width: logoSizeWidth,
                   }}
                 >
                   <Image
@@ -213,100 +212,68 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
 );
 Header.displayName = "Header";
 
-const Content = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, children }, ref) => {
-    const { scrollYProgress } = useScroll();
-    const scaleAnim = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0, 1], {
-      ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
-    });
-    const opacityAnim = useTransform(scrollYProgress, [0, 0.2, 1], [0, 0.2, 1], {
-      ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
-    });
-    const backToTop = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+type ContentProps = React.HTMLAttributes<HTMLDivElement>;
 
-    const MotionButton = motion(Button);
+const Content = ({ className, children }: ContentProps) => {
+  const MotionButton = motion(Button);
 
-    const classes = cn(
-      "relative z-30 h-full flex portrait:md:items-center lg:items-center flex-col justify-center",
-      className
-    );
+  const classes = cn(
+    "relative z-30 h-full flex portrait:md:items-center lg:items-center flex-col justify-center",
+    className
+  );
 
-    return (
-      <motion.main className={classes} ref={ref}>
+  return (
+    <AnimatePresence mode="sync">
+      <motion.main className={classes}>
         {children}
-        <div className="fixed bottom-10 right-10 z-50 flex gap-4">
-          {/* <motion.div
-            style={{
-              opacity: opacityAnim,
-              scale: scaleAnim,
-            }}
+        <div className="fixed bottom-10 right-10 z-50 flex flex-row items-center gap-4">
+          <MotionButton
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 1.1 }}
+            variant="whatsapp"
+            size="xl"
+            className="flex items-center justify-center gap-2 shadow"
+            rounded="xl"
           >
-            <Button color="primary" size="icon" onClick={backToTop}>
-              <FaArrowAltCircleUp size={20} />
-            </Button>
-          </motion.div> */}
-          <div>
-            <MotionButton
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 1.1 }}
-              variant="whatsapp"
-              size="xl"
-              className="flex items-center justify-center gap-2 shadow"
-              rounded="xl"
-            >
-              <MdOutlineWhatsapp size={32} /> Entre em contato
-            </MotionButton>
-          </div>
+            <MdOutlineWhatsapp size={32} /> Entre em contato
+          </MotionButton>
         </div>
       </motion.main>
-    );
-  }
-);
+    </AnimatePresence>
+  );
+};
 Content.displayName = "Content";
 
-const Footer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, children }, ref) => {
-    const { scrollYProgress } = useScroll();
-    const scaleAnim = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0, 1], {
-      ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
-    });
-    const opacityAnim = useTransform(scrollYProgress, [0, 0.2, 1], [0, 0.2, 1], {
-      ease: cubicBezier(0.17, 0.67, 0.83, 0.67),
-    });
-    const backToTop = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    const MotionButton = motion(Button);
-
-    return (
+const Footer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((_, ref) => {
+  return (
+    <AnimatePresence mode="sync">
       <motion.footer
         className="container flex flex-col space-y-10 w-full select-none items-center px-5 py-4 md:px-12 lg:px-12"
         initial="hide"
         whileInView="show"
         exit="hide"
         variants={footerVariants}
+        ref={ref}
       >
-        <div className="flex flex-row items-center justify-between w-full">
+        <div className="flex flex-col gap-10 md:gap-0 md:flex-row items-center justify-between w-full">
           <Image
             src="/assets/logo-pardini.png"
             alt="Logo Pardini"
             width="140"
             height="40"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="w-[200px] md:w-auto"
             priority
           />
           <SocialNetworks size={18} />
         </div>
-        <p className="m-0 text-center text-white text-opacity-75">
+        <p className="text-center text-white text-opacity-75">
           © {new Date().getFullYear()} - Todos os direitos reservados
         </p>
       </motion.footer>
-    );
-  }
-);
+    </AnimatePresence>
+  );
+});
 Footer.displayName = "Footer";
 
 export interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
