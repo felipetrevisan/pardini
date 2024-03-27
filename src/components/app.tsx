@@ -192,6 +192,7 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
                       </NavigationMenuList>
                     </NavigationMenu>
                     <MotionSocialNetworks
+                      className="hidden md:flex"
                       size={18}
                       style={{
                         scaleX: iconScale,

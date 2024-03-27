@@ -4,7 +4,6 @@ import { icons } from "lucide-react";
 import { motion } from "framer-motion";
 import { useSite } from "@/hooks/useSite";
 import React from "react";
-import { cn } from "@/lib/utils";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   size: number;
@@ -16,7 +15,7 @@ const SocialNetworks = React.forwardRef<HTMLDivElement, Props>(({ size, classNam
   if (isLoading) return <></>;
 
   return (
-    <div className={cn("hidden md:flex", className)} ref={ref}>
+    <div className={className} ref={ref}>
       {data?.socialNavigation?.items.map(({ id, icon, url, label }) => {
         const Icon = icons[icon as keyof typeof icons] ?? icons["Link"];
 
