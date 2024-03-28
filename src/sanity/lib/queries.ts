@@ -9,6 +9,7 @@ export const siteConfigQuery = groq`
         "id": _key,
         "hasSubmenu": has_submenu,
         "label": navigation_label,
+        "columns": submenu_columns,
         "submenu": navigation_submenu_items[] {
           "label": navigation_label,
           "url": navigation_item_url {

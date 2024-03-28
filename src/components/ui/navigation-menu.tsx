@@ -16,7 +16,7 @@ const NavigationMenu = React.forwardRef<
     {...props}
   >
     {children}
-    <NavigationMenuViewport />
+    <NavigationMenuViewport forceMount />
   </NavigationMenuPrimitive.Root>
 ));
 NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName;
@@ -27,7 +27,10 @@ const NavigationMenuList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <NavigationMenuPrimitive.List
     ref={ref}
-    className={cn("group flex flex-1 list-none items-center justify-center space-x-1", className)}
+    className={cn(
+      "group flex flex-1 flex-wrap list-none items-center justify-center space-x-1",
+      className
+    )}
     {...props}
   />
 ));
@@ -105,9 +108,7 @@ const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
 >(({ className, ...props }, ref) => (
-  <div
-    className={cn("absolute right-0 top-full flex justify-center")}
-  >
+  <div className={cn("absolute w-full md:w-auto top-1/2 md:right-0 md:top-full flex justify-center")}>
     <NavigationMenuPrimitive.Viewport
       className={cn(
         "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border-4 border-secondary bg-popover text-popover-foreground backdrop-blur-md shadow-black data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
@@ -154,6 +155,7 @@ const NavigationListItem = React.forwardRef<HTMLAnchorElement, NavigationListIte
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground",
             className
           )}
+          ref={ref}
           {...props}
         >
           <div className="flex flex-row items-center gap-2">

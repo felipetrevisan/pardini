@@ -29,6 +29,7 @@ export type NavigationItem = {
   label: string;
   url: NavigationItemURL;
   hasSubmenu: boolean;
+  columns?: number;
   submenu: NavigationItem[];
 };
 

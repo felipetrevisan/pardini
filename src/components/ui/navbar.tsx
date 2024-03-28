@@ -67,7 +67,7 @@ const Collapse = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
     return (
       <div
         className={cn(
-          "md:flex gap-10",
+          "md:flex md:gap-10",
           {
             hidden: !isMenuOpen,
           },
@@ -123,7 +123,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, NavbarToggleProps>(
         ref={ref}
         onClick={() => toogleMenu()}
         className={cn(
-          "inline-flex items-center rounded-xl p-2 text-sm text-secondary-foreground hover:bg-secondary-foreground hover:text-background focus:outline-none focus:ring-2 focus:bg-secondary-foreground md:hidden",
+          "inline-flex items-center rounded-xl p-2 text-sm text-secondary-foreground hover:bg-secondary-foreground hover:text-background focus:outline-none focus:ring-2 focus:bg-secondary-foreground focus:text-secondary md:hidden",
           className
         )}
         {...props}

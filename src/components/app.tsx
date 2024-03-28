@@ -78,7 +78,7 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
       <AnimatePresence mode="sync">
         <motion.header
           className={cn(
-            `max-w-screen-xl h-[var(--header-height)] max-h-[var(--header-height)] flex flex-wrap items-center justify-between mx-auto`,
+            `max-w-screen-xl h-[var(--header-height)] max-h-[var(--header-height)] flex flex-wrap md:flex-nowrap items-center justify-between mx-auto`,
             className
           )}
           ref={ref}
@@ -111,7 +111,7 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
                   <Image
                     src="/assets/logo-pardini.png"
                     alt="Logo Pardini"
-                    className="w-[240px] h-full max-w-[240px] md:max-w-[440px]"
+                    className="w-[200px] h-full max-w-[200px] md:max-w-[440px]"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority
                     fill
@@ -125,13 +125,22 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
                     <NavigationMenu>
                       <NavigationMenuList>
                         {siteConfigData?.primaryNavigation?.items?.map(
-                          ({ id, hasSubmenu, label, url, submenu }) => (
+                          ({ id, hasSubmenu, label, url, submenu, columns }) => (
                             <Fragment key={id}>
                               {hasSubmenu ? (
                                 <NavigationMenuItem>
                                   <NavigationMenuTrigger>{label}</NavigationMenuTrigger>
                                   <NavigationMenuContent>
-                                    <ul className="grid gap-3 p-4 w-[300px] md:w-[400px] lg:w-[600px] lg:grid-cols-[1fr_1fr]">
+                                    <ul
+                                      className={cn("flex flex-col gap-3 p-4 w-full", {
+                                        "md:grid md:grid-cols-1 md:w-[400px] lg:w-[600px]":
+                                          columns === 1,
+                                        "md:grid md:grid-cols-2 md:w-[400px] lg:w-[600px]":
+                                          columns === 2,
+                                        "md:grid md:grid-cols-3 md:w-[400px] lg:w-[600px]":
+                                          columns === 3,
+                                      })}
+                                    >
                                       {submenu?.map(({ id, label, url }) => (
                                         <>
                                           {url.type === LinkType.SERVICE_DIALOG ? (
@@ -176,15 +185,16 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
                                   </NavigationMenuContent>
                                 </NavigationMenuItem>
                               ) : (
-                                <NavigationMenuItem>
-                                  <Link
-                                    href={url.usePath ? url.path! : url.externalUrl!}
-                                    legacyBehavior
-                                    passHref
-                                  >
+                                <Link
+                                  href={url.usePath ? url.path! : url.externalUrl!}
+                                  target={!url.usePath && url.externalUrl ? "_blank" : undefined}
+                                  legacyBehavior
+                                  passHref
+                                >
+                                  <NavigationMenuItem>
                                     <NavigationMenuLink>{label}</NavigationMenuLink>
-                                  </Link>
-                                </NavigationMenuItem>
+                                  </NavigationMenuItem>
+                                </Link>
                               )}
                             </Fragment>
                           )
