@@ -7,27 +7,30 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
+import { DialogTrigger } from "./ui/dialog";
+import { Textarea } from "./ui/textarea";
 
 const contactFormSchema = z.object({
-  name: z.string({
-    required_error: "The name is required.",
-  }),
+  name: z
+    .string({
+      required_error: "The name is required.",
+    })
+    .min(1),
   email: z
     .string({
       required_error: "The name is required.",
     })
     .email(),
-  state: z
+  subject: z
     .string({
-      required_error: "The state is required.",
-    }).min(2).max(2).transform(v => v.toLocaleUpperCase()),
-  phone: z
+      required_error: "The subject is required.",
+    })
+    .min(1),
+  message: z
     .string({
-      required_error: "The phone is required.",
-    }).length(10)
-  // .regex(/^[a-zA-Z]+(-[a-zA-Z]+)*$/, {
-  //   message: "Use only letters and hyphens.",
-  // }),
+      required_error: "The message is required.",
+    })
+    .min(1),
 });
 
 type ContactFormSchema = z.infer<typeof contactFormSchema>;
@@ -50,8 +53,8 @@ export function ContactFormDrawer({ onRequestClose }: CreateContactFormDialogPro
     defaultValues: {
       name: "",
       email: "",
-      state: "",
-      phone: ""
+      subject: "",
+      message: "",
     },
   });
 
@@ -126,40 +129,42 @@ export function ContactFormDrawer({ onRequestClose }: CreateContactFormDialogPro
                 )}
               </div>
             </div>
-            </div>
-            <div className="grid grid-cols-2 items-baseline gap-4">
+          </div>
+          <div className="grid grid-cols-1 items-baseline gap-4">
             <div>
-              <Label htmlFor="state" className="text-right">
-                Estado
+              <Label htmlFor="subject" className="text-right">
+                Assunto
               </Label>
               <div className="col-span-2 space-y-4">
                 <Input
-                  id="state"
-                  placeholder="Estado"
+                  id="subject"
+                  placeholder="Assunto"
                   disabled={isSubmitting}
-                  {...register("state")}
+                  {...register("subject")}
                 />
-                {errors.state && (
+                {errors.subject && (
                   <p className="text-sm font-medium text-red-500 dark:text-red-400">
-                    {errors.state.message}
+                    {errors.subject.message}
                   </p>
                 )}
               </div>
             </div>
+          </div>
+          <div className="grid grid-cols-1 items-baseline gap-4">
             <div>
-              <Label htmlFor="phone" className="text-right">
-                Telefone
+              <Label htmlFor="subject" className="text-right">
+                Mensagem
               </Label>
-              <div className="col-span-3 space-y-4">
-                <Input
-                  id="phone"
-                  placeholder="Telefone"
+              <div className="col-span-2 space-y-4">
+                <Textarea
+                  id="message"
+                  placeholder="Mensagem"
                   disabled={isSubmitting}
-                  {...register("phone")}
+                  {...register("message")}
                 />
-                {errors.phone && (
+                {errors.message && (
                   <p className="text-sm font-medium text-red-500 dark:text-red-400">
-                    {errors.phone.message}
+                    {errors.message.message}
                   </p>
                 )}
               </div>
@@ -167,14 +172,20 @@ export function ContactFormDrawer({ onRequestClose }: CreateContactFormDialogPro
           </div>
         </div>
         <DrawerFooter>
-          {/* <DialogTrigger asChild>
-            <Button type="button" variant="ghost">
-              Cancel
+          <DialogTrigger asChild>
+            <Button type="button" variant="ghost" size="xl" rounded="full">
+              Cancelar
             </Button>
           </DialogTrigger>
-          <Button className="w-24" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Create"}
-          </Button> */}
+          <Button
+            variant="secondary"
+            size="xl"
+            type="submit"
+            rounded="full"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Enviar"}
+          </Button>
         </DrawerFooter>
       </form>
     </DrawerContent>

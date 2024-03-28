@@ -236,16 +236,18 @@ const Content = ({ className, children }: ContentProps) => {
       <motion.main className={classes}>
         {children}
         <div className="fixed bottom-10 right-10 z-50 flex flex-row items-center gap-4">
-          <MotionButton
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 1.1 }}
-            variant="whatsapp"
-            size="xl"
-            className="flex items-center justify-center gap-2 shadow"
-            rounded="xl"
-          >
-            <MdOutlineWhatsapp size={32} /> Entre em contato
-          </MotionButton>
+          <Link href="https://wa.link/0lz45r" passHref target="_blank">
+            <MotionButton
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 1.1 }}
+              variant="whatsapp"
+              size="xl"
+              className="flex items-center justify-center gap-2 shadow"
+              rounded="xl"
+            >
+              <MdOutlineWhatsapp size={32} /> Entre em contato
+            </MotionButton>
+          </Link>
         </div>
       </motion.main>
     </AnimatePresence>
