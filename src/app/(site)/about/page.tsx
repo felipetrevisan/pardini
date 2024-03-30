@@ -2,11 +2,6 @@ import { Fragment } from "react";
 import { About } from "./about";
 import { getAboutContent } from "@/server/get-about";
 
-// export const metadata: Metadata = {
-//   title: "Sobre nós",
-//   description: "",
-// };
-
 export default async function Page() {
   const content = await getAboutContent();
 
