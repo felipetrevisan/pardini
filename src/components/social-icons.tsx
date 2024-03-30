@@ -4,10 +4,14 @@ import { icons } from "lucide-react";
 import { motion } from "framer-motion";
 import { useSite } from "@/hooks/useSite";
 import React from "react";
+import Link from "next/link";
+import { Button } from "./ui/button";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   size: number;
 };
+
+const MotionLink = motion(Link);
 
 const SocialNetworks = React.forwardRef<HTMLDivElement, Props>(({ size, className }, ref) => {
   const { data, isLoading } = useSite();
@@ -20,17 +24,20 @@ const SocialNetworks = React.forwardRef<HTMLDivElement, Props>(({ size, classNam
         const Icon = icons[icon as keyof typeof icons] ?? icons["Link"];
 
         return (
-          <motion.a
-            className="relative mx-1 inline-flex size-12 items-center justify-center rounded-full border border-secondary text-secondary duration-300 ease-linear bg-white hover:bg-secondary hover:text-secondary-foreground hover:border-white hover:after:animate-pulse"
+          <MotionLink
             href={url}
             target="_blank"
             rel="noopener noreferrer"
             whileTap={{ scale: 0.97 }}
             key={id}
+            passHref
+            className="relative mx-1 inline-flex items-center justify-center"
           >
-            <Icon size={size} />
-            <span className="sr-only">{label}</span>
-          </motion.a>
+            <Button variant="secondary" size="icon" shadow hover="effect">
+              <Icon size={size} />
+              <span className="sr-only">{label}</span>
+            </Button>
+          </MotionLink>
         );
       })}
     </div>

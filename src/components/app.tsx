@@ -226,16 +226,16 @@ type ContentProps = React.HTMLAttributes<HTMLDivElement>;
 const Content = ({ className, children }: ContentProps) => {
   const MotionButton = motion(Button);
 
-  const classes = cn(
-    "relative z-30 h-full flex portrait:md:items-center lg:items-center flex-col justify-center",
-    className
-  );
-
   return (
     <AnimatePresence mode="sync">
-      <motion.main className={classes}>
+      <motion.main
+        className={cn(
+          "relative z-30 h-full flex portrait:md:items-center lg:items-center flex-col justify-center",
+          className
+        )}
+      >
         {children}
-        <div className="fixed bottom-10 right-10 z-50 flex flex-row items-center gap-4">
+        <div className="fixed bottom-4 right-20 z-50 flex flex-row items-center gap-4">
           <Link href="https://wa.link/0lz45r" passHref target="_blank">
             <MotionButton
               whileHover={{ scale: 1.1 }}
@@ -243,9 +243,9 @@ const Content = ({ className, children }: ContentProps) => {
               variant="whatsapp"
               size="xl"
               className="flex items-center justify-center gap-2 shadow"
-              rounded="xl"
+              rounded="full"
             >
-              <MdOutlineWhatsapp size={32} /> Entre em contato
+              <MdOutlineWhatsapp size={32} />
             </MotionButton>
           </Link>
         </div>
