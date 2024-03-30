@@ -21,6 +21,18 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/quem-somos',
+        destination: '/about',
+      },
+      {
+        source: '/contato',
+        destination: '/contact',
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig;
