@@ -27,7 +27,7 @@ export function About() {
           </div>
         </div>
         <div className="w-full lg:w-1/2 flex flex-col gap-5">
-          <App.Title className="text-4xl">A Pardini</App.Title>
+          <App.Title className="text-2xl md:text-4xl">A Pardini</App.Title>
           <p className="font-medium">
             Não somos apenas uma empresa, somos pessoas que, assim como você, escolhemos mudar as
             nossas vidas, e para nós, a cidadania italiana foi uma ferramenta importante neste
