@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Service, WhatsappButtonLabel } from "@/types/services";
+import { PortableText } from "@portabletext/react";
 import { icons } from "lucide-react";
 import Link from "next/link";
 import { MdOutlineWhatsapp } from "react-icons/md";
+import { portableComponents } from "./ui/portable-components";
 
 type ServiceDetailsDialogProps = Omit<Service, "_id" | "excerpt" | "type">;
 
@@ -24,7 +26,11 @@ export function ServiceDetailsDialog({
           </div>
         </DialogTitle>
       </DialogHeader>
-      {description && <div className="grid gap-4 p-6">{description}</div>}
+      {description && (
+        <div className="grid gap-4 p-6">
+          <PortableText value={description} components={portableComponents} />
+        </div>
+      )}
       <DialogFooter className="justify-between gap-2">
         {buttons.hasSeeMoreButton && buttons.linkSeeMore && (
           <Link href={buttons.linkSeeMore} passHref target="_blank">
