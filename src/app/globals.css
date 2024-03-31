@@ -88,6 +88,6 @@
   }
 
   section:last-of-type {
-    @apply rounded-bl-[90px] rounded-br-[90px];
+    @apply rounded-bl-[40px] rounded-br-[40px];
   }
 }
