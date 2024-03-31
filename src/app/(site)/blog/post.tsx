@@ -13,7 +13,7 @@ type PostProps = PostType;
 export function Post({ coverImage, title, excerpt, slug, author, date }: PostProps) {
   return (
     <Link href={`blog/${slug}`} passHref>
-      <Card className="rounded-xl shadow-lg relative overflow-hidden">
+      <Card className="flex flex-col rounded-xl shadow-lg relative overflow-hidden h-full min-h-96">
         <CardHeader className="relative h-[200px] overflow-hidden">
           {coverImage === null ? (
             <Image
@@ -24,14 +24,16 @@ export function Post({ coverImage, title, excerpt, slug, author, date }: PostPro
             />
           ) : (
             <Image
-              src={urlForImage(coverImage!).url()}
+              src={urlForImage(coverImage.asset).url()}
               fill
               alt=""
               className="hover:scale-110 transition-all ease-linear duration-200"
+              placeholder="blur"
+              blurDataURL={coverImage.metadata.lqip}
             />
           )}
         </CardHeader>
-        <CardContent className="flex flex-col h-auto flex-shrink justify-start p-4 space-y-4">
+        <CardContent className="flex flex-col h-auto flex-shrink flex-grow justify-start p-4 space-y-4">
           <motion.h6 className="text-secondary font-semibold text-base md:text-md lg:text-xl">
             {title}
           </motion.h6>
@@ -39,7 +41,8 @@ export function Post({ coverImage, title, excerpt, slug, author, date }: PostPro
             {excerpt}
           </motion.div>
         </CardContent>
-        <CardFooter className="mt-10 divide-y-2 divide-red-800">
+        <hr className="border-t border-gray-400/30 m-4" />
+        <CardFooter>
           <div className="flex flex-row flex-shrink">
             <PostDetails {...author} date={date} />
           </div>

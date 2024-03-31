@@ -31,7 +31,7 @@ export async function generateMetadata(
     stega: false,
   });
   const previousImages = (await parent).openGraph?.images || [];
-  const ogImage = resolveOpenGraphImage(post?.coverImage!);
+  const ogImage = post?.coverImage?.asset ? resolveOpenGraphImage(post.coverImage.asset) : undefined;
 
   return {
     authors: post?.author?.name ? [{ name: post?.author?.name }] : [],

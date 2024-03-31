@@ -50,7 +50,7 @@ export function About({ initialData }: { initialData: AboutType[] }) {
                   {picture.hasPicture && picture.side === BlockSideType.BEFORE && (
                     <div className="relative w-full flex justify-center items-center">
                       <Image
-                        src={urlForImage(picture.url).url()}
+                        src={urlForImage(picture.image.asset).url()}
                         alt=""
                         width={353}
                         height={470}
@@ -60,6 +60,8 @@ export function About({ initialData }: { initialData: AboutType[] }) {
                           "rounded-[16%_84%_19%_81%_/_88%_10%_90%_12%]": idx === 2,
                         })}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        placeholder="blur"
+                        blurDataURL={picture.image.metadata.lqip}
                       />
                     </div>
                   )}
@@ -72,7 +74,7 @@ export function About({ initialData }: { initialData: AboutType[] }) {
                   {picture.hasPicture && picture.side === BlockSideType.AFTER && (
                     <div className="relative w-full flex justify-center items-center">
                       <Image
-                        src={urlForImage(picture.url).url()}
+                        src={urlForImage(picture.image.asset).url()}
                         alt=""
                         width={353}
                         height={470}
@@ -82,6 +84,8 @@ export function About({ initialData }: { initialData: AboutType[] }) {
                           "rounded-[16%_84%_19%_81%_/_88%_10%_90%_12%]": idx === 2,
                         })}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        placeholder="blur"
+                        blurDataURL={picture.image.metadata.lqip}
                       />
                     </div>
                   )}

@@ -4,40 +4,37 @@ import { motion } from "framer-motion";
 import * as App from "@/components/app";
 import { usePosts } from "@/hooks/usePosts";
 import { Post } from "./post";
-
-type BlogPaginationProps = {
-  pageCount: number;
-  pageSize: number;
-  pageIndex: number;
-};
+import { Posts } from "@/types/post";
+import { PostsPagination } from "./pagination";
 
 type BlogPostQuery = {
   pageIndex: number;
   pageSize: number;
 };
 
-export function Blog({ pageIndex, pageSize }: BlogPostQuery) {
-  // const createQueryString = useCallback(
-  //   (name: string, value: string) => {
-  //     const params = new URLSearchParams(searchParams.toString());
-  //     params.set(name, value);
+type BlogPostProps = {
+  initialData: Posts;
+} & BlogPostQuery;
 
-  //     return params.toString();
-  //   },
-  //   [searchParams]
-  // );
-
-  const { data } = usePosts({ skip: "", limit: pageSize });
+export function Blog({ pageIndex, pageSize, initialData }: BlogPostProps) {
+  const { data } = usePosts({ pageIndex, pageSize, initialData });
 
   return (
     <motion.div
-      layout
-      className="h-full w-screen flex flex-col mb-20 space-y-20"
+      layout="size"
+      className="h-full w-screen flex flex-col mb-10 md:mb-20 space-y-20"
       data-section="blog"
     >
       <App.PageHeader>Blog</App.PageHeader>
-      <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {data?.map((post) => <Post {...post} key={post.id} />)}
+      <div className="container flex flex-col gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {data?.items?.map((post) => <Post {...post} key={post.id} />)}
+        </div>
+        <PostsPagination
+          pageSize={pageSize}
+          pageIndex={pageIndex}
+          pageCount={data.pagination.total}
+        />
       </div>
     </motion.div>
   );
