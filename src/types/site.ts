@@ -1,4 +1,4 @@
-import { Image } from "sanity";
+import { SanityAsset } from "./sanityAssets";
 
 export type Site = {
   id: string;
@@ -21,7 +21,7 @@ export type Featured = {
   id: string;
   title: string;
   subtitle: string;
-  image: Image;
+  image: SanityAsset;
 };
 
 export type NavigationItem = {

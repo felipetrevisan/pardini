@@ -1,4 +1,5 @@
-import { Image, PortableTextBlock } from "sanity";
+import { PortableTextBlock } from "sanity";
+import { SanityAsset } from "./sanityAssets";
 
 export type About = {
   id: string;
@@ -10,7 +11,7 @@ export type About = {
 
 type BlockPicture = {
   hasPicture: boolean;
-  url: Image;
+  image: SanityAsset;
   side: keyof typeof BlockSideType;
 };
 

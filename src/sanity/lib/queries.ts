@@ -40,7 +40,13 @@ export const siteConfigQuery = groq`
       "id": _id,
       title,
       subtitle,
-      "image": background_image
+      "image": background_image {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      }
     }
   }
 `;
@@ -52,7 +58,13 @@ export const aboutQuery = groq`
     content,
     "picture": {
       "hasPicture": has_block_picture,
-      "url": picture,
+      "image": picture {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      },
       "side": picture_block_side
     },
     "hasButton": has_button
@@ -91,7 +103,13 @@ export const testimonialsQuery = groq`
     "id": _id,
     "author": {
       "name": author_name,
-      "avatar": author_avatar
+      "avatar": author_avatar {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      }
     },
     "showHome": show_home,
     type,
@@ -107,13 +125,25 @@ const postFields = groq`
   "slug": slug.current,
   excerpt,
   body,
-  coverImage,
+  coverImage {
+    "asset": asset,
+    "metadata": {
+      "lqip": asset->metadata.lqip,
+      "dimensions": asset->metadata.dimensions
+    }
+  },
   "date": coalesce(date, publishedAt),
   "author": author->{"name": coalesce(name, "Anonimo"), picture},
 `;
 
-export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(date desc, publishedAt desc) [0...$limit] {
-  ${postFields}
+export const postsQuery = groq`{
+  "items": *[_type == "post" && defined(slug.current)] | order(date desc, publishedAt desc) [($pageIndex * $pageSize)...($pageIndex + 1) * $pageSize] {
+    ${postFields}
+ },
+  "pagination": {
+    "total": count(*[_type == "post" && defined(slug.current)]),
+    "page": $pageIndex + 1,
+  }
 }`;
 
 export const postQuery = groq`*[_type == "post" && slug.current == $slug] [0] {

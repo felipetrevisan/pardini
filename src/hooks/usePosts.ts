@@ -1,12 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { Post } from "@/types/post";
+import { Post, Posts } from "@/types/post";
 import { getPost, getPosts } from "@/server/get-posts";
-import { Pagination } from "@/types/post";
+import { PaginationQuery } from "@/types/post";
 
-export function usePosts({ skip, limit }: Pagination) {
-  const { data, isLoading, isPending } = useQuery<Post[]>({
-    queryKey: ["posts", skip, limit],
-    queryFn: () => getPosts({ skip, limit }),
+export function usePosts({
+  pageIndex,
+  pageSize,
+  initialData,
+}: PaginationQuery & { initialData: Posts }) {
+  const { data, isLoading, isPending } = useQuery<Posts>({
+    queryKey: ["posts", pageIndex, pageSize],
+    queryFn: () => getPosts({ pageIndex, pageSize }),
+    initialData,
   });
 
   return { data, isLoading, isPending };

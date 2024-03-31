@@ -1,3 +1,4 @@
+import { PortableTextBlock } from "@portabletext/react";
 import { icons } from "lucide-react";
 
 export type Service = {
@@ -6,7 +7,7 @@ export type Service = {
   icon: keyof typeof icons;
   type: keyof typeof ServiceType;
   excerpt: string;
-  description: string;
+  description: PortableTextBlock[];
   buttons: ServiceButton;
 };
 

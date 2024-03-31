@@ -1,14 +1,15 @@
-import { Image } from "sanity";
+import { PortableTextBlock } from "sanity";
+import { SanityAsset } from "./sanityAssets";
 
 export type Testimonial = {
   id: string;
   author: {
     name: string;
-    avatar: Image;
-  },
+    avatar: SanityAsset;
+  };
   showHome: boolean;
   type: keyof typeof TestimonialType;
-  testimonial?: string;
+  testimonial?: PortableTextBlock[];
   video?: string;
 };
 

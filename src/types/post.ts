@@ -1,5 +1,11 @@
-import { Image } from "sanity";
 import { PortableTextBlock } from "@portabletext/react";
+import { SanityAsset } from "./sanityAssets";
+import { SanityAssetSource } from "@sanity/asset-utils";
+
+export type Posts = {
+  items: Post[];
+  pagination: Pagination;
+}
 
 export type Post = {
   id: string;
@@ -8,7 +14,7 @@ export type Post = {
   slug: string;
   excerpt?: string | null;
   body: PortableTextBlock;
-  coverImage?: Image | null;
+  coverImage: SanityAsset;
   date: string;
   author: Author;
   categories?: Category[] | null;
@@ -16,7 +22,7 @@ export type Post = {
 
 export type Author = {
   name: string;
-  picture?: Image | null;
+  picture?: SanityAssetSource | null;
 };
 
 export type Category = {
@@ -25,6 +31,11 @@ export type Category = {
 };
 
 export type Pagination = {
-  skip: string;
-  limit: number;
+  total: number;
+  page: number;
+}
+
+export type PaginationQuery = {
+  pageIndex: number;
+  pageSize: number;
 };
