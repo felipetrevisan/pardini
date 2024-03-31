@@ -5,15 +5,16 @@ import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 
+import { Testimonial as Item } from "./testimonial";
+import { Button } from "@/components/ui/button";
+
+import { useTestimonials } from "@/hooks/useTestimonials";
+
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
-import { Testimonial as Item } from "./testimonial";
-import { Button } from "@/components/ui/button";
-
 import "./styles.scss";
-import { useTestimonials } from "@/hooks/useTestimonials";
 
 export function Items() {
   const prevButtonRef = useRef(null);

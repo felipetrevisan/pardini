@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Testimonial, TestimonialType } from "@/types/testimonial";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,6 +8,8 @@ import { cn, getWordInitials } from "@/lib/utils";
 import { urlForImage } from "@/sanity/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Fragment } from "react";
+import { PortableText } from "@portabletext/react";
+import { portableComponents } from "@/components/ui/portable-components";
 
 type Props = Omit<Testimonial, "showHome" | "id">;
 
@@ -28,14 +29,16 @@ export function Testimonial({ author, type, testimonial, video }: Props) {
             <Fragment>
               <ScrollArea className="h-3/4 max-w-2xl mx-auto mb-4 lg:mb-8 text-base relative w-full">
                 <QuoteIcon className="absolute left-0 top-0 size-24 stroke-accent/30" />
-                <p className="my-4 text-slate-700 font-bold text-center drop-shadow-xl shadow-black">
-                  {testimonial}
+                <p className="my-4 text-slate-700 font-bold drop-shadow-xl shadow-black">
+                  {testimonial && (
+                    <PortableText value={testimonial} components={portableComponents} />
+                  )}
                 </p>
               </ScrollArea>
               <figcaption className="flex items-center justify-center">
                 <Avatar>
                   <AvatarImage
-                    src={author.avatar ? urlForImage(author.avatar).url() : undefined}
+                    src={author.avatar ? urlForImage(author.avatar.asset).url() : undefined}
                     alt={`Foto de ${author.name}`}
                   />
                   <AvatarFallback>{getWordInitials(author.name)}</AvatarFallback>

@@ -1,29 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import { MailIcon } from "lucide-react";
-import { useApp } from "@/hooks/useApp";
 import { slideUpVariants } from "@/config/animation";
 import { Button } from "@/components/ui/button";
-import { Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { ContactFormDrawer } from "@/components/contact-form-drawer";
 import { Featured } from "@/types/site";
 import { urlForImage } from "@/sanity/lib/utils";
-import Image from "next/image";
 
 export function Home({ images }: { images: Featured[] }) {
-  const refHome = useRef<HTMLDivElement>(null);
-  const { setCurrentSection, getSection } = useApp();
-
-  useEffect(() => {
-    setCurrentSection(getSection("/"));
-  }, [getSection, setCurrentSection]);
-
   return (
-    <motion.div layout ref={refHome} className="w-screen" data-section="home">
+    <motion.div layout className="w-screen" data-section="home">
       <div className="aspect-[1] md:aspect-[16/7] flex items-center justify-start space-y-1 relative bg-white shadow-xl">
         <Swiper
           slidesPerView={1}
@@ -44,9 +35,11 @@ export function Home({ images }: { images: Featured[] }) {
                 <Image
                   className="h-auto w-full z-[1]"
                   alt=""
-                  src={urlForImage(image).url()}
+                  src={urlForImage(image.asset).url()}
                   sizes="100vw"
                   fill
+                  placeholder="blur"
+                  blurDataURL={image.metadata.lqip}
                 />
               )}
               <div className="w-full h-full flex flex-row items-center px-10 md:px-20">

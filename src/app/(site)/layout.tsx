@@ -14,14 +14,6 @@ const inter = Inter({
   variable: "--inter",
 });
 
-// export const metadata = {
-//   title: {
-//     template: '%s | Pardini Cidadania',
-//     absolute: 'Pardini Cidadania',
-//   },
-//   description: "",
-// };
-
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteConfig();
   const title = settings?.title || "Pardini Cidadania";
