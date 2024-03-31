@@ -20,7 +20,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             "bg-input/10 border-2 border-input/20 text-gray-900 rounded-2xl text-sm shadow-sm placeholder:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-within:border-input/50 disabled:cursor-not-allowed disabled:opacity-50 block w-full p-2.5",
             {
-              "ps-10": Icon
+              "ps-10": Icon,
             },
             className
           )}

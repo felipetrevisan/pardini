@@ -1,24 +1,47 @@
+import { CustomImage } from "@/sanity/lib/portable-components";
 import { PortableTextComponents } from "@portabletext/react";
+import Link from "next/link";
+import { Button } from "./button";
 
 export const portableComponents: PortableTextComponents = {
-  // types: {
-  //   image: ({value}) => <img src={value.imageUrl} />,
-  //   callToAction: ({value, isInline}) =>
-  //     isInline ? (
-  //       <a href={value.url}>{value.text}</a>
-  //     ) : (
-  //       <div className="callToAction">{value.text}</div>
-  //     ),
-  // },
+  types: {
+    image: CustomImage,
+    // callToAction: ({value, isInline}) =>
+    //   isInline ? (
+    //     <a href={value.url}>{value.text}</a>
+    //   ) : (
+    //     <div className="callToAction">{value.text}</div>
+    //   ),
+  },
   marks: {
-    // link: ({children, value}) => {
-    //   const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined
-    //   return (
-    //     <a href={value.href} rel={rel}>
-    //       {children}
-    //     </a>
-    //   )
-    // },
+    internalLink: ({ value, children }) => {
+      const { slug = {} } = value;
+      const href = `/${slug.current}`;
+
+      return (
+        <Link href={href} passHref>
+          <Button variant="outline" rounded="full">
+            {children}
+          </Button>
+        </Link>
+      );
+    },
+    link: ({ value, children }) => {
+      const { blank, href } = value;
+      return blank ? (
+        <Link href={href} passHref target="_blank" rel="noopener">
+          <Button variant="outline" rounded="full">
+            {children}
+          </Button>
+        </Link>
+      ) : (
+        <Link href={href} passHref>
+          <Button variant="outline" shadow>
+            {children}
+          </Button>
+        </Link>
+      );
+    },
   },
 
   list: {

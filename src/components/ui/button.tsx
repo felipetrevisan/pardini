@@ -9,13 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90 outline outline-2 outline-primary",
+        default:
+          "bg-primary text-primary-foreground shadow hover:bg-primary/90 outline outline-2 outline-primary",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
           "border border-white bg-accent shadow-sm hover:bg-secondary hover:text-secondary-foreground outline outline-2 outline-secondary",
         secondary:
           "bg-secondary text-secondary-foreground shadow hover:bg-secondary/80 outline outline-2 outline-secondary",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: "hover:bg-secondary/10",
         link: "text-primary underline-offset-4 hover:underline",
         whatsapp:
           "bg-success border-2 border-white text-white font-bold hover:bg-white hover:text-success hover:border-white outline outline-2 outline-success hover:outline-white hover:border-success",
@@ -58,8 +59,7 @@ const buttonVariants = cva(
       {
         hover: "effect",
         variant: "default",
-        className:
-          "transition-all ease-in-out duration-500 before:bg-accent hover:text-primary",
+        className: "transition-all ease-in-out duration-500 before:bg-accent hover:text-primary",
       },
       {
         hover: "effect",
@@ -75,7 +75,14 @@ const buttonVariants = cva(
       {
         shadow: true,
         variant: "secondary",
-        className: "shadow-secondary/40 hover:shadow-black transition-shadow ease-in-out duration-500",
+        className:
+          "shadow-secondary/40 hover:shadow-black transition-shadow ease-in-out duration-500",
+      },
+      {
+        shadow: true,
+        variant: "outline",
+        className:
+          "shadow-secondary/40 hover:shadow-black transition-shadow ease-in-out duration-500",
       },
     ],
   }
