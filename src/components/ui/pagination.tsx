@@ -37,7 +37,7 @@ const PaginationLink = ({
   className,
   isActive,
   isDisabled,
-  size = "icon",
+  size = "xl",
   ...props
 }: PaginationLinkProps) => (
   <Link
@@ -46,6 +46,7 @@ const PaginationLink = ({
       buttonVariants({
         variant: isActive ? "secondary" : "ghost",
         size,
+        icon: true
       }),
       {
         "pointer-events-none opacity-20": isDisabled,

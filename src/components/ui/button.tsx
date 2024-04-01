@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "relative overflow-hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-[1] duration-500 ",
+  "relative overflow-hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-[1] duration-500 cursor-pointer",
   {
     variants: {
       variant: {
@@ -27,7 +27,9 @@ const buttonVariants = cva(
         lg: "h-10 px-8",
         xl: "h-14 text-md px-6",
         "2xl": "h-16 text-md px-8",
-        icon: "size-9",
+      },
+      icon: {
+        true: "size-9 p-0",
       },
       rounded: {
         none: "rounded-none",
@@ -50,11 +52,33 @@ const buttonVariants = cva(
       rounded: "none",
       hover: null,
       shadow: false,
+      icon: false,
     },
     compoundVariants: [
       {
-        size: "icon",
-        className: "rounded-full",
+        icon: true,
+        size: "default",
+        className: "size-7",
+      },
+      {
+        icon: true,
+        size: "sm",
+        className: "size-6",
+      },
+      {
+        icon: true,
+        size: "lg",
+        className: "size-7",
+      },
+      {
+        icon: true,
+        size: "xl",
+        className: "size-10",
+      },
+      {
+        icon: true,
+        size: "2xl",
+        className: "size-12",
       },
       {
         hover: "effect",
@@ -95,11 +119,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, rounded, hover, shadow, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, rounded, hover, icon, shadow, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, rounded, hover, shadow, className }))}
+        className={cn(buttonVariants({ variant, size, rounded, hover, icon, shadow, className }))}
         ref={ref}
         {...props}
       />

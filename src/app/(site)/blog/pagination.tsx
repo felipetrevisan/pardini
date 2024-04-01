@@ -34,9 +34,9 @@ export function PostsPagination({ pageCount, pageSize, pageIndex }: PostsPaginat
   const pageLength = Math.round(pageCount / pageSize);
   const page = pageIndex + 1;
   const hasPreviousPage = page > 1;
-  const hasNextPage = page < pageCount;
+  const hasNextPage = page < pageLength;
 
-  if (pageLength == 1) return <></>;
+  if (pageLength == 0) return <></>;
 
   return (
     <div className="flex items-center justify-end mb-10">

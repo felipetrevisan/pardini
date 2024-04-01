@@ -35,6 +35,8 @@ import { footerVariants } from "@/config/animation";
 import { useSite } from "@/hooks/useSite";
 import { LinkType } from "@/types/site";
 import { SocialNetworks } from "./social-icons";
+import { Logo } from "./logo";
+import { TopNavigation } from "./navigation";
 
 const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className }, ref) => {
@@ -99,107 +101,17 @@ const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
           >
             <Fragment>
               <Navbar.Brand>
-                <motion.a
-                  href="/"
-                  className="relative w-full h-[60px]"
-                  style={{
-                    height: logoSizeHeight,
-                    width: logoSizeWidth,
-                  }}
-                >
-                  <Image
-                    src="/assets/logo-pardini.png"
-                    alt="Logo Pardini"
-                    className="w-[200px] h-full max-w-[200px] md:max-w-[440px]"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority
-                    fill
-                  />
-                </motion.a>
+                <Logo height={logoSizeHeight} width={logoSizeWidth} />
               </Navbar.Brand>
               {!isSiteConfigLoading && (
                 <Fragment>
                   <Navbar.Toggle icon="Menu" />
                   <Navbar.Collapse>
-                    <NavigationMenu>
-                      <NavigationMenuList>
-                        {siteConfigData?.primaryNavigation?.items?.map(
-                          ({ id, hasSubmenu, label, url, submenu, columns }) => (
-                            <Fragment key={id}>
-                              {hasSubmenu ? (
-                                <NavigationMenuItem>
-                                  <NavigationMenuTrigger>{label}</NavigationMenuTrigger>
-                                  <NavigationMenuContent>
-                                    <ul
-                                      className={cn("flex flex-col gap-3 p-4 w-full", {
-                                        "md:grid md:grid-cols-1 md:w-[400px] lg:w-[600px]":
-                                          columns === 1,
-                                        "md:grid md:grid-cols-2 md:w-[400px] lg:w-[600px]":
-                                          columns === 2,
-                                        "md:grid md:grid-cols-3 md:w-[400px] lg:w-[600px]":
-                                          columns === 3,
-                                      })}
-                                    >
-                                      {submenu?.map(({ id, label, url }) => (
-                                        <>
-                                          {url.type === LinkType.SERVICE_DIALOG ? (
-                                            <>
-                                              {isLoading ? (
-                                                <Fragment key={id}>
-                                                  {Array.from({ length: 10 }).map((_, index) => (
-                                                    <li
-                                                      key={index}
-                                                      className="space-y-1 rounded-md p-3"
-                                                    >
-                                                      <Skeleton className="h-6" />
-                                                    </li>
-                                                  ))}
-                                                </Fragment>
-                                              ) : (
-                                                <Fragment>
-                                                  {serviceData?.map((service) => (
-                                                    <Dialog key={`submenu-${service.id}`}>
-                                                      <DialogTrigger asChild>
-                                                        <NavigationListItem
-                                                          title={service.title}
-                                                          icon={service.icon}
-                                                        />
-                                                      </DialogTrigger>
-                                                      <ServiceDetailsDialog {...service} />
-                                                    </Dialog>
-                                                  ))}
-                                                </Fragment>
-                                              )}
-                                            </>
-                                          ) : (
-                                            <NavigationListItem
-                                              title={label}
-                                              key={id}
-                                              href={url?.usePath ? url?.path : url?.externalUrl}
-                                            />
-                                          )}
-                                        </>
-                                      ))}
-                                    </ul>
-                                  </NavigationMenuContent>
-                                </NavigationMenuItem>
-                              ) : (
-                                <Link
-                                  href={url.usePath ? url.path! : url.externalUrl!}
-                                  target={!url.usePath && url.externalUrl ? "_blank" : undefined}
-                                  legacyBehavior
-                                  passHref
-                                >
-                                  <NavigationMenuItem>
-                                    <NavigationMenuLink>{label}</NavigationMenuLink>
-                                  </NavigationMenuItem>
-                                </Link>
-                              )}
-                            </Fragment>
-                          )
-                        )}
-                      </NavigationMenuList>
-                    </NavigationMenu>
+                    <TopNavigation
+                      navigation={siteConfigData?.primaryNavigation}
+                      servicesData={serviceData}
+                      isServicesLoading={isLoading}
+                    />
                     <MotionSocialNetworks
                       className="hidden md:flex"
                       size={18}
@@ -237,14 +149,17 @@ const Content = ({ className, children }: ContentProps) => {
         <div className="fixed bottom-4 right-20 z-50 flex flex-row items-center gap-4">
           <Link href="https://wa.link/0lz45r" passHref target="_blank">
             <MotionButton
+              aria-label="Entre em contato por Whatsapp"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 1.1 }}
               variant="whatsapp"
-              size="xl"
-              className="flex items-center justify-center gap-2 shadow"
+              size="2xl"
+              icon
               rounded="full"
+              className="flex items-center justify-center gap-2 shadow"
             >
               <MdOutlineWhatsapp size={32} />
+              <span className="sr-only">Entre em contato por Whatsapp</span>
             </MotionButton>
           </Link>
         </div>

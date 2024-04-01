@@ -20,7 +20,9 @@ export function Items() {
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
-  const { data } = useTestimonials();
+  const { data, isLoading } = useTestimonials();
+
+  const items = data?.filter((testimonial) => testimonial.showHome) ?? [];
 
   return (
     <div className="md:container">
@@ -54,24 +56,25 @@ export function Items() {
           modules={[EffectCoverflow, Navigation]}
           className="w-10/12"
         >
-          {data
-            ?.filter((testimonial) => testimonial.showHome)
-            ?.map(({ id, ...rest }) => (
-              <SwiperSlide key={id}>
-                <Item {...rest} />
-              </SwiperSlide>
-            ))}
+          {items.map(({ id, ...rest }) => (
+            <SwiperSlide key={id}>
+              <Item {...rest} />
+            </SwiperSlide>
+          ))}
         </Swiper>
-        <div className="flex justify-center mt-4 gap-4 select-none">
-          <Button ref={prevButtonRef} size="icon" variant="outline" className="size-12">
-            <ArrowLeftIcon className="size-4" />
-            <span className="sr-only">Previous slide</span>
-          </Button>
-          <Button ref={nextButtonRef} size="icon" variant="outline" className="size-12">
-            <ArrowRightIcon className="size-4" />
-            <span className="sr-only">Next slide</span>
-          </Button>
-        </div>
+        {!isLoading ||
+          (items.length === 0 && (
+            <div className="flex justify-center mt-4 gap-4 select-none">
+              <Button ref={prevButtonRef} size="xl" icon variant="outline">
+                <ArrowLeftIcon className="size-4" />
+                <span className="sr-only">Previous slide</span>
+              </Button>
+              <Button ref={nextButtonRef} size="xl" icon variant="outline">
+                <ArrowRightIcon className="size-4" />
+                <span className="sr-only">Next slide</span>
+              </Button>
+            </div>
+          ))}
       </div>
     </div>
   );

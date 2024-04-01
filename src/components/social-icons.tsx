@@ -33,7 +33,7 @@ const SocialNetworks = React.forwardRef<HTMLDivElement, Props>(({ size, classNam
             passHref
             className="relative mx-1 inline-flex items-center justify-center"
           >
-            <Button variant="secondary" size="icon" shadow hover="effect">
+            <Button variant="secondary" size="xl" rounded="full" icon shadow hover="effect">
               <Icon size={size} />
               <span className="sr-only">{label}</span>
             </Button>

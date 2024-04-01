@@ -83,30 +83,30 @@ const Collapse = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 );
 Collapse.displayName = "Navbar.Collapse";
 
-export interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  asChild?: boolean;
-  disabled?: boolean;
-  active?: boolean;
-}
+// export interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+//   asChild?: boolean;
+//   disabled?: boolean;
+//   active?: boolean;
+// }
 
-const Link = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
-  ({ className, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "a";
-    return (
-      <li className="relative font-semibold text-white uppercase flex overflow-hidden p-4 hover:after:left-0 hover:after-right-auto hover:after:w-full after:transition-all after:absolute after:left-auto after:right-0 after:bottom-0 after:h-[0.40rem] after:w-0 after:bg-gradient-to-r after:from-primary after:to-secondary text-md md:text-md">
-        <Comp
-          className={cn(
-            "flex py-2 pr-4 pl-3 md:p-0 items-center justify-center p-6 w-full",
-            className
-          )}
-          ref={ref}
-          {...props}
-        />
-      </li>
-    );
-  }
-);
-Link.displayName = "Navbar.Link";
+// const Link = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
+//   ({ className, asChild = false, ...props }, ref) => {
+//     const Comp = asChild ? Slot : "a";
+//     return (
+//       <li className="relative font-semibold text-white uppercase flex overflow-hidden p-4 hover:after:left-0 hover:after-right-auto hover:after:w-full after:transition-all after:absolute after:left-auto after:right-0 after:bottom-0 after:h-[0.40rem] after:w-0 after:bg-gradient-to-r after:from-primary after:to-secondary text-md md:text-md">
+//         <Comp
+//           className={cn(
+//             "flex py-2 pr-4 pl-3 md:p-0 items-center justify-center p-6 w-full",
+//             className
+//           )}
+//           ref={ref}
+//           {...props}
+//         />
+//       </li>
+//     );
+//   }
+// );
+// Link.displayName = "Navbar.Link";
 
 export interface NavbarToggleProps extends ComponentProps<"button"> {
   icon: keyof typeof icons;
@@ -136,4 +136,4 @@ const Toggle = React.forwardRef<HTMLButtonElement, NavbarToggleProps>(
 );
 Toggle.displayName = "Navbar.Toggle";
 
-export { Root, Brand, Collapse, Link, Toggle };
+export { Root, Brand, Collapse, Toggle };
