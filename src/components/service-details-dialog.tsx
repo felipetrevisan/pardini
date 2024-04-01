@@ -6,6 +6,7 @@ import { icons } from "lucide-react";
 import Link from "next/link";
 import { MdOutlineWhatsapp } from "react-icons/md";
 import { portableComponents } from "./ui/portable-components";
+import { ScrollArea } from "./ui/scroll-area";
 
 type ServiceDetailsDialogProps = Omit<Service, "_id" | "excerpt" | "type">;
 
@@ -27,9 +28,9 @@ export function ServiceDetailsDialog({
         </DialogTitle>
       </DialogHeader>
       {description && (
-        <div className="grid gap-4 p-6">
+        <ScrollArea className="grid gap-4 p-6 h-[400px]">
           <PortableText value={description} components={portableComponents} />
-        </div>
+        </ScrollArea>
       )}
       <DialogFooter className="justify-between gap-2">
         {buttons.hasSeeMoreButton && buttons.linkSeeMore && (
