@@ -146,7 +146,7 @@ const Content = ({ className, children }: ContentProps) => {
         )}
       >
         {children}
-        <div className="fixed bottom-4 right-20 z-50 flex flex-row items-center gap-4">
+        <div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
           <Link href="https://wa.link/0lz45r" passHref target="_blank">
             <MotionButton
               aria-label="Entre em contato por Whatsapp"
