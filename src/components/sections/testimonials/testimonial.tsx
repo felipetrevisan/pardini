@@ -19,7 +19,7 @@ export function Testimonial({ author, type, testimonial, video }: Props) {
       <CardContent className="flex items-center justify-center w-full bg-accent overflow-hidden rounded-lg p-0 h-full">
         <figure
           className={cn(
-            "flex flex-col items-center justify-center w-full h-full border-b rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e",
+            "flex flex-col items-center justify-center w-full h-full border-0",
             {
               "p-8": type === TestimonialType.TEXT,
             }
@@ -55,7 +55,7 @@ export function Testimonial({ author, type, testimonial, video }: Props) {
               src={video!}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className="aspect-video h-full w-full overflow-hidden"
+              className="aspect-video h-full w-full overflow-hidden p-3"
             />
           )}
         </figure>

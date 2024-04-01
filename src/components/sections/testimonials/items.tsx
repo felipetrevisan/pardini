@@ -62,14 +62,14 @@ export function Items() {
             </SwiperSlide>
           ))}
         </Swiper>
-        {!isLoading ||
-          (items.length === 0 && (
+        {!isLoading &&
+          (items.length !== 0 && (
             <div className="flex justify-center mt-4 gap-4 select-none">
-              <Button ref={prevButtonRef} size="xl" icon variant="outline">
+              <Button ref={prevButtonRef} size="xl" icon rounded="full" variant="outline">
                 <ArrowLeftIcon className="size-4" />
                 <span className="sr-only">Previous slide</span>
               </Button>
-              <Button ref={nextButtonRef} size="xl" icon variant="outline">
+              <Button ref={nextButtonRef} size="xl" icon rounded="full" variant="outline">
                 <ArrowRightIcon className="size-4" />
                 <span className="sr-only">Next slide</span>
               </Button>
