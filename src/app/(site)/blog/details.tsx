@@ -2,7 +2,7 @@
 
 import { Author, Post } from "@/types/post";
 import { urlForImage } from "@/sanity/lib/utils";
-import { formatRelative } from "date-fns";
+import { formatRelative, isDate } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getWordInitials } from "@/lib/utils";
@@ -18,9 +18,11 @@ export function PostDetails({ name, picture, date }: BlogDetailsProps) {
       </Avatar>
       <div className="space-y-0.5 text-left tracking-normal leading-snug ms-3">
         <p className="font-semibold text-black text-base">Por {name}</p>
-        <time dateTime={date} className="text-black text-xs capitalize">
-          {formatRelative(date, new Date(), { locale: ptBR })}
-        </time>
+        {isDate(date) && (
+          <time dateTime={date} className="text-black text-xs capitalize">
+            {formatRelative(date, new Date(), { locale: ptBR })}
+          </time>
+        )}
       </div>
     </figcaption>
   );
