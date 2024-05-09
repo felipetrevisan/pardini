@@ -8,10 +8,11 @@ import { PostDetails } from "./details";
 import { urlForImage } from "@/sanity/lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { getImageDimensions } from "@sanity/asset-utils";
+import { badgeVariants } from "@/components/ui/badge";
 
 type PostProps = PostType;
 
-export function Post({ coverImage, title, excerpt, slug, author, date }: PostProps) {
+export function Post({ coverImage, title, excerpt, slug, author, date, categories }: PostProps) {
   const { width, height } = coverImage
     ? getImageDimensions(coverImage.asset)
     : { width: 0, height: 0 };
@@ -37,6 +38,11 @@ export function Post({ coverImage, title, excerpt, slug, author, date }: PostPro
               blurDataURL={coverImage.metadata.lqip}
             />
           )}
+          {categories?.map((category, id) => (
+            <Link href="" className={badgeVariants({ variant: "outline" })} key={id}>
+              {category.title}
+            </Link>
+          ))}
         </CardHeader>
         <CardContent className="flex flex-col h-auto flex-shrink flex-grow justify-start p-4 space-y-4">
           <motion.h2 className="text-secondary font-semibold text-base md:text-md lg:text-xl">

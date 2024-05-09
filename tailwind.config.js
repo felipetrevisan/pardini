@@ -66,6 +66,7 @@ const config = {
         "page-header": 'url("/assets/bg-page-title.jpg")',
         pattern: 'url("/assets/bg-pattern.png")',
         separator: "linear-gradient(15deg, #fff 50%, transparent 50%)",
+        family: 'url("/assets/bg-family.webp")',
       },
       backgroundSize: {
         divider: "120% 2px",

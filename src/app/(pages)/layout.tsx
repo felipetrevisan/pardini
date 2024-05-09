@@ -33,9 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.className}`} suppressHydrationWarning>
       <body className="antialiased">
         <Providers>
-          <App.Header />
-          <App.Content>{children}</App.Content>
-          <App.Footer />
+          {children}
         </Providers>
         <SpeedInsights />
       </body>

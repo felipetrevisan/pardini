@@ -31,6 +31,10 @@ const nextConfig = {
         source: '/contato',
         destination: '/contact',
       },
+      {
+        source: '/apresentacao-familia',
+        destination: '/family',
+      },
     ]
   },
 };

@@ -135,17 +135,31 @@ Header.displayName = "Header";
 type ContentProps = React.HTMLAttributes<HTMLDivElement>;
 
 const Content = ({ className, children }: ContentProps) => {
+  return (
+    <AnimatePresence mode="sync">
+      <motion.main
+        className={cn("relative z-30 h-full flex items-center flex-col justify-center", className)}
+      >
+        {children}
+      </motion.main>
+    </AnimatePresence>
+  );
+};
+Content.displayName = "Content";
+
+const Footer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((_, ref) => {
   const MotionButton = motion(Button);
 
   return (
     <AnimatePresence mode="sync">
-      <motion.main
-        className={cn(
-          "relative z-30 h-full flex portrait:md:items-center lg:items-center flex-col justify-center",
-          className
-        )}
+      <motion.footer
+        className="container flex flex-col space-y-10 w-full select-none items-center px-5 py-4 md:px-12 lg:px-12 relative"
+        initial="hide"
+        whileInView="show"
+        exit="hide"
+        variants={footerVariants}
+        ref={ref}
       >
-        {children}
         <div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
           <Link href="https://wa.link/0lz45r" passHref target="_blank">
             <MotionButton
@@ -163,23 +177,6 @@ const Content = ({ className, children }: ContentProps) => {
             </MotionButton>
           </Link>
         </div>
-      </motion.main>
-    </AnimatePresence>
-  );
-};
-Content.displayName = "Content";
-
-const Footer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((_, ref) => {
-  return (
-    <AnimatePresence mode="sync">
-      <motion.footer
-        className="container flex flex-col space-y-10 w-full select-none items-center px-5 py-4 md:px-12 lg:px-12"
-        initial="hide"
-        whileInView="show"
-        exit="hide"
-        variants={footerVariants}
-        ref={ref}
-      >
         <div className="flex flex-col gap-10 md:gap-0 md:flex-row items-center justify-between w-full">
           <Image
             src="/assets/logo-pardini.png"
