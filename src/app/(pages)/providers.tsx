@@ -1,11 +1,13 @@
 "use client";
 
-import { AppProvider } from "@/hooks/useApp";
+import { ReactNode, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
-import { ReactNode, useState } from "react";
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { AppProvider } from "@/hooks/useApp";
 import { Toaster } from "@/components/ui/toaster";
+import { env } from "@/config/env";
 
 export default function Providers({ children }: { children: ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
@@ -16,6 +18,7 @@ export default function Providers({ children }: { children: ReactNode }) {
         <AppProvider>{children}</AppProvider>
         <ReactQueryDevtools initialIsOpen={false} />
         <Toaster />
+        <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_AD_ID} />
       </QueryClientProvider>
     </ThemeProvider>
   );

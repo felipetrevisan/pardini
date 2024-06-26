@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Inter } from "next/font/google";
-import * as App from "@/components/app";
 
 import "../globals.css";
 import Providers from "./providers";
@@ -32,9 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.className}`} suppressHydrationWarning>
       <body className="antialiased">
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
         <SpeedInsights />
       </body>
     </html>

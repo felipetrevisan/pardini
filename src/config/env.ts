@@ -25,6 +25,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SANITY_DATASET: z
       .enum(["production", "preview", "development"])
       .default("production"),
+    NEXT_PUBLIC_GOOGLE_AD_ID: z.string().refine(requiredOnEnv("production")),
   },
   shared: {
     NODE_ENV: nodeEnv,
@@ -34,6 +35,7 @@ export const env = createEnv({
     NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    NEXT_PUBLIC_GOOGLE_AD_ID: process.env.NEXT_PUBLIC_GOOGLE_AD_ID,
     NODE_ENV: process.env.NODE_ENV,
     VERCEL_ENV: process.env.VERCEL_ENV,
   },
