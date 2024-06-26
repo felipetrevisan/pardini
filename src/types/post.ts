@@ -18,6 +18,7 @@ export type Post = {
   date: string;
   author: Author;
   categories?: Category[] | null;
+  tags?: Tag[] | null;
 };
 
 export type Author = {
@@ -26,6 +27,13 @@ export type Author = {
 };
 
 export type Category = {
+  id: string
+  title: string;
+  slug: string;
+};
+
+export type Tag = {
+  id: string
   title: string;
   slug: string;
 };

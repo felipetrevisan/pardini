@@ -134,6 +134,8 @@ const postFields = groq`
   },
   "date": coalesce(date, publishedAt),
   "author": author->{"name": coalesce(name, "Anonimo"), picture},
+  "tags": tags[]-> {"id": _id,title},
+  "categories": categories[]-> {"id": _id,title,slug},
 `;
 
 export const postsQuery = groq`{

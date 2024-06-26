@@ -16,12 +16,14 @@ import link from "./schemas/objects/link";
 import navigationSubmenuItem from "./schemas/objects/navigationSubmenuItem";
 import featured from "./schemas/featured";
 import socialNetworksItem from "./schemas/objects/socialNetworksItem";
+import tag from "./schemas/blog/tag";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     post,
     author,
     category,
+    tag,
     blockContent,
     service,
     faq,
