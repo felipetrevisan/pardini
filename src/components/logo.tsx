@@ -3,7 +3,6 @@
 import * as React from "react";
 import Image from "next/image";
 import { HTMLMotionProps, MotionValue, motion } from "framer-motion";
-import Link from "next/link";
 
 type LogoProps = {
   height: MotionValue<string>;
