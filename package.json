@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -43,11 +44,12 @@
     "embla-carousel-react": "^8.0.0-rc22",
     "framer-motion": "^10.12.8",
     "lucide-react": "^0.263.0",
-    "next": "^14.1.4",
+    "next": "^14.2.4",
     "next-sanity": "^7.1.4",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-facebook-pixel": "^1.0.4",
     "react-hook-form": "^7.51.2",
     "react-icons": "^5.0.1",
     "resend": "^3.2.0",
@@ -70,6 +72,7 @@
     "eslint-config-next": "14.0.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.11",
     "postcss": "^8",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.3.0",
