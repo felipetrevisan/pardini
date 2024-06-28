@@ -8,7 +8,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AppProvider } from "@/hooks/useApp";
 import { Toaster } from "@/components/ui/toaster";
 import { env } from "@/config/env";
-import FacebookPixel from "@/components/facebook-pixel";
 
 export default function Providers({ children }: { children: ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
@@ -20,7 +19,6 @@ export default function Providers({ children }: { children: ReactNode }) {
         <ReactQueryDevtools initialIsOpen={false} />
         <Toaster />
         <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_AD_ID} />
-        <FacebookPixel />
       </QueryClientProvider>
     </ThemeProvider>
   );

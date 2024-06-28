@@ -27,6 +27,7 @@ export const env = createEnv({
       .default("production"),
     NEXT_PUBLIC_GOOGLE_AD_ID: z.string().refine(requiredOnEnv("production")),
     NEXT_PUBLIC_FACEBOOK_PIXEL_ID: z.string().refine(requiredOnEnv("production")),
+    NEXT_PUBLIC_FACEBOOK_PIXEL_ID_FAMILY_PAGE: z.string().refine(requiredOnEnv("production")),
   },
   shared: {
     NODE_ENV: nodeEnv,
@@ -38,6 +39,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
     NEXT_PUBLIC_GOOGLE_AD_ID: process.env.NEXT_PUBLIC_GOOGLE_AD_ID,
     NEXT_PUBLIC_FACEBOOK_PIXEL_ID: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID,
+    NEXT_PUBLIC_FACEBOOK_PIXEL_ID_FAMILY_PAGE: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID_FAMILY_PAGE,
     NODE_ENV: process.env.NODE_ENV,
     VERCEL_ENV: process.env.VERCEL_ENV,
   },

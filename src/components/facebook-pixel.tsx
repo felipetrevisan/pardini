@@ -5,7 +5,7 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 import * as pixel from "@/lib/facebook-pixel";
 
-const FacebookPixel = () => {
+const FacebookPixel = ({ id }: { id: string} ) => {
   const [loaded, setLoaded] = useState(false);
   const pathname = usePathname();
 
@@ -22,7 +22,7 @@ const FacebookPixel = () => {
         src="/js/pixel.js"
         strategy="afterInteractive"
         onLoad={() => setLoaded(true)}
-        data-pixel-id={pixel.FB_PIXEL_ID}
+        data-pixel-id={id}
       />
     </div>
   );

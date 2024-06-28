@@ -1,7 +1,5 @@
 import { env } from "@/config/env";
 
-export const FB_PIXEL_ID = env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
-
 export const pageview = () => {
   window.fbq("track", "PageView");
 };
