@@ -18,22 +18,8 @@ import { Button } from "@/components/ui/button";
 import { MdOutlineWhatsapp } from "react-icons/md";
 import { Slot } from "@radix-ui/react-slot";
 import Link from "next/link";
-import {
-  NavigationListItem,
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import { useServices } from "@/hooks/useServices";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { ServiceDetailsDialog } from "./service-details-dialog";
-import { Skeleton } from "@/components/ui/skeleton";
-import { footerVariants } from "@/config/animation";
 import { useSite } from "@/hooks/useSite";
-import { LinkType } from "@/types/site";
 import { SocialNetworks } from "./social-icons";
 import { Logo } from "./logo";
 import { TopNavigation } from "./navigation";
@@ -154,10 +140,6 @@ const Footer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
     <AnimatePresence mode="sync">
       <motion.footer
         className="container flex flex-col space-y-10 w-full select-none items-center px-5 py-4 md:px-12 lg:px-12 relative"
-        initial="hide"
-        whileInView="show"
-        exit="hide"
-        variants={footerVariants}
         ref={ref}
       >
         <div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
