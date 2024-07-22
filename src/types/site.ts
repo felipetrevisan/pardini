@@ -7,6 +7,7 @@ export type Site = {
   primaryNavigation?: Navigation;
   socialNavigation?: SocialNetwork;
   featured?: Featured[];
+  whatsappUrl: string;
 };
 
 export type Navigation = {

@@ -45,5 +45,11 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: "whatsapp_url",
+      title: "Whatsapp URL Button",
+      type: "url",
+      validation: (Rule) => Rule.required(),
+    }),
   ],
 });

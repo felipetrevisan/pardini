@@ -4,6 +4,7 @@ export const siteConfigQuery = groq`
   *[ _type == 'siteConfig' ][0] {
     title,
     description,
+    "whatsappUrl": whatsapp_url,
     "primaryNavigation": main_nav-> {
       "items": items[] {
         "id": _key,

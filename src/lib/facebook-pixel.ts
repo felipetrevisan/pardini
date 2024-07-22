@@ -1,5 +1,3 @@
-import { env } from "@/config/env";
-
 export const pageview = () => {
   window.fbq("track", "PageView");
 };

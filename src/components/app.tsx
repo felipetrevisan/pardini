@@ -136,44 +136,48 @@ Content.displayName = "Content";
 const Footer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((_, ref) => {
   const MotionButton = motion(Button);
 
+  const { data, isLoading } = useSite();
+
   return (
     <AnimatePresence mode="sync">
       <motion.footer
-        className="container flex flex-col space-y-10 w-full select-none items-center px-5 py-4 md:px-12 lg:px-12 relative"
+        className="container flex flex-col space-y-10 w-full select-none items-center py-10 relative"
         ref={ref}
       >
-        <div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
-          <Link href="https://wa.link/0lz45r" passHref target="_blank">
-            <MotionButton
-              aria-label="Entre em contato por Whatsapp"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 1.1 }}
-              variant="whatsapp"
-              size="2xl"
-              icon
-              rounded="full"
-              className="flex items-center justify-center gap-2 shadow"
-            >
-              <MdOutlineWhatsapp size={32} />
-              <span className="sr-only">Entre em contato por Whatsapp</span>
-            </MotionButton>
-          </Link>
-        </div>
+        {!isLoading && data?.whatsappUrl && (
+          <div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
+            <Link href={data.whatsappUrl} passHref target="_blank">
+              <MotionButton
+                aria-label="Entre em contato por Whatsapp"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 1.1 }}
+                variant="whatsapp"
+                size="2xl"
+                icon
+                rounded="full"
+                className="flex items-center justify-center gap-2 shadow"
+              >
+                <MdOutlineWhatsapp size={32} />
+                <span className="sr-only">Entre em contato por Whatsapp</span>
+              </MotionButton>
+            </Link>
+          </div>
+        )}
         <div className="flex flex-col gap-10 md:gap-0 md:flex-row items-center justify-between w-full">
           <Image
             src="/assets/logo-pardini.png"
             alt="Logo Pardini"
-            width="140"
-            height="40"
+            width="200"
+            height="60"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="w-[200px] md:w-auto"
+            className="w-[200px]"
             priority
           />
-          <SocialNetworks size={18} />
+          <SocialNetworks size={24} />
+          <p className="text-center text-white text-opacity-75">
+            © {new Date().getFullYear()} - Todos os direitos reservados
+          </p>
         </div>
-        <p className="text-center text-white text-opacity-75">
-          © {new Date().getFullYear()} - Todos os direitos reservados
-        </p>
       </motion.footer>
     </AnimatePresence>
   );
