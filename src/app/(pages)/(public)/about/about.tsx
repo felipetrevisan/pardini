@@ -8,18 +8,13 @@ import { type About as AboutType, BlockSideType } from "@/types/about";
 import { PortableText } from "@portabletext/react";
 import { urlForImage } from "@/sanity/lib/utils";
 import { cn } from "@/lib/utils";
-import { useAbout } from "@/hooks/useAbout";
+import { useAbout } from "@/hooks/use-about";
 
 export function About({ initialData }: { initialData: AboutType[] }) {
   const { data } = useAbout(initialData);
 
   return (
-    <motion.div
-      layout
-      className="h-full w-screen flex flex-col mb-20 space-y-20"
-      data-section="about"
-    >
-      <App.PageHeader>Conheça a Pardini Cidadania</App.PageHeader>
+    <motion.div layout className="h-full flex flex-col space-y-20 bg-white">
       <div className="grid gap-10">
         {data?.map(({ id, title, content, picture }, index) => {
           const idx = index % 3;
@@ -27,13 +22,13 @@ export function About({ initialData }: { initialData: AboutType[] }) {
           return (
             <motion.div
               key={id}
-              className="w-full flex flex-col px-10"
+              className="w-full flex flex-col"
               initial="hidden"
               variants={aboutSectionVariants}
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <div className="md:container w-full flex flex-col justify-center gap-5">
+              <div className="px-10 w-full flex flex-col justify-center gap-5">
                 {title && <App.Title className="text-4xl">{title}</App.Title>}
                 <div
                   className={cn(
@@ -66,10 +61,7 @@ export function About({ initialData }: { initialData: AboutType[] }) {
                     </div>
                   )}
                   <div className="font-semibold flex flex-col justify-center gap-4 drop-shadow-text shadow-white">
-                    <PortableText
-                      value={content}
-                      // components={/* optional object of custom components to use */}
-                    />
+                    <PortableText value={content} />
                   </div>
                   {picture.hasPicture && picture.side === BlockSideType.AFTER && (
                     <div className="relative w-full flex justify-center items-center">

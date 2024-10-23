@@ -8,7 +8,7 @@ import { PostDetails } from "./details";
 import { urlForImage } from "@/sanity/lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { getImageDimensions } from "@sanity/asset-utils";
-import { badgeVariants } from "@/components/ui/badge";
+import { Badge, badgeVariants } from "@/components/ui/badge";
 
 type PostProps = PostType;
 
@@ -25,24 +25,17 @@ export function Post({ coverImage, title, excerpt, slug, author, date, categorie
             <Image
               src={urlForImage(coverImage.asset).url()}
               alt=""
-              layout="responsive"
-              width={width}
-              height={height}
-              sizes="(max-width: 800px) 100vw, 800px"
-              style={{
-                // Avoid jumping around with aspect-ratio CSS property
-                aspectRatio: width / height,
-              }}
+              fill
+              // sizes="(max-width: 800px) 100vw, 800px"
+              // style={{
+              //   // Avoid jumping around with aspect-ratio CSS property
+              //   aspectRatio: width / height,
+              // }}
               className="hover:scale-110 transition-all ease-linear duration-200"
               placeholder="blur"
               blurDataURL={coverImage.metadata.lqip}
             />
           )}
-          {categories?.map((category, id) => (
-            <Link href="" className={badgeVariants({ variant: "outline" })} key={id}>
-              {category.title}
-            </Link>
-          ))}
         </CardHeader>
         <CardContent className="flex flex-col h-auto flex-shrink flex-grow justify-start p-4 space-y-4">
           <motion.h2 className="text-secondary font-semibold text-base md:text-md lg:text-xl">
@@ -51,6 +44,11 @@ export function Post({ coverImage, title, excerpt, slug, author, date, categorie
           <motion.div className="flex flex-col items-start justify-start gap-1 text-sm text-truncate md:text-md text-gray-500">
             {excerpt}
           </motion.div>
+          {/* {categories?.map((category, id) => (
+            <Badge variant="secondary" key={id}>
+              {category.title}
+            </Badge>
+          ))} */}
         </CardContent>
         <hr className="border-t border-gray-400/30 m-4" />
         <CardFooter>

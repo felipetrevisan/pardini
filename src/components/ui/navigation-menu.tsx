@@ -1,10 +1,10 @@
 import * as React from "react";
+import { icons } from "lucide-react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import { icons } from "lucide-react";
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -28,7 +28,7 @@ const NavigationMenuList = React.forwardRef<
   <NavigationMenuPrimitive.List
     ref={ref}
     className={cn(
-      "group flex flex-1 flex-wrap list-none items-center justify-center space-x-1",
+      "group flex flex-1 flex-wrap list-none items-center justify-center space-x-1 lg:gap-5 data-[orientation=vertical]:flex-col data-[orientation=vertical]:justify-start",
       className
     )}
     {...props}
@@ -43,10 +43,14 @@ const NavigationMenuItem = React.forwardRef<
   <NavigationMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative font-semibold text-white uppercase block p-4 text-sm md:text-md md:hover:scale-110 transition-all cursor-pointer",
-      "before:transition-[all_0.35s_ease] before:size-5 before:absolute before:opacity-0 before:left-0 before:top-0 before:border-l-2 before:border-t-2 before:border-l-primary before:border-t-primary before:translate-x-12 before:translate-y-12",
-      "after:transition-[all_0.35s_ease] after:size-5 after:absolute after:opacity-0 before:right-0 before:bottom-0 after:border-r-2 after:border-b-2 after:border-r-secondary after:border-b-secondary after:-translate-x-12 after:-translate-y-12",
-      "hover:before:translate-x-0 hover:before:translate-y-0 hover:before:opacity-100 hover:after:translate-x-0 hover:after:translate-y-4 hover:after:opacity-100",
+      "relative font-bold lg:font-semibold text-secondary lg:text-accent uppercase block p-4 text-xl md:text-3xl lg:text-base transition-all cursor-pointer",
+      "lg:before:transition-[all_0.35s_ease] lg:before:size-5 lg:before:absolute lg:before:opacity-0 lg:before:left-0 lg:before:top-0 lg:before:border-l-2 lg:before:border-t-2 lg:before:border-l-primary lg:before:border-t-primary lg:before:translate-x-12 lg:before:translate-y-12",
+      "lg:after:transition-[all_0.35s_ease] lg:after:size-5 lg:after:absolute lg:after:opacity-0 lg:before:right-0 lg:before:bottom-0 lg:after:border-r-2 lg:after:border-b-2 lg:after:border-r-secondary lg:after:border-b-secondary lg:after:-translate-x-12 lg:after:-translate-y-12",
+      "lg:hover:before:translate-x-0 lg:hover:before:translate-y-0 lg:hover:before:opacity-100 lg:hover:after:-translate-x-[0.188rem] lg:hover:after:translate-y-full lg:hover:after:opacity-100",
+      "lg:has-[>[data-active]]:pointer-events-none lg:has-[>[data-active]]:before:translate-x-0 lg:has-[>[data-active]]:before:translate-y-0 lg:has-[>[data-active]]:before:opacity-100 lg:has-[>[data-active]]:after:-translate-x-[0.188rem] lg:has-[>[data-active]]:after:translate-y-full lg:has-[>[data-active]]:after:opacity-100",
+      "has-[>[data-active]]:before:block has-[>[data-active]]:before:absolute has-[>[data-active]]:before:-inset-1 has-[>[data-active]]:before:-skew-y-3 has-[>[data-active]]:before:bg-secondary has-[>[data-active]]:before:text-accent",
+      "lg:has-[>[data-active]]:before:flex lg:has-[>[data-active]]:before:inset-0 lg:has-[>[data-active]]:before:skew-x-0 lg:has-[>[data-active]]:before:bg-transparent",
+      "hover:has-[>[data-active]]:before:block hover:has-[>[data-active]]:before:absolute hover:has-[>[data-active]]:before:-inset-1 hover:has-[>[data-active]]:before:-skew-y-3 hover:has-[>[data-active]]:before:bg-secondary hover:has-[>[data-active]]:before:text-accent",
       className
     )}
     {...props}
@@ -55,7 +59,7 @@ const NavigationMenuItem = React.forwardRef<
 NavigationMenuItem.displayName = NavigationMenuPrimitive.Item.displayName;
 
 const navigationMenuTriggerStyle = cva(
-  "group inline-flex w-max items-center justify-center rounded-md font-semibold text-white uppercase transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+  "group inline-flex w-max items-center justify-center rounded-md font-bold lg:font-semibold text-secondary lg:text-accent text-xl md:text-3xl lg:text-base cursor-pointer uppercase transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50"
 );
 
 const NavigationMenuTrigger = React.forwardRef<
@@ -108,12 +112,10 @@ const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
 >(({ className, ...props }, ref) => (
-  <div
-    className={cn("absolute w-full md:w-auto top-1/2 md:right-0 md:top-full flex justify-center")}
-  >
+  <div className={cn("absolute w-1/2 md:w-auto top-0 md:right-0 md:top-full flex justify-center")}>
     <NavigationMenuPrimitive.Viewport
       className={cn(
-        "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border-4 border-secondary bg-popover text-popover-foreground backdrop-blur-md shadow-black data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
+        "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md backdrop-blur-lg md:border-4 md:border-secondary bg-transparent md:bg-muted text-muted-foreground shadow-black data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
         className
       )}
       ref={ref}
@@ -161,7 +163,7 @@ const NavigationListItem = React.forwardRef<HTMLAnchorElement, NavigationListIte
           {...props}
         >
           <div className="flex flex-row items-center gap-2">
-            {LucideIcon && <LucideIcon className="size-6" />}
+            {LucideIcon && <LucideIcon className="size-6 hidden md:inline-flex" />}
             <div className="text-md font-medium leading-none">{title}</div>
           </div>
           {children && (

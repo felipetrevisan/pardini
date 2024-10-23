@@ -17,7 +17,7 @@ export default defineType({
       name: "subtitle",
       title: "Subtitle",
       type: "text",
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => Rule.required().warning("O título é obrigatório"),
     }),
     defineField({
       name: "background_image",

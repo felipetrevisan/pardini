@@ -1,45 +1,41 @@
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { VariantProps, cva } from "class-variance-authority";
+import { ComponentProps, forwardRef, HTMLAttributes } from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { HTMLMotionProps, motion } from "framer-motion";
-import { ComponentProps } from "react";
-import { icons } from "lucide-react";
-import { useApp } from "@/hooks/useApp";
+import { VariantProps, cva } from "class-variance-authority";
+import { HTMLMotionProps, motion, MotionValue } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { useApp } from "@/hooks/use-app";
 
-const navbarVariants = cva(
-  "w-full h-auto sm:px-4 w-full bg-black/80 border-gray-200 shadow-black backdrop-blur-md p-2",
-  {
-    variants: {
-      sticky: {
-        true: "fixed z-[90] top-0 start-0",
-      },
-      rounded: {
-        none: "rounded-none",
-        full: "rounded-full",
-        lg: "rounded-lg",
-      },
+const navbarVariants = cva("w-full h-auto sm:px-4 p-2", {
+  variants: {
+    sticky: {
+      true: "fixed z-[90] top-0 start-0",
     },
-    defaultVariants: {
-      sticky: false,
-      rounded: "none",
+    rounded: {
+      none: "rounded-none",
+      full: "rounded-full",
+      lg: "rounded-lg",
     },
-  }
-);
+  },
+  defaultVariants: {
+    sticky: false,
+    rounded: "none",
+  },
+});
 
 export interface NavbarProps extends HTMLMotionProps<"nav">, VariantProps<typeof navbarVariants> {
   children: JSX.Element;
 }
 
-const Root = React.forwardRef<HTMLDivElement, NavbarProps>(
+const Root = forwardRef<HTMLDivElement, NavbarProps>(
   ({ className, sticky, rounded, children, ...props }, ref) => {
     return (
       <motion.nav
         ref={ref}
         className={cn(navbarVariants({ sticky, rounded, className }))}
+        initial={false}
         {...props}
       >
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+        <div className="max-w-8xl mx-auto flex flex-wrap items-center justify-between">
           {children}
         </div>
       </motion.nav>
@@ -48,92 +44,88 @@ const Root = React.forwardRef<HTMLDivElement, NavbarProps>(
 );
 Root.displayName = "Navbar.Root";
 
-export interface NavBrandProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface NavBrandProps extends HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
 }
 
-const Brand = React.forwardRef<HTMLDivElement, NavBrandProps>(
+const Brand = forwardRef<HTMLDivElement, NavBrandProps>(
   ({ className, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "div";
-    return <Comp className={cn("flex items-center space-x-3", className)} ref={ref} {...props} />;
+    return <Comp ref={ref} className={cn("flex items-center space-x-3", className)} {...props} />;
   }
 );
 Brand.displayName = "Navbar.Brand";
 
-const Collapse = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, children, ...props }, ref) => {
-    const { isMenuOpen } = useApp();
-
-    return (
-      <div
-        className={cn(
-          "md:flex md:gap-10",
-          {
-            hidden: !isMenuOpen,
-          },
-          className
-        )}
-        {...props}
-        ref={ref}
-      >
-        {children}
-      </div>
-    );
-  }
+const Path = (props: any) => (
+  <motion.path
+    fill="currentColor"
+    strokeWidth="3"
+    className="stroke-secondary"
+    strokeLinecap="round"
+    {...props}
+  />
 );
-Collapse.displayName = "Navbar.Collapse";
 
-// export interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-//   asChild?: boolean;
-//   disabled?: boolean;
-//   active?: boolean;
-// }
-
-// const Link = React.forwardRef<HTMLAnchorElement, NavLinkProps>(
-//   ({ className, asChild = false, ...props }, ref) => {
-//     const Comp = asChild ? Slot : "a";
-//     return (
-//       <li className="relative font-semibold text-white uppercase flex overflow-hidden p-4 hover:after:left-0 hover:after-right-auto hover:after:w-full after:transition-all after:absolute after:left-auto after:right-0 after:bottom-0 after:h-[0.40rem] after:w-0 after:bg-gradient-to-r after:from-primary after:to-secondary text-md md:text-md">
-//         <Comp
-//           className={cn(
-//             "flex py-2 pr-4 pl-3 md:p-0 items-center justify-center p-6 w-full",
-//             className
-//           )}
-//           ref={ref}
-//           {...props}
-//         />
-//       </li>
-//     );
-//   }
-// );
-// Link.displayName = "Navbar.Link";
-
-export interface NavbarToggleProps extends ComponentProps<"button"> {
-  icon: keyof typeof icons;
-}
-
-const Toggle = React.forwardRef<HTMLButtonElement, NavbarToggleProps>(
-  ({ className, icon, ...props }, ref) => {
-    const { toogleMenu } = useApp();
-
-    const LucideIcon = icons[icon];
+const Toggle = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
+  ({ className, ...props }, ref) => {
+    const { toggleMenu } = useApp();
 
     return (
       <button
         ref={ref}
-        onClick={() => toogleMenu()}
+        onClick={() => toggleMenu()}
         className={cn(
-          "inline-flex items-center rounded-xl p-2 text-sm text-secondary-foreground hover:bg-secondary-foreground hover:text-background focus:outline-none focus:ring-2 focus:bg-secondary-foreground focus:text-secondary md:hidden",
+          "rounded-full bg-white cursor-pointer flex justify-center items-center size-12 text-sm lg:hidden",
           className
         )}
         {...props}
       >
-        <span className="sr-only">Open main menu</span>
-        <LucideIcon className="size-8 shrink-0" />
+        <svg width="23" height="23" viewBox="0 0 23 23">
+          <Path
+            variants={{
+              closed: { d: "M 2 2.5 L 20 2.5" },
+              open: { d: "M 3 16.5 L 17 2.5" },
+            }}
+          />
+          <Path
+            d="M 2 9.423 L 20 9.423"
+            variants={{
+              closed: { opacity: 1 },
+              open: { opacity: 0 },
+            }}
+            transition={{ duration: 0.1 }}
+          />
+          <Path
+            variants={{
+              closed: { d: "M 2 16.346 L 20 16.346" },
+              open: { d: "M 3 2.5 L 17 16.346" },
+            }}
+          />
+        </svg>
       </button>
     );
   }
 );
 Toggle.displayName = "Navbar.Toggle";
 
-export { Root, Brand, Collapse, Toggle };
+export interface BackgroundProps extends HTMLMotionProps<"div"> {
+  size: MotionValue<string>;
+}
+
+const Background = forwardRef<HTMLDivElement, BackgroundProps>(
+  ({ className, size, ...props }, ref) => {
+    return (
+      <motion.div
+        ref={ref}
+        className={cn(
+          "absolute flex justify-center top-0 right-0 bottom-0 shadow-xl bg-accent backdrop-blur-xl md:hidden w-7/12 md:w-9/12 h-screen border-l-4 border-secondary",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+Background.displayName = "Navbar.Background";
+
+export { Root, Brand, Background, Toggle };

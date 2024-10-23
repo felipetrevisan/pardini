@@ -1,4 +1,4 @@
-import { MdLink, MdNavigation } from "react-icons/md";
+import { MdLink } from "react-icons/md";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
@@ -9,71 +9,65 @@ export default defineType({
   fields: [
     defineField({
       name: "link_type",
-      title: "Link Type",
+      title: "Tipo de Link",
       type: "string",
       initialValue: "EXTERNAL",
       options: {
         list: [
-          { title: "Internal", value: "INTERNAL" },
-          { title: "External", value: "EXTERNAL" },
-          { title: "Service Dialog", value: "SERVICE_DIALOG" },
+          { title: "Interno", value: "INTERNAL" },
+          { title: "Externo", value: "EXTERNAL" },
+          { title: "Diálogo de Serviço", value: "SERVICE_DIALOG" },
         ],
         layout: "radio",
       },
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => Rule.required().warning("O tipo de link é obrigatório."),
     }),
     defineField({
       name: "internal_link",
-      title: "Internal Link",
-      description: "Select pages for navigation",
+      title: "Link Interno",
+      description: "Selecione uma página para navegação",
       type: "reference",
       to: [{ type: "post" }],
-      hidden: ({ parent }) =>
-        parent?.link_type === "EXTERNAL" || parent?.link_type === "SERVICE_DIALOG",
+      hidden: ({ parent }) => parent?.link_type !== "INTERNAL",
       validation: (Rule) =>
         Rule.custom((field, context) =>
-          context?.document?.link_type === "INTERNAL" && field === undefined
-            ? "This field must not be empty."
+          context?.document?.link_type === "INTERNAL" && !field
+            ? "Este campo é obrigatório para links internos."
             : true
         ).warning(),
     }),
     defineField({
       name: "use_page_path_uri",
-      title: "Use Page Path URI",
+      title: "Usar URI do Caminho da Página",
       type: "boolean",
       initialValue: false,
-      hidden: ({ parent }) =>
-        parent?.link_type === "INTERNAL" || parent?.link_type === "SERVICE_DIALOG",
+      hidden: ({ parent }) => parent?.link_type !== "EXTERNAL",
     }),
     defineField({
       name: "path_uri",
-      title: "Page Path URI",
-      description: "Paths URI need starts with a slash (/)",
+      title: "URI do Caminho da Página",
+      description: "O caminho deve começar com uma barra (/)",
       type: "string",
-      hidden: ({ parent }) =>
-        !parent?.use_page_path_uri ||
-        parent?.link_type === "INTERNAL" ||
-        parent?.link_type === "SERVICE_DIALOG",
-      validation: (rule) =>
-        rule
-          .custom((field, context) => {
-            return context?.document?.link_type === "EXTERNAL" &&
-              context?.document?.use_page_path_uri &&
-              !field?.startsWith("/")
-              ? "Path need starts with slash"
-              : true;
-          })
-          .warning(),
+      hidden: ({ parent }) => !parent?.use_page_path_uri || parent?.link_type !== "EXTERNAL",
+      validation: (Rule) =>
+        Rule.custom((field, context) => {
+          const isExternalLink = context?.document?.link_type === "EXTERNAL";
+          const usesPagePath = context?.document?.use_page_path_uri;
+          return isExternalLink && usesPagePath && (!field || !field.startsWith("/"))
+            ? "O caminho precisa começar com uma barra (/)"
+            : true;
+        }).warning(),
     }),
     defineField({
       name: "external_url",
-      title: "External URL",
-      description: "Use fully qualified URLS for external link",
+      title: "URL Externa",
+      description: "Use uma URL totalmente qualificada para links externos",
       type: "url",
-      hidden: ({ parent }) =>
-        parent?.use_page_path_uri ||
-        parent?.link_type === "INTERNAL" ||
-        parent?.link_type === "SERVICE_DIALOG",
+      hidden: ({ parent }) => parent?.use_page_path_uri || parent?.link_type !== "EXTERNAL",
+      validation: (Rule) =>
+        Rule.uri({
+          scheme: ["http", "https"],
+        }).warning("Insira uma URL externa válida."),
     }),
   ],
 });

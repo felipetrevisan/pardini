@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import * as App from "@/components/app";
-import { usePosts } from "@/hooks/usePosts";
+import { usePosts } from "@/hooks/use-posts";
 import { Post } from "./post";
 import { Posts } from "@/types/post";
 import { PostsPagination } from "./pagination";
@@ -22,12 +21,10 @@ export function Blog({ pageIndex, pageSize, initialData }: BlogPostProps) {
   return (
     <motion.div
       layout="size"
-      className="h-full w-screen flex flex-col mb-10 md:mb-20 space-y-20"
-      data-section="blog"
+      className="h-full flex flex-col space-y-20 bg-white"
     >
-      <App.PageHeader>Blog</App.PageHeader>
       <div className="container flex flex-col gap-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {data?.items?.map((post) => <Post {...post} key={post.id} />)}
         </div>
         <PostsPagination

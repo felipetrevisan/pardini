@@ -15,7 +15,7 @@ import { urlForImage } from "@/sanity/lib/utils";
 export function Home({ images }: { images: Featured[] }) {
   return (
     <motion.div layout className="w-screen" data-section="home">
-      <div className="aspect-[1] md:aspect-[16/7] flex items-center justify-start space-y-1 relative bg-white shadow-xl">
+      <div className="aspect-[6/7] md:aspect-[10/7] lg:aspect-[10/4] flex items-center justify-start space-y-1 relative bg-white shadow-xl">
         <Swiper
           slidesPerView={1}
           loop={true}
@@ -29,7 +29,7 @@ export function Home({ images }: { images: Featured[] }) {
           {images?.map(({ id, title, subtitle, image }) => (
             <SwiperSlide
               key={id}
-              className="relative before:absolute before:z-[2] before:bg-gradient-to-r before:from-black/70 before:via-secondary/40 before:to-black/10 before:w-full before:h-full bg-primary"
+              className="relative after:absolute after:z-[3] after:bg-gradient-to-b after:from-transparent after:to-secondary after:w-full after:h-56 after:-bottom-10 before:absolute before:z-[2] before:bg-gradient-to-r before:from-black/70 before:via-secondary/40 before:to-black/10 before:w-full before:h-full bg-primary"
             >
               {image && (
                 <Image
@@ -42,17 +42,17 @@ export function Home({ images }: { images: Featured[] }) {
                   blurDataURL={image.metadata.lqip}
                 />
               )}
-              <div className="w-full h-full flex flex-row items-center px-10 md:px-20">
+              <div className="container w-full h-full flex flex-row items-center px-10 md:px-20">
                 <motion.div
-                  className="flex flex-col items-start justify-start md:justify-center space-y-6 z-[3]"
+                  className="flex flex-col items-center md:items-start justify-start md:justify-center space-y-6 z-[3]"
                   variants={slideUpVariants}
                   initial="initial"
                   animate="animate"
                 >
-                  <motion.h2 className="text-2xl text-secondary-foreground md:text-5xl font-bold md:text-start drop-shadow-text shadow-black">
+                  <motion.h2 className="text-4xl text-secondary-foreground md:text-5xl font-bold text-center md:text-start drop-shadow-text shadow-black">
                     {title}
                   </motion.h2>
-                  <motion.h3 className="text-xl font-medium text-secondary-foreground md:text-3xl md:text-start drop-shadow-text shadow-black line-clamp-2 max-w-2xl">
+                  <motion.h3 className="text-2xl font-medium text-secondary-foreground md:text-3xl text-center md:text-start drop-shadow-text shadow-black line-clamp-2 max-w-2xl">
                     {subtitle}
                   </motion.h3>
                   <Drawer>

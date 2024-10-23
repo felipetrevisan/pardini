@@ -9,32 +9,39 @@ export default defineType({
   fields: [
     defineField({
       name: "author_name",
-      title: "Author Name",
+      title: "Nome do Autor",
       type: "string",
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => Rule.required().warning("O nome do autor é obrigatório."),
     }),
     defineField({
       name: "author_avatar",
-      title: "Author Avatar",
+      title: "Avatar do Autor",
       type: "image",
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: "order",
-      title: "Display Order",
+      title: "Ordem de Exibição",
       type: "number",
       initialValue: 0,
-      validation: (Rule) => Rule.required().min(0).max(100).warning(),
+      validation: (Rule) =>
+        Rule.required()
+          .min(0)
+          .max(100)
+          .warning("A ordem de exibição é obrigatória e deve ser entre 0 e 100."),
     }),
     defineField({
       name: "show_home",
-      title: "Show In Home?",
+      title: "Exibir na Página Inicial?",
       type: "boolean",
       initialValue: false,
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => Rule.required().warning("Este campo é obrigatório."),
     }),
     defineField({
       name: "type",
-      title: "Testimonial Type",
+      title: "Tipo de Depoimento",
       type: "string",
       options: {
         list: [
@@ -43,11 +50,12 @@ export default defineType({
         ],
         layout: "radio",
       },
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) =>
+        Rule.required().warning("Selecione o tipo de depoimento (Texto ou Vídeo)."),
     }),
     defineField({
       name: "testimonial",
-      title: "Testimonial",
+      title: "Depoimento",
       type: "array",
       of: [
         {
@@ -67,22 +75,26 @@ export default defineType({
       hidden: ({ parent }) => parent?.type !== "TEXT",
       validation: (Rule) =>
         Rule.custom((field, context) =>
-          context?.document?.type === "TEXT" && field === undefined
-            ? "This field must not be empty."
+          context?.document?.type === "TEXT" && !field
+            ? "Este campo é obrigatório quando o tipo for Texto."
             : true
         ).warning(),
     }),
     defineField({
       name: "video",
-      title: "Video URL",
+      title: "URL do Vídeo",
       type: "url",
       hidden: ({ parent }) => parent?.type !== "VIDEO",
       validation: (Rule) =>
         Rule.custom((field, context) =>
-          context?.document?.type === "VIDEO" && field === undefined
-            ? "This field must not be empty."
+          context?.document?.type === "VIDEO" && !field
+            ? "Este campo é obrigatório quando o tipo for Vídeo."
             : true
-        ).warning(),
+        )
+          .uri({
+            scheme: ["http", "https"],
+          })
+          .warning("Insira uma URL de vídeo válida."),
     }),
   ],
   preview: {
@@ -102,12 +114,12 @@ export default defineType({
   },
   orderings: [
     {
-      title: "type",
+      title: "Tipo",
       name: "typeDesc",
       by: [{ field: "type", direction: "desc" }],
     },
     {
-      title: "order",
+      title: "Ordem",
       name: "orderAsc",
       by: [{ field: "order", direction: "asc" }],
     },

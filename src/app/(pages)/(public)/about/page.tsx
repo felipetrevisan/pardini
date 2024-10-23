@@ -1,18 +1,14 @@
-import { Fragment } from "react";
 import { About } from "./about";
 import { getAboutContent } from "@/server/get-about";
+import * as App from "@/components/app";
 
 export default async function Page() {
   const content = await getAboutContent();
 
   return (
-    <Fragment>
-      <section
-        id="about"
-        className="section relative flex flex-col min-h-full w-screen items-center justify-center bg-white"
-      >
-        <About initialData={content} />
-      </section>
-    </Fragment>
+    <section className="relative flex flex-col min-h-full items-center justify-center">
+      <App.PageHeader>Quem Somos</App.PageHeader>
+      <About initialData={content} />
+    </section>
   );
 }

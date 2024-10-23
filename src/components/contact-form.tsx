@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InfoIcon, Loader2 } from "lucide-react";
+import { MdEmail } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,10 +8,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "./ui/textarea";
 import { ContactFormSchema, contactFormSchema } from "@/types/contact";
 import { sendEmail } from "@/server/send-email";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { DrawerFooter } from "./ui/drawer";
 import { DialogTrigger } from "./ui/dialog";
-import { MdEmail } from "react-icons/md";
 
 export function ContactForm({ isDrawer = false }: { isDrawer: boolean }) {
   const { toast } = useToast();
@@ -52,7 +52,10 @@ export function ContactForm({ isDrawer = false }: { isDrawer: boolean }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(handleSendForm)} className="w-full">
+    <form
+      onSubmit={handleSubmit(handleSendForm)}
+      className="w-full grid justify-normal md:justify-center"
+    >
       <div className="grid gap-4 py-4">
         <div className="grid grid-cols-1 md:grid-cols-2 items-baseline gap-4">
           <div>

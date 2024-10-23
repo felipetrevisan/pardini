@@ -11,7 +11,8 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => 
+        Rule.required().warning("O título é obrigatório"),
     }),
     defineField({
       name: "answer",
@@ -20,7 +21,7 @@ export default defineType({
       of: [
         {
           type: "block",
-          styles: [],
+          styles: [], // Definir estilos permitidos aqui se necessário
           marks: {
             decorators: [
               { title: "Strong", value: "strong" },
@@ -30,14 +31,27 @@ export default defineType({
           },
         },
       ],
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => 
+        Rule.required().warning("A resposta é obrigatória"),
     }),
     defineField({
       name: "show_home",
       title: "Show In Home?",
       type: "boolean",
       initialValue: false,
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => 
+        Rule.required().warning("Esse campo precisa ser preenchido"),
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+    },
+    prepare(selection) {
+      const { title } = selection;
+      return {
+        title: title ?? "Pergunta sem título",
+      };
+    },
+  },
 });

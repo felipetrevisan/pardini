@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Service, WhatsappButtonLabel } from "@/types/services";
 import { PortableText } from "@portabletext/react";
 import { icons } from "lucide-react";
 import Link from "next/link";
 import { MdOutlineWhatsapp } from "react-icons/md";
+import { Service, WhatsappButtonLabel } from "@/types/services";
+import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { portableComponents } from "./ui/portable-components";
 import { ScrollArea } from "./ui/scroll-area";
 

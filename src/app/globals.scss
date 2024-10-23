@@ -21,10 +21,10 @@
     --secondary: 356.74deg 68.66% 26.27%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 4.8% 95.9%;
+    --muted: 35.29deg 26.98% 87.65%; //240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 0 0% 98% /* 30deg 95.83% 52.94%*/;
+    --accent: 0 0% 98%;
     --accent-foreground: 240 5.9% 10%;
 
     --destructive: 0 84.2% 60.2%;
@@ -38,7 +38,6 @@
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
-    --header-height: 98px;
   }
 
   .dark {
@@ -87,7 +86,12 @@
     @apply bg-background text-foreground;
   }
 
-  section:last-of-type {
+  section:last-of-type,
+  section:last-of-type > div:last-of-type {
     @apply rounded-bl-[40px] rounded-br-[40px];
+  }
+
+  section:not(#faqs):last-of-type > div:last-of-type {
+    @apply rounded-tl-[40px] rounded-tr-[40px] pb-20 pt-20 -mt-64 z-[4];
   }
 }

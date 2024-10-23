@@ -1,7 +1,9 @@
-import { Fragment } from "react";
+"use client";
+
 import * as App from "@/components/app";
 
-import "../../globals.css";
+import { Fragment } from "react";
+import "../../globals.scss";
 import FacebookPixel from "@/components/facebook-pixel";
 import { env } from "@/config/env";
 

@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import { z } from "zod";
+import * as App from "@/components/app";
 import { Blog } from "./blog";
 import { getPosts } from "@/server/get-posts";
 
@@ -16,13 +16,9 @@ export default async function Page({ searchParams }: { searchParams: BlogPageSea
   const posts = await getPosts({ pageIndex: query.pageIndex, pageSize: query.pageSize });
 
   return (
-    <Fragment>
-      <section
-        id="blog"
-        className="section relative flex flex-col min-h-full w-screen items-center justify-center bg-white"
-      >
-        <Blog {...query} initialData={posts} />
-      </section>
-    </Fragment>
+    <section className="relative flex flex-col min-h-full items-center justify-center">
+      <App.PageHeader>Blog</App.PageHeader>
+      <Blog {...query} initialData={posts} />
+    </section>
   );
 }

@@ -1,18 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import * as App from "@/components/app";
 import { ContactForm } from "@/components/contact-form";
 
 export function Contact() {
   return (
-    <motion.div
-      layout
-      className="h-full w-screen flex flex-col mb-20 space-y-20"
-      data-section="contact"
-    >
-      <App.PageHeader>Contato</App.PageHeader>
-      <div className="container flex max-w-4xl">
+    <motion.div layout className="container md:max-w-screen-sm h-full flex flex-col space-y-20 bg-white">
+      <div className="flex flex-col gap-10">
         <ContactForm isDrawer={false} />
       </div>
     </motion.div>

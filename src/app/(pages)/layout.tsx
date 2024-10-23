@@ -3,7 +3,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Inter } from "next/font/google";
 
-import "../globals.css";
+import "../globals.scss";
 import Providers from "./providers";
 import { getSiteConfig } from "@/server/get-site-config";
 
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.className}`} suppressHydrationWarning>
-      <body className="antialiased">
+      <body className="antialiased h-screen relative">
         <Providers>{children}</Providers>
         <SpeedInsights />
       </body>

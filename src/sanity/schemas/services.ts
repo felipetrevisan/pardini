@@ -10,7 +10,7 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => Rule.required().warning("O título é obrigatório"),
     }),
     defineField({
       name: "slug",
@@ -26,12 +26,13 @@ export default defineType({
       title: "Display Order",
       type: "number",
       initialValue: 0,
-      validation: (Rule) => Rule.required().min(0).max(100).warning(),
+      validation: (Rule) =>
+        Rule.required().min(0).max(100).warning("A ordem deve ser entre 0 e 100"),
     }),
     defineField({
       name: "icon",
       title: "Icon",
-      type: 'string',
+      type: "string",
     }),
     defineField({
       name: "type",
@@ -44,13 +45,13 @@ export default defineType({
         ],
         layout: "radio",
       },
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => Rule.required().warning("O tipo de serviço é obrigatório"),
     }),
     defineField({
       name: "excerpt",
       title: "Excerpt",
       type: "text",
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => Rule.required().warning("O resumo é obrigatório"),
     }),
     defineField({
       name: "description",
@@ -69,25 +70,25 @@ export default defineType({
           },
         },
       ],
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) => Rule.required().warning("A descrição é obrigatória"),
     }),
     defineField({
       name: "has_see_more_button",
       title: "See More Button?",
       type: "boolean",
       initialValue: false,
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) =>
+        Rule.required().warning("É necessário informar se há um botão de 'Ver mais'"),
     }),
     defineField({
       name: "link_see_more",
       title: "See More Button Link",
       type: "url",
-      // to: [{ type: 'route' }, { type: 'post' }],
       hidden: ({ parent }) => !parent?.has_see_more_button,
       validation: (Rule) =>
         Rule.custom((field, context) =>
-          context?.document?.has_see_more_button && field === undefined
-            ? "This field must not be empty."
+          context?.document?.has_see_more_button && !field
+            ? "Este campo é obrigatório quando houver um botão 'Ver mais'."
             : true
         ).warning(),
     }),
@@ -96,7 +97,8 @@ export default defineType({
       title: "Whatsapp Button?",
       type: "boolean",
       initialValue: false,
-      validation: (Rule) => Rule.required().warning(),
+      validation: (Rule) =>
+        Rule.required().warning("É necessário informar se há um botão do WhatsApp"),
     }),
     defineField({
       name: "whatsapp_button_label",
@@ -112,8 +114,8 @@ export default defineType({
       hidden: ({ parent }) => !parent?.has_whatsapp_button,
       validation: (Rule) =>
         Rule.custom((field, context) =>
-          context?.document?.has_whatsapp_button && field === undefined
-            ? "This field must not be empty."
+          context?.document?.has_whatsapp_button && !field
+            ? "Este campo é obrigatório quando houver um botão do WhatsApp."
             : true
         ).warning(),
     }),
@@ -124,8 +126,8 @@ export default defineType({
       hidden: ({ parent }) => !parent?.has_whatsapp_button,
       validation: (Rule) =>
         Rule.custom((field, context) =>
-          context?.document?.has_whatsapp_button && field === undefined
-            ? "This field must not be empty."
+          context?.document?.has_whatsapp_button && !field
+            ? "Este campo é obrigatório quando houver um botão do WhatsApp."
             : true
         ).warning(),
     }),
@@ -148,17 +150,17 @@ export default defineType({
   },
   orderings: [
     {
-      title: "title",
+      title: "Título",
       name: "titleDesc",
       by: [{ field: "title", direction: "desc" }],
     },
     {
-      title: "type",
+      title: "Tipo de serviço",
       name: "typeDesc",
       by: [{ field: "type", direction: "desc" }],
     },
     {
-      title: "order",
+      title: "Ordem de exibição",
       name: "orderAsc",
       by: [{ field: "order", direction: "asc" }],
     },

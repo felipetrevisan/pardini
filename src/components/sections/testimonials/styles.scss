@@ -1,13 +1,10 @@
 [data-section="testimonials"] {
   & .swiper-slide {
-    &:has(.swiper-slide-active) {
-      @apply shadow-2xl;
-    }
+    @apply opacity-20 before:flex justify-center items-center;
 
-    &:not(.swiper-slide-fully-visible) {
-      @apply relative before:z-30 before:absolute before:h-full before:w-full before:bg-secondary/30;
-
-      opacity: 0.5;
+    &.swiper-slide-active,
+    &.swiper-slide-next {
+      @apply opacity-100 zoom-in-150 zoom-out-75;
     }
   }
 }

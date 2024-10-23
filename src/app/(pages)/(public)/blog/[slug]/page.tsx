@@ -1,13 +1,15 @@
-import { Fragment } from "react";
-import { z } from "zod";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { getPost, getPostsSlug } from "@/server/get-posts";
-import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import type { Metadata, ResolvingMetadata } from "next";
+import { notFound } from "next/navigation";
+import { z } from "zod";
+import { motion } from "framer-motion";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import * as App from "@/components/app";
+import { getPost, getPostsSlug } from "@/server/get-posts";
+import { resolveOpenGraphImage, urlForImage } from "@/sanity/lib/utils";
 import { postQuery } from "@/sanity/lib/queries";
 import type { Post as PostType } from "@/types/post";
 import { Post } from "./post";
-import { notFound } from "next/navigation";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const blogPageParams = z.object({
   params: z.object({
@@ -31,7 +33,9 @@ export async function generateMetadata(
     stega: false,
   });
   const previousImages = (await parent).openGraph?.images || [];
-  const ogImage = post?.coverImage?.asset ? resolveOpenGraphImage(post.coverImage.asset) : undefined;
+  const ogImage = post?.coverImage?.asset
+    ? resolveOpenGraphImage(post.coverImage.asset)
+    : undefined;
 
   return {
     authors: post?.author?.name ? [{ name: post?.author?.name }] : [],
@@ -51,13 +55,8 @@ export default async function Page({ params: { slug } }: BlogPageParams) {
   }
 
   return (
-    <Fragment>
-      <section
-        id="blog"
-        className="section relative flex min-h-full w-screen items-center justify-center bg-white"
-      >
-        <Post initialData={post} slug={slug} />
-      </section>
-    </Fragment>
+    <section className="relative flex flex-col min-h-full items-center justify-center">
+      <Post initialData={post} slug={slug} />
+    </section>
   );
 }

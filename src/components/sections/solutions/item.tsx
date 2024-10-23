@@ -2,8 +2,8 @@
 
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 type Props = {
   src: string;

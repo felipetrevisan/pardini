@@ -1,7 +1,8 @@
 "use client";
 
-import * as React from "react";
+import { forwardRef, Fragment, HTMLAttributes, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   AnimatePresence,
   motion,
@@ -10,122 +11,141 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import { MdOutlineWhatsapp } from "react-icons/md";
+import { Slot } from "@radix-ui/react-slot";
+import { Background, Parallax } from "react-parallax";
 
 import { cn } from "@/lib/utils";
 import * as Navbar from "@/components/ui/navbar";
-import { Fragment } from "react";
 import { Button } from "@/components/ui/button";
-import { MdOutlineWhatsapp } from "react-icons/md";
-import { Slot } from "@radix-ui/react-slot";
-import Link from "next/link";
-import { useServices } from "@/hooks/useServices";
-import { useSite } from "@/hooks/useSite";
+import { useServices } from "@/hooks/use-services";
+import { useSite } from "@/hooks/use-site";
 import { SocialNetworks } from "./social-icons";
 import { Logo } from "./logo";
-import { TopNavigation } from "./navigation";
+import { sidebar } from "@/config/animation";
+import { useDimensions } from "@/hooks/use-dimensions";
+import { useApp } from "@/hooks/use-app";
+import { DesktopNavigation } from "./desktop-navigation";
+import { MobileNavigation } from "./mobile-navigation";
+import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 
-const Header = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className }, ref) => {
-    const { data: serviceData, isLoading } = useServices();
-    const { data: siteConfigData, isLoading: isSiteConfigLoading } = useSite();
+const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className }, ref) => {
+  const { data: serviceData, isLoading } = useServices();
+  const { data: siteConfigData, isLoading: isSiteConfigLoading } = useSite();
+  const [currentScrollY, setCurrentScrollY] = useState(0);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const { height } = useDimensions(containerRef);
+  const { isMenuOpen, toggleMenu } = useApp();
+  const { scrollY } = useScroll();
 
-    const MotionSocialNetworks = motion(SocialNetworks);
+  const scrollYRange = [0, 100, 100];
 
-    const { scrollY } = useScroll();
+  const logoSizeHeight = useTransform(scrollY, scrollYRange, ["60px", "56px", "56px"]);
+  const logoSizeWidth = useTransform(scrollY, scrollYRange, ["220px", "174px", "174px"]);
+  const menuSize = useTransform(scrollY, scrollYRange, [
+    "circle(30px at 45vw 48px)",
+    "circle(28px at 45vw 43px)",
+    "circle(28px at 45vw 43px)",
+  ]);
+  const iconScale = useTransform(scrollY, scrollYRange, ["1", ".75", ".75"]);
+  const paddingHeaderX = useTransform(scrollY, scrollYRange, ["30px", "20px", "20px"]);
+  const paddingHeaderY = useTransform(scrollY, scrollYRange, ["1.2rem", "1rem", "1rem"]);
 
-    const scrollYRange = [0, 100, 100];
+  const controls = useAnimation();
+  const delta = useRef(0);
+  const lastScrollY = useRef(0);
 
-    const logoSizeHeight = useTransform(scrollY, scrollYRange, ["60px", "40px", "40px"]);
-    const logoSizeWidth = useTransform(scrollY, scrollYRange, ["220px", "140px", "140px"]);
-    const iconScale = useTransform(scrollY, scrollYRange, ["1", ".75", ".75"]);
-    const paddingHeaderX = useTransform(scrollY, scrollYRange, ["30px", "20px", "20px"]);
-    const paddingHeaderY = useTransform(scrollY, scrollYRange, ["1.2rem", "1rem", "1rem"]);
+  useMotionValueEvent(scrollY, "change", (val) => {
+    const diff = Math.abs(val - lastScrollY.current);
 
-    const controls = useAnimation();
-    const delta = React.useRef(0);
-    const lastScrollY = React.useRef(0);
+    if (val >= lastScrollY.current) {
+      delta.current = delta.current >= 10 ? 10 : delta.current + diff;
+    } else {
+      delta.current = delta.current <= -10 ? -10 : delta.current - diff;
+    }
 
-    useMotionValueEvent(scrollY, "change", (val) => {
-      const diff = Math.abs(val - lastScrollY.current);
-      if (val >= lastScrollY.current) {
-        delta.current = delta.current >= 10 ? 10 : delta.current + diff;
-      } else {
-        delta.current = delta.current <= -10 ? -10 : delta.current - diff;
-      }
+    if (delta.current >= 10 && val > 200) {
+      controls.start("hidden");
+    } else if (delta.current <= -10 || val < 200) {
+      controls.start("visible");
+    }
 
-      if (delta.current >= 10 && val > 200) {
-        controls.start("hidden");
-      } else if (delta.current <= -10 || val < 200) {
-        controls.start("visible");
-      }
-      lastScrollY.current = val;
-    });
+    lastScrollY.current = val;
+    setCurrentScrollY(val);
+  });
 
-    return (
-      <AnimatePresence mode="sync">
-        <motion.header
-          className={cn(
-            `max-w-screen-xl h-[var(--header-height)] max-h-[var(--header-height)] flex flex-wrap md:flex-nowrap items-center justify-between mx-auto`,
-            className
-          )}
-          ref={ref}
+  return (
+    <AnimatePresence mode="sync">
+      <motion.header
+        className={cn(
+          "fixed top-0 z-[100] w-full backdrop-blur-md transition-colors duration-500 bg-transparent h-20",
+          {
+            "bg-black/60 backdrop-blur-xl": currentScrollY > 200,
+          },
+          className
+        )}
+        ref={ref}
+        {...(isMenuOpen && { "data-menu-open": true })}
+      >
+        <Navbar.Root
+          sticky
+          initial="visible"
+          animate={controls}
+          variants={{
+            visible: { top: "0px" },
+            hidden: { top: "0px" },
+          }}
+          style={{
+            paddingLeft: paddingHeaderX,
+            paddingRight: paddingHeaderX,
+            paddingTop: paddingHeaderY,
+            paddingBottom: paddingHeaderY,
+          }}
         >
-          <Navbar.Root
-            sticky
-            initial="visible"
-            animate={controls}
-            variants={{
-              visible: { top: "0px" },
-              hidden: { top: "0px" },
-            }}
-            style={{
-              paddingLeft: paddingHeaderX,
-              paddingRight: paddingHeaderX,
-              paddingTop: paddingHeaderY,
-              paddingBottom: paddingHeaderY,
-            }}
-          >
-            <Fragment>
-              <Navbar.Brand>
-                <Logo height={logoSizeHeight} width={logoSizeWidth} />
-              </Navbar.Brand>
+          <Fragment>
+            <Navbar.Brand>
+              <Logo height={logoSizeHeight} width={logoSizeWidth} />
+            </Navbar.Brand>
+            <motion.div animate={isMenuOpen ? "open" : "closed"} custom={height} ref={containerRef} className="flex">
               {!isSiteConfigLoading && (
                 <Fragment>
-                  <Navbar.Toggle icon="Menu" />
-                  <Navbar.Collapse>
-                    <TopNavigation
-                      navigation={siteConfigData?.primaryNavigation}
-                      servicesData={serviceData}
-                      isServicesLoading={isLoading}
-                    />
-                    <MotionSocialNetworks
-                      className="hidden md:flex"
-                      size={18}
-                      style={{
-                        scaleX: iconScale,
-                        scaleY: iconScale,
-                      }}
-                    />
-                  </Navbar.Collapse>
+                  <DesktopNavigation
+                    navigation={siteConfigData?.primaryNavigation}
+                    servicesData={serviceData}
+                    isServicesLoading={isLoading}
+                  />
+                  <Drawer open={isMenuOpen} onClose={() => toggleMenu(0)}>
+                    <DrawerTrigger>
+                      <Navbar.Toggle />
+                    </DrawerTrigger>
+                    <DrawerContent className="container max-w-xl md:max-w-4xl h-[99vh]">
+                      <DrawerTrigger>
+                        <Navbar.Toggle className="absolute right-7 top-10 bg-transparent" />
+                      </DrawerTrigger>
+                      <MobileNavigation
+                        navigation={siteConfigData?.primaryNavigation}
+                        servicesData={serviceData}
+                        isServicesLoading={isLoading}
+                      />
+                    </DrawerContent>
+                  </Drawer>
                 </Fragment>
               )}
-            </Fragment>
-          </Navbar.Root>
-        </motion.header>
-      </AnimatePresence>
-    );
-  }
-);
+            </motion.div>
+          </Fragment>
+        </Navbar.Root>
+      </motion.header>
+    </AnimatePresence>
+  );
+});
 Header.displayName = "Header";
 
-type ContentProps = React.HTMLAttributes<HTMLDivElement>;
+type ContentProps = HTMLAttributes<HTMLDivElement>;
 
 const Content = ({ className, children }: ContentProps) => {
   return (
     <AnimatePresence mode="sync">
-      <motion.main
-        className={cn("relative z-30 h-full flex items-center flex-col justify-center", className)}
-      >
+      <motion.main className={cn("container max-w-8xl mx-auto px-4 sm:px-6 md:px-8", className)}>
         {children}
       </motion.main>
     </AnimatePresence>
@@ -133,7 +153,7 @@ const Content = ({ className, children }: ContentProps) => {
 };
 Content.displayName = "Content";
 
-const Footer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((_, ref) => {
+const Footer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>((_, ref) => {
   const MotionButton = motion(Button);
 
   const { data, isLoading } = useSite();
@@ -141,7 +161,7 @@ const Footer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
   return (
     <AnimatePresence mode="sync">
       <motion.footer
-        className="container flex flex-col space-y-10 w-full select-none items-center py-10 relative"
+        className="container flex flex-col space-y-10 w-full select-none items-center pb-10 lg:relative"
         ref={ref}
       >
         {!isLoading && data?.whatsappUrl && (
@@ -184,11 +204,11 @@ const Footer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
 });
 Footer.displayName = "Footer";
 
-export interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface TitleProps extends HTMLAttributes<HTMLHeadingElement> {
   asChild?: boolean;
 }
 
-const Title = React.forwardRef<HTMLHeadingElement, TitleProps>(
+const Title = forwardRef<HTMLHeadingElement, TitleProps>(
   ({ className, children, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : "div";
 
@@ -224,7 +244,7 @@ const Title = React.forwardRef<HTMLHeadingElement, TitleProps>(
 );
 Title.displayName = "Title";
 
-const Subtitle = React.forwardRef<HTMLHeadingElement, TitleProps>(
+const Subtitle = forwardRef<HTMLHeadingElement, TitleProps>(
   ({ className, asChild, ...props }, ref) => {
     const Comp = asChild ? Slot : "h3";
 
@@ -239,44 +259,42 @@ const Subtitle = React.forwardRef<HTMLHeadingElement, TitleProps>(
 );
 Subtitle.displayName = "Subtitle";
 
-export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PageHeaderProps extends HTMLAttributes<HTMLDivElement> {
   background?: string;
 }
 
-const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
+const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
   ({ className, background, children, ...props }, ref) => {
     return (
-      <div
-        className={cn(
-          "overflow-hidden shadow-lg rounded-bl-3xl rounded-br-3xl relative w-full h-[180px] md:h-[200px] flex items-end before:absolute before:z-[2] before:bg-gradient-to-r before:from-black/90 before:via-secondary/40 before:to-black/40 before:w-full before:h-full",
-          className
-        )}
-        {...props}
-        ref={ref}
-      >
-        <Image
-          className="h-auto w-full z-[1] object-cover"
-          alt=""
-          src={!background ? "/assets/bg-page-title.jpg" : background}
-          sizes="100vw"
-          fill
-          priority
-        />
+      <Parallax strength={500} blur={{ min: -1, max: 3 }} className="w-screen">
+        <Background>
+          <div
+            className={cn(`w-screen h-screen bg-cover bg-center`)}
+            style={{
+              backgroundImage: `url("${!background ? "/assets/bg-page-title.jpg" : background!}")`,
+            }}
+          />
+        </Background>
         <div
-          className="
-            relative p-4 mx-auto w-full lg:py-8 lg:pr-16 lg:pl-8 z-[3]"
+          className={cn(
+            "overflow-hidden relative w-full h-[500px] md:h-[590px] flex items-center after:absolute after:z-[3] after:bg-gradient-to-b after:from-transparent after:via-secondary after:to-secondary after:w-full after:h-40 after:-bottom-20 before:absolute before:z-[2] before:bg-gradient-to-r before:from-black/90 before:via-secondary/40 before:to-black/40 before:w-full before:h-full",
+            className
+          )}
+          {...props}
+          ref={ref}
         >
-          <h1
-            className={cn(
-              "font-bold text-white text-2xl lg:text-4xl uppercase drop-shadow-text shadow-black",
-              className
-            )}
-          >
-            {children}
-          </h1>
+          <div className="max-w-8xl relative p-4 mx-auto w-full z-[4] flex justify-center items-center -translate-y-12">
+            <h1
+              className={cn(
+                "font-bold text-white text-4xl clamp-[xl-6cqw-6xl] uppercase line-clamp-4 p-10",
+                className
+              )}
+            >
+              {children}
+            </h1>
+          </div>
         </div>
-      </div>
-      // </div>
+      </Parallax>
     );
   }
 );

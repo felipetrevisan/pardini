@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment } from "react";
-import { useFaq } from "@/hooks/useFaq";
+import { useFaq } from "@/hooks/use-faq";
 import { FaqSkeleton } from "./skeleton";
 import { Items } from "./items";
 

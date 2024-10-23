@@ -16,8 +16,15 @@ function requiredOnEnv(env: z.infer<typeof nodeEnv>) {
 export const env = createEnv({
   server: {
     SANITY_API_READ_TOKEN: z.string().refine(requiredOnEnv("production")),
-    RESEND_API_KEY: z.string().refine(requiredOnEnv("production")).refine(requiredOnEnv("development")),
-    RESEND_TO_EMAIL: z.string().email().refine(requiredOnEnv("production")).refine(requiredOnEnv("development")),
+    RESEND_API_KEY: z
+      .string()
+      .refine(requiredOnEnv("production"))
+      .refine(requiredOnEnv("development")),
+    RESEND_TO_EMAIL: z
+      .string()
+      .email()
+      .refine(requiredOnEnv("production"))
+      .refine(requiredOnEnv("development")),
   },
   client: {
     NEXT_PUBLIC_VERCEL_URL: z.string().url().min(1),
@@ -39,7 +46,8 @@ export const env = createEnv({
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
     NEXT_PUBLIC_GOOGLE_AD_ID: process.env.NEXT_PUBLIC_GOOGLE_AD_ID,
     NEXT_PUBLIC_FACEBOOK_PIXEL_ID: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID,
-    NEXT_PUBLIC_FACEBOOK_PIXEL_ID_FAMILY_PAGE: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID_FAMILY_PAGE,
+    NEXT_PUBLIC_FACEBOOK_PIXEL_ID_FAMILY_PAGE:
+      process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID_FAMILY_PAGE,
     NODE_ENV: process.env.NODE_ENV,
     VERCEL_ENV: process.env.VERCEL_ENV,
   },

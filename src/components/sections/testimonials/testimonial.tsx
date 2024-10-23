@@ -1,29 +1,26 @@
 "use client";
 
+import { Fragment } from "react";
+import { QuoteIcon } from "lucide-react";
+import { PortableText } from "@portabletext/react";
 import { Testimonial, TestimonialType } from "@/types/testimonial";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
-import { QuoteIcon } from "lucide-react";
 import { cn, getWordInitials } from "@/lib/utils";
 import { urlForImage } from "@/sanity/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Fragment } from "react";
-import { PortableText } from "@portabletext/react";
 import { portableComponents } from "@/components/ui/portable-components";
 
 type Props = Omit<Testimonial, "showHome" | "id">;
 
-export function Testimonial({ author, type, testimonial, video }: Props) {
+export function Testimonials({ author, type, testimonial, video }: Props) {
   return (
     <Card className="h-[300px] max-h-[300px] group relative overflow-hidden select-none cursor-pointer p-1">
       <CardContent className="flex items-center justify-center w-full bg-accent overflow-hidden rounded-lg p-0 h-full">
         <figure
-          className={cn(
-            "flex flex-col items-center justify-center w-full h-full border-0",
-            {
-              "p-8": type === TestimonialType.TEXT,
-            }
-          )}
+          className={cn("flex flex-col items-center justify-center w-full h-full border-0", {
+            "p-8": type === TestimonialType.TEXT,
+          })}
         >
           {type === TestimonialType.TEXT ? (
             <Fragment>

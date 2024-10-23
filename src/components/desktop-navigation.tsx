@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { Fragment } from "react";
 import Link from "next/link";
 import {
@@ -18,6 +18,8 @@ import { ServiceDetailsDialog } from "./service-details-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LinkType, Navigation } from "@/types/site";
 import { Service } from "@/types/services";
+import { cn } from "@/lib/utils";
+import { useApp } from "@/hooks/use-app";
 
 type NavigationProps = {
   navigation?: Navigation;
@@ -25,14 +27,22 @@ type NavigationProps = {
   isServicesLoading?: boolean;
 };
 
-export const TopNavigation = ({ navigation, servicesData, isServicesLoading }: NavigationProps) => {
+const MenuItemMotion = motion(NavigationMenuItem);
+
+export const DesktopNavigation = ({
+  navigation,
+  servicesData,
+  isServicesLoading,
+}: NavigationProps) => {
+  const { isMenuActive } = useApp();
+
   return (
-    <NavigationMenu>
+    <NavigationMenu className="hidden lg:flex">
       <NavigationMenuList>
         {navigation?.items?.map(({ id, hasSubmenu, label, url, submenu, columns }) => (
           <Fragment key={`frag-${id}`}>
             {hasSubmenu ? (
-              <NavigationMenuItem>
+              <MenuItemMotion whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                 <NavigationMenuTrigger>{label}</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul
@@ -81,18 +91,20 @@ export const TopNavigation = ({ navigation, servicesData, isServicesLoading }: N
                     ))}
                   </ul>
                 </NavigationMenuContent>
-              </NavigationMenuItem>
+              </MenuItemMotion>
             ) : (
-              <NavigationMenuItem>
+              <MenuItemMotion whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   href={url.usePath ? url.path! : url.externalUrl!}
                   target={!url.usePath && url.externalUrl ? "_blank" : undefined}
                   legacyBehavior
                   passHref
                 >
-                  <NavigationMenuLink>{label}</NavigationMenuLink>
+                  <NavigationMenuLink active={(url.usePath && isMenuActive(url.path!)) || false} className="relative">
+                    {label}
+                  </NavigationMenuLink>
                 </Link>
-              </NavigationMenuItem>
+              </MenuItemMotion>
             )}
           </Fragment>
         ))}

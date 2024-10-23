@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 import { motion } from "framer-motion";
+import { PortableText } from "@portabletext/react";
 import { Button } from "@/components/ui/button";
 import {
   DrawerTrigger,
@@ -18,7 +19,6 @@ import {
 } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Faq } from "@/types/faq";
-import { PortableText } from "@portabletext/react";
 import { portableComponents } from "@/components/ui/portable-components";
 
 export function Items({ data }: { data: Faq[] }) {
@@ -26,7 +26,12 @@ export function Items({ data }: { data: Faq[] }) {
 
   return (
     <Fragment>
-      <Accordion type="single" collapsible onValueChange={(value) => setCurrentItem(value)}>
+      <Accordion
+        type="single"
+        collapsible
+        onValueChange={(value) => setCurrentItem(value)}
+        className="flex flex-col mt-10"
+      >
         {data
           .filter((faq) => !!faq.showHome)
           .map(({ id, title, answer }) => (
@@ -56,18 +61,17 @@ export function Items({ data }: { data: Faq[] }) {
             </AccordionItem>
           ))}
       </Accordion>
-
       <Drawer>
         <DrawerTrigger asChild>
-          <Button variant="secondary" size="xl" rounded="full" hover="effect" shadow>
+          <Button variant="secondary" size="xl" rounded="full" hover="effect" shadow fullWidth>
             Veja mais perguntas frequentes
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="container max-w-6xl">
+        <DrawerContent className="container max-w-6xl h-3/4">
           <DrawerHeader>
             <DrawerTitle>Perguntas Frequentes</DrawerTitle>
           </DrawerHeader>
-          <ScrollArea className="h-[400px]">
+          <ScrollArea className="h-full">
             <Accordion type="single" collapsible onValueChange={(value) => setCurrentItem(value)}>
               {data.map(({ id, title, answer }) => (
                 <AccordionItem key={id} value={id}>

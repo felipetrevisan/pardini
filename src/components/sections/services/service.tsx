@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Carousel,
@@ -9,8 +10,7 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { Item } from "./item";
-import { useServices } from "@/hooks/useServices";
-import { Fragment } from "react";
+import { useServices } from "@/hooks/use-services";
 import { ServiceSkeleton } from "./skeleton";
 import { ServiceType } from "@/types/services";
 

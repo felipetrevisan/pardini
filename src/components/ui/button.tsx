@@ -45,6 +45,9 @@ const buttonVariants = cva(
         effect:
           "before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:[clip-path:polygon(50%_0%,50%_0%,50%_50%,50%_100%,50%_100%,50%_50%)] before:-z-[1] before:transition-all hover:before:[clip-path:polygon(25%_-70%,75%_-70%,120%_50%,75%_170%,25%_170%,-20%_50%)] before:duration-500",
       },
+      fullWidth: {
+        true: "w-full",
+      },
     },
     defaultVariants: {
       variant: "default",
@@ -53,6 +56,7 @@ const buttonVariants = cva(
       hover: null,
       shadow: false,
       icon: false,
+      fullWidth: false,
     },
     compoundVariants: [
       {
@@ -119,11 +123,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, rounded, hover, icon, shadow, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, rounded, hover, icon, shadow, fullWidth, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, rounded, hover, icon, shadow, className }))}
+        className={cn(buttonVariants({ variant, size, rounded, hover, icon, shadow, fullWidth, className }))}
         ref={ref}
         {...props}
       />

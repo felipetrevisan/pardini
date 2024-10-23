@@ -1,10 +1,10 @@
 "use client";
 
-import { icons } from "lucide-react";
-import { motion } from "framer-motion";
-import { useSite } from "@/hooks/useSite";
 import React from "react";
 import Link from "next/link";
+import { icons } from "lucide-react";
+import { motion } from "framer-motion";
+import { useSite } from "@/hooks/use-site";
 import { Button } from "./ui/button";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {

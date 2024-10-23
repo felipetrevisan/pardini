@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
-import { useEffect, useState } from "react";
 import * as pixel from "@/lib/facebook-pixel";
 
 const FacebookPixel = ({ id }: { id: string} ) => {

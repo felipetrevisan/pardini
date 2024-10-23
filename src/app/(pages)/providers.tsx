@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { AppProvider } from "@/hooks/useApp";
+import { AppProvider } from "@/hooks/use-app";
 import { Toaster } from "@/components/ui/toaster";
 import { env } from "@/config/env";
 

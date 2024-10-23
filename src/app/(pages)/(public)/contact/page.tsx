@@ -1,15 +1,11 @@
-import { Fragment } from "react";
 import { Contact } from "./contact";
-export default function Page() {
+import * as App from "@/components/app";
 
+export default function Page() {
   return (
-    <Fragment>
-      <section
-        id="contact"
-        className="section relative flex flex-col min-h-full w-screen items-center justify-center bg-white"
-      >
-        <Contact />
-      </section>
-    </Fragment>
+    <section className="relative flex flex-col min-h-full items-center justify-center">
+      <App.PageHeader>Contato</App.PageHeader>
+      <Contact />
+    </section>
   );
 }
