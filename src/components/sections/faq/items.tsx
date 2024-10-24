@@ -63,7 +63,7 @@ export function Items({ data }: { data: Faq[] }) {
       </Accordion>
       <Drawer>
         <DrawerTrigger asChild>
-          <Button variant="secondary" size="xl" rounded="full" hover="effect" shadow fullWidth>
+          <Button variant="secondary" size="xl" rounded="full" hover="effect" shadow fullWidth className="mt-6">
             Veja mais perguntas frequentes
           </Button>
         </DrawerTrigger>

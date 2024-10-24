@@ -15,7 +15,7 @@ import { urlForImage } from "@/sanity/lib/utils";
 export function Home({ images }: { images: Featured[] }) {
   return (
     <motion.div layout className="w-screen" data-section="home">
-      <div className="aspect-[6/7] md:aspect-[10/7] lg:aspect-[10/4] flex items-center justify-start space-y-1 relative bg-white shadow-xl">
+      <div className="aspect-[11/15] md:aspect-[10/7] lg:aspect-[7/4] xl:aspect-[10/4] flex items-center justify-start space-y-1 relative bg-white shadow-xl">
         <Swiper
           slidesPerView={1}
           loop={true}
