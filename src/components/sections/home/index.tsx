@@ -44,7 +44,7 @@ export function Home({ images }: { images: Featured[] }) {
               )}
               <div className="container w-full h-full flex flex-row items-center px-10 md:px-20">
                 <motion.div
-                  className="flex flex-col items-center md:items-start justify-start md:justify-center space-y-6 z-[3]"
+                  className="flex flex-col items-center md:items-start justify-start md:justify-center space-y-6 z-30"
                   variants={slideUpVariants}
                   initial="initial"
                   animate="animate"
@@ -52,7 +52,7 @@ export function Home({ images }: { images: Featured[] }) {
                   <motion.h2 className="text-4xl text-secondary-foreground md:text-5xl font-bold text-center md:text-start drop-shadow-text shadow-black">
                     {title}
                   </motion.h2>
-                  <motion.h3 className="text-2xl font-medium text-secondary-foreground md:text-3xl text-center md:text-start drop-shadow-text shadow-black line-clamp-2 max-w-2xl">
+                  <motion.h3 className="text-2xl font-medium text-secondary-foreground md:text-3xl text-center md:text-start drop-shadow-text shadow-black max-w-2xl">
                     {subtitle}
                   </motion.h3>
                   <Drawer>

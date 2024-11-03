@@ -13,24 +13,19 @@ import { Badge, badgeVariants } from "@/components/ui/badge";
 type PostProps = PostType;
 
 export function Post({ coverImage, title, excerpt, slug, author, date, categories }: PostProps) {
-  const { width, height } = coverImage
-    ? getImageDimensions(coverImage.asset)
-    : { width: 0, height: 0 };
+  // const { width, height } = coverImage
+  //   ? getImageDimensions(coverImage.asset)
+  //   : { width: 0, height: 0 };
 
   return (
     <Link href={`blog/${slug}`} passHref>
-      <Card className="flex flex-col rounded-xl shadow-lg relative overflow-hidden h-full min-h-96">
+      <Card className="flex flex-col rounded-xl shadow-lg relative overflow-hidden h-full min-h-96 max-w-[390px] md:max-w-full">
         <CardHeader className="relative h-[200px] overflow-hidden bg-secondary p-0">
           {coverImage !== null && (
             <Image
               src={urlForImage(coverImage.asset).url()}
               alt=""
               fill
-              // sizes="(max-width: 800px) 100vw, 800px"
-              // style={{
-              //   // Avoid jumping around with aspect-ratio CSS property
-              //   aspectRatio: width / height,
-              // }}
               className="hover:scale-110 transition-all ease-linear duration-200"
               placeholder="blur"
               blurDataURL={coverImage.metadata.lqip}

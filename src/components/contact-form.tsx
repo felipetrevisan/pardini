@@ -143,11 +143,6 @@ export function ContactForm({ isDrawer = false }: { isDrawer: boolean }) {
       </div>
       {isDrawer && (
         <DrawerFooter>
-          <DialogTrigger asChild>
-            <Button type="button" variant="ghost" size="xl" rounded="full">
-              Cancelar
-            </Button>
-          </DialogTrigger>
           <Button
             variant="secondary"
             size="xl"
@@ -157,6 +152,11 @@ export function ContactForm({ isDrawer = false }: { isDrawer: boolean }) {
           >
             {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Enviar"}
           </Button>
+          <DialogTrigger asChild>
+            <Button type="button" variant="ghost" size="xl" rounded="full">
+              Cancelar
+            </Button>
+          </DialogTrigger>
         </DrawerFooter>
       )}
       {!isDrawer && (

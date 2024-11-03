@@ -16,7 +16,7 @@ export default async function Page({ searchParams }: { searchParams: BlogPageSea
   const posts = await getPosts({ pageIndex: query.pageIndex, pageSize: query.pageSize });
 
   return (
-    <section className="relative flex flex-col min-h-full items-center justify-center">
+    <section className="container relative flex flex-col min-h-full items-center justify-center">
       <App.PageHeader>Blog</App.PageHeader>
       <Blog {...query} initialData={posts} />
     </section>

@@ -112,10 +112,14 @@ const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
 >(({ className, ...props }, ref) => (
-  <div className={cn("absolute w-[65vw] md:w-auto top-[50%] -translate-x-[50%] md:translate-x-0 md:right-0 md:top-full flex justify-center")}>
+  <div
+    className={cn(
+      "absolute w-[65vw] md:w-auto top-0 left-[50%] -translate-x-[50%] md:translate-x-0 md:right-0 md:top-full md:left-0 flex justify-center"
+    )}
+  >
     <NavigationMenuPrimitive.Viewport
       className={cn(
-        "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md backdrop-blur-lg md:border-4 md:border-secondary bg-transparent md:bg-muted text-muted-foreground shadow-black data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
+        "origin-top-center relative mt-16 lg:m-0 h-[74vh] overflow-y-scroll lg:overflow-hidden lg:h-[var(--radix-navigation-menu-viewport-height)] w-full rounded-md backdrop-blur-lg md:border-4 md:border-secondary bg-muted/80 md:bg-muted text-secondary font-bold shadow-black data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
         className
       )}
       ref={ref}
@@ -164,10 +168,12 @@ const NavigationListItem = React.forwardRef<HTMLAnchorElement, NavigationListIte
         >
           <div className="flex flex-row items-center gap-2">
             {LucideIcon && <LucideIcon className="size-6 hidden md:inline-flex" />}
-            <div className="text-md font-medium leading-none">{title}</div>
+            <div className="text-lg md:text-md font-medium leading-none">{title}</div>
           </div>
           {children && (
-            <p className="line-clamp-1 text-sm leading-snug text-muted-foreground">{children}</p>
+            <p className="line-clamp-1 text-sm leading-snug">
+              {children}
+            </p>
           )}
         </a>
       </li>

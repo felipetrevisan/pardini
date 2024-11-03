@@ -12,7 +12,7 @@ export function About() {
   return (
     <motion.div
       layout
-      className="h-full w-screen flex flex-col lg:flex-row my-20"
+      className="container h-full w-screen flex flex-col lg:flex-row my-20"
       data-section="about"
     >
       <div className="container flex flex-col lg:flex-row items-center justify-around gap-10">

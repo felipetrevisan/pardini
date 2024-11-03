@@ -3,7 +3,7 @@ import { Items } from "./items";
 
 export function Testimonials() {
   return (
-    <div className="h-full w-screen flex my-20" data-section="testimonials">
+    <div className="container h-full w-screen flex my-20" data-section="testimonials">
       <div className="container w-full flex flex-col gap-14">
         <div className="flex flex-col">
           <App.Title>Depoimentos</App.Title>

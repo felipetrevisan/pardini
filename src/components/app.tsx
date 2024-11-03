@@ -81,6 +81,7 @@ const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
           "fixed top-0 z-[100] w-full backdrop-blur-md transition-colors duration-500 bg-transparent h-20",
           {
             "bg-black/60 backdrop-blur-xl": currentScrollY > 200,
+            "z-[200] backdrop-blur-none": true,
           },
           className
         )}
@@ -103,10 +104,15 @@ const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
           }}
         >
           <Fragment>
-            <Navbar.Brand>
+            <Navbar.Brand className={cn({ hidden: isMenuOpen })}>
               <Logo height={logoSizeHeight} width={logoSizeWidth} />
             </Navbar.Brand>
-            <motion.div animate={isMenuOpen ? "open" : "closed"} custom={height} ref={containerRef} className="flex">
+            <motion.div
+              animate={isMenuOpen ? "open" : "closed"}
+              custom={height}
+              ref={containerRef}
+              className="flex"
+            >
               {!isSiteConfigLoading && (
                 <Fragment>
                   <DesktopNavigation
@@ -115,13 +121,22 @@ const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
                     isServicesLoading={isLoading}
                   />
                   <Drawer open={isMenuOpen} onClose={() => toggleMenu(0)}>
-                    <DrawerTrigger>
+                    <DrawerTrigger
+                      className={cn({
+                        hidden: isMenuOpen,
+                      })}
+                    >
                       <Navbar.Toggle />
                     </DrawerTrigger>
                     <DrawerContent className="container max-w-xl md:max-w-4xl h-[99vh]">
-                      <DrawerTrigger>
-                        <Navbar.Toggle className="absolute right-7 top-10 bg-transparent" />
-                      </DrawerTrigger>
+                      <div className="flex justify-between">
+                        <Navbar.Brand className="mt-5">
+                          <Logo height={logoSizeHeight} width={logoSizeWidth} />
+                        </Navbar.Brand>
+                        <DrawerTrigger>
+                          <Navbar.Toggle className="mt-5 bg-secondary text-muted" />
+                        </DrawerTrigger>
+                      </div>
                       <MobileNavigation
                         navigation={siteConfigData?.primaryNavigation}
                         servicesData={serviceData}

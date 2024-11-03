@@ -58,9 +58,9 @@ Brand.displayName = "Navbar.Brand";
 
 const Path = (props: any) => (
   <motion.path
-    fill="currentColor"
     strokeWidth="3"
-    className="stroke-secondary"
+    fill="currentColor"
+    stroke="currentColor"
     strokeLinecap="round"
     {...props}
   />

@@ -1,6 +1,5 @@
 import { useState, useEffect, MutableRefObject } from "react";
 
-// Definir a tipagem do retorno e dos parâmetros
 interface Dimensions {
   width: number;
   height: number;
@@ -18,18 +17,13 @@ export const useDimensions = (ref: MutableRefObject<HTMLElement | null>): Dimens
         });
       }
     };
-
-    // Chama a função quando o componente é montado
     updateDimensions();
 
-    // Escuta o evento de resize da janela
     window.addEventListener("resize", updateDimensions);
-
-    // Remove o listener ao desmontar o componente
     return () => {
       window.removeEventListener("resize", updateDimensions);
     };
-  }, [ref]); // Atualiza o efeito se o ref mudar
+  }, [ref]);
 
   return dimensions;
 };

@@ -13,7 +13,7 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "4rem",
+      padding: "2rem",
       screens: {
         "2xl": "1536px",
         "8xl": "90rem",

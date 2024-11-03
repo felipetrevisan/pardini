@@ -17,7 +17,7 @@ export default function Home({ featured }: Site) {
       </section>
       <section
         id="about"
-        className="section relative flex min-h-full items-center justify-center bg-white rounded-t-3xl z-[1]"
+        className="section relative flex min-h-full items-center justify-center bg-white rounded-t-3xl z-[1] -mt-24"
       >
         <AboutComponent />
       </section>
