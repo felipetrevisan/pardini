@@ -1,8 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import { NextConfig } from "next";
+
+export default {
   experimental: {
     // Used to guard against accidentally leaking SANITY_API_READ_TOKEN to the browser
     taint: true,
+  },
+  sassOptions: {
+    silenceDeprecations: ["legacy-js-api"],
   },
   transpilePackages: ["lucide-react"],
   images: {
@@ -24,19 +28,17 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/quem-somos',
-        destination: '/about',
+        source: "/quem-somos",
+        destination: "/about",
       },
       {
-        source: '/contato',
-        destination: '/contact',
+        source: "/contato",
+        destination: "/contact",
       },
       {
-        source: '/apresentacao-familia',
-        destination: '/family',
+        source: "/apresentacao-familia",
+        destination: "/family",
       },
-    ]
+    ];
   },
-};
-
-module.exports = nextConfig;
+} satisfies NextConfig;

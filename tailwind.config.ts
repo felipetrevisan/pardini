@@ -1,7 +1,40 @@
-const plugin = require("tailwindcss/plugin");
+import type { Config } from "tailwindcss";
+import plugin from "tailwindcss";
+import { PluginAPI, PluginCreator } from "tailwindcss/types/config";
 
-/** @type {import("tailwindcss").Config} */
-const config = {
+const clampPlugin: PluginCreator = ({ matchUtilities, theme }) =>
+  matchUtilities(
+    {
+      clamp(value: string) {
+        // load font sizes from theme
+        const sizes = theme("fontSize") as Record<string, [string, string]>;
+
+        // parse the value passed in from class name
+        const split = value.split("-").map((v) => (sizes[v] ? sizes[v][0] : v));
+
+        // return a clamped font-size
+        return {
+          fontSize: `clamp(${split[0]}, ${split[1]}, ${split[2]})`,
+        };
+      },
+    },
+    { values: theme("fontSize") as Record<string, string> } // Tipagem opcional para matchUtilities
+  );
+
+const backgroundPlugin: PluginCreator = ({ addUtilities }) => {
+  const newBackgroundUtilities = {
+    ".bg-repeat-no-repeat": {
+      "background-repeat": "repeat, no-repeat",
+    },
+    ".bg-position-y-center-center": {
+      "background-position-y": "center, center",
+    },
+  };
+
+  addUtilities(newBackgroundUtilities);
+};
+
+export default {
   darkMode: "media",
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -100,42 +133,9 @@ const config = {
         text: "0px 1px 2px var(--tw-shadow-color)",
       },
       zIndex: {
-        backdrop: 100,
+        backdrop: "100",
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    plugin(({ matchUtilities, theme }) => {
-      matchUtilities({
-        clamp(value) {
-          // load font sizes from theme
-          const sizes = theme("fontSize");
-
-          // parse the value passed in from class name
-          // split it by "-" and compare pieces to fontSize values
-          const split = value.split("-").map((v) => (sizes[v] ? sizes[v]["0"] : v));
-
-          // return a clamped font-size
-          return {
-            fontSize: `clamp(${split[0]}, ${split[1]}, ${split[2]})`,
-          };
-        },
-      });
-    }),
-    plugin(function ({ addUtilities }) {
-      const newBackgroundUtilities = {
-        ".bg-repeat-no-repeat": {
-          "background-repeat": "repeat, no-repeat",
-        },
-        ".bg-position-y-center-center": {
-          "background-position-y": "center, center",
-        },
-      };
-
-      addUtilities(newBackgroundUtilities);
-    }),
-  ],
-};
-
-export default config;
+  plugins: [require("tailwindcss-animate"), clampPlugin, backgroundPlugin],
+} satisfies Config;
