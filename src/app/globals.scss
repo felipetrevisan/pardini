@@ -91,7 +91,11 @@
     @apply rounded-bl-[40px] rounded-br-[40px];
   }
 
-  section:not(#faqs):last-of-type > div:last-of-type {
+  section:not([data-section="faqs"]):last-of-type > div:last-of-type {
     @apply rounded-tl-[40px] rounded-tr-[40px] pb-20 pt-20 -mt-64 z-[4];
+  }
+
+  section:is([data-section="post"]):last-of-type > div:last-of-type {
+    @apply pt-0;
   }
 }

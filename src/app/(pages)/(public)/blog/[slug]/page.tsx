@@ -1,20 +1,15 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { z } from "zod";
-import { motion } from "framer-motion";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import * as App from "@/components/app";
 import { getPost, getPostsSlug } from "@/server/get-posts";
-import { resolveOpenGraphImage, urlForImage } from "@/sanity/lib/utils";
+import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 import { postQuery } from "@/sanity/lib/queries";
 import type { Post as PostType } from "@/types/post";
 import { Post } from "./post";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const blogPageParams = z.object({
-  params: z.object({
-    slug: z.string(),
-  }),
+  slug: z.string(),
 });
 
 export type BlogPageParams = z.infer<typeof blogPageParams>;
@@ -24,7 +19,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  { params }: BlogPageParams,
+  { params }: { params: Promise<BlogPageParams> },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const post = await sanityFetch<PostType>({
@@ -47,7 +42,8 @@ export async function generateMetadata(
   } satisfies Metadata;
 }
 
-export default async function Page({ params: { slug } }: BlogPageParams) {
+export default async function Page({ params }: { params: Promise<BlogPageParams> }) {
+  const { slug } = await params;
   const post = await getPost(slug);
 
   if (!post.id) {
@@ -55,7 +51,10 @@ export default async function Page({ params: { slug } }: BlogPageParams) {
   }
 
   return (
-    <section className="relative flex flex-col min-h-full items-center justify-center">
+    <section
+      className="relative flex flex-col min-h-full items-center justify-center"
+      data-section="post"
+    >
       <Post initialData={post} slug={slug} />
     </section>
   );

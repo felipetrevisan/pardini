@@ -35,7 +35,7 @@ export const MobileNavigation = ({
   servicesData,
   isServicesLoading,
 }: NavigationProps) => {
-  const { isMenuActive } = useApp();
+  const { isMenuActive, toggleMenu } = useApp();
 
   return (
     <NavigationMenu className="flex mx-auto lg:hidden" orientation="vertical">
@@ -72,7 +72,9 @@ export const MobileNavigation = ({
                             ) : (
                               <Fragment>
                                 {servicesData?.map((service) => (
-                                  <Dialog key={`submenu-${service.id}`}>
+                                  <Dialog
+                                    key={`submenu-${service.id}`}
+                                  >
                                     <DialogTrigger asChild>
                                       <NavigationListItem
                                         title={service.title}

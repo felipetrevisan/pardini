@@ -10,13 +10,13 @@ const blogPageSearchParams = z.object({
 
 export type BlogPageSearchParams = z.infer<typeof blogPageSearchParams>;
 
-export default async function Page({ searchParams }: { searchParams: BlogPageSearchParams }) {
-  const query = blogPageSearchParams.parse(searchParams);
+export default async function Page({ searchParams }: { searchParams: Promise<BlogPageSearchParams> }) {
+  const query = blogPageSearchParams.parse(await searchParams);
 
   const posts = await getPosts({ pageIndex: query.pageIndex, pageSize: query.pageSize });
 
   return (
-    <section className="container relative flex flex-col min-h-full items-center justify-center">
+    <section className="relative flex flex-col min-h-full items-center justify-center">
       <App.PageHeader>Blog</App.PageHeader>
       <Blog {...query} initialData={posts} />
     </section>

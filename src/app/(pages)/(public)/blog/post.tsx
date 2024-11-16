@@ -19,7 +19,7 @@ export function Post({ coverImage, title, excerpt, slug, author, date, categorie
 
   return (
     <Link href={`blog/${slug}`} passHref>
-      <Card className="flex flex-col rounded-xl shadow-lg relative overflow-hidden h-full min-h-96 max-w-[390px] md:max-w-full">
+      <Card className="flex flex-col rounded-xl shadow-lg relative overflow-hidden h-full min-h-[32rem] max-w-[390px] md:max-w-full">
         <CardHeader className="relative h-[200px] overflow-hidden bg-secondary p-0">
           {coverImage !== null && (
             <Image

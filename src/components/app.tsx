@@ -22,12 +22,12 @@ import { useServices } from "@/hooks/use-services";
 import { useSite } from "@/hooks/use-site";
 import { SocialNetworks } from "./social-icons";
 import { Logo } from "./logo";
-import { sidebar } from "@/config/animation";
 import { useDimensions } from "@/hooks/use-dimensions";
 import { useApp } from "@/hooks/use-app";
 import { DesktopNavigation } from "./desktop-navigation";
 import { MobileNavigation } from "./mobile-navigation";
-import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
+import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "./ui/drawer";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
 const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className }, ref) => {
   const { data: serviceData, isLoading } = useServices();
@@ -81,7 +81,7 @@ const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
           "fixed top-0 z-[100] w-full backdrop-blur-md transition-colors duration-500 bg-transparent h-20",
           {
             "bg-black/60 backdrop-blur-xl": currentScrollY > 200,
-            "z-[200] backdrop-blur-none": true,
+            "backdrop-blur-none": currentScrollY < 200,
           },
           className
         )}
@@ -122,18 +122,22 @@ const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
                   />
                   <Drawer open={isMenuOpen} onClose={() => toggleMenu(0)}>
                     <DrawerTrigger
+                      asChild
                       className={cn({
                         hidden: isMenuOpen,
                       })}
                     >
                       <Navbar.Toggle />
                     </DrawerTrigger>
-                    <DrawerContent className="container max-w-xl md:max-w-4xl h-[99vh]">
+                    <VisuallyHidden.Root>
+                      <DrawerTitle>Menu</DrawerTitle>
+                    </VisuallyHidden.Root>
+                    <DrawerContent className="container max-w-xl md:max-w-4xl h-[99svh]">
                       <div className="flex justify-between">
                         <Navbar.Brand className="mt-5">
                           <Logo height={logoSizeHeight} width={logoSizeWidth} />
                         </Navbar.Brand>
-                        <DrawerTrigger>
+                        <DrawerTrigger asChild>
                           <Navbar.Toggle className="mt-5 bg-secondary text-muted" />
                         </DrawerTrigger>
                       </div>

@@ -30,16 +30,16 @@ export function Post({ initialData, slug }: { initialData: PostType; slug: strin
           {isLoading ? <Skeleton className="size-4" /> : data.title}
         </div>
       </App.PageHeader>
-      <motion.div layout className="h-full flex flex-col space-y-20 bg-white">
-        <article className="container">
+      <motion.div layout className="h-full flex flex-col bg-white py-0">
+        <div className="flex flex-row justify-start bg-secondary/5 rounded-3xl w-full p-5">
+          {isLoading ? (
+            <Skeleton className="size-14 rounded-full" />
+          ) : (
+            <>{data.author && <PostDetails {...data.author} date={data.date} />}</>
+          )}
+        </div>
+        <article className="container mt-10">
           <div className="flex flex-col justify-start items-start gap-10">
-            <div className="flex flex-row justify-start bg-secondary/5 rounded-3xl w-full p-5">
-              {isLoading ? (
-                <Skeleton className="size-14 rounded-full" />
-              ) : (
-                <>{data.author && <PostDetails {...data.author} date={data.date} />}</>
-              )}
-            </div>
             <div className="flex flex-col space-y-2 p-2">
               {data.body && <PortableText value={data.body} components={portableComponents} />}
             </div>

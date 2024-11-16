@@ -73,12 +73,12 @@ const Toggle = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
     return (
       <button
         ref={ref}
-        onClick={() => toggleMenu()}
         className={cn(
           "rounded-full bg-white cursor-pointer flex justify-center items-center size-12 text-sm lg:hidden",
           className
         )}
         {...props}
+        onClick={() => toggleMenu()}
       >
         <svg width="23" height="23" viewBox="0 0 23 23">
           <Path
