@@ -45,12 +45,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setActiveMenu(currentUrl);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (isMenuOpen) {
       toggleMenu();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUrl]);
 
   return (
