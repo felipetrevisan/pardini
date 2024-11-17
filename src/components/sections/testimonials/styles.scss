@@ -1,6 +1,6 @@
 [data-section="testimonials"] {
   & .swiper-slide {
-    @apply opacity-20 before:flex justify-center items-center;
+    @apply before:flex justify-center items-center;
 
     &.swiper-slide-active,
     &.swiper-slide-next {
