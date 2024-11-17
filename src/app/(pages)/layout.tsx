@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.className}`} suppressHydrationWarning>
-      <body className="antialiased h-screen relative">
+      <body className="antialiased h-screen relative overflow-hidden">
         <Providers>{children}</Providers>
         <SpeedInsights />
       </body>

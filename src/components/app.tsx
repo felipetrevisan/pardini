@@ -305,7 +305,7 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
           <div className="max-w-8xl relative p-4 mx-auto w-full z-[4] flex justify-center items-center -translate-y-12">
             <h1
               className={cn(
-                "font-bold text-white text-4xl clamp-[xl-6cqw-6xl] uppercase line-clamp-4 p-10",
+                "font-bold text-white text-4xl clamp-[xl-6cqw-6xl] uppercase lg:normal-case line-clamp-4 p-10",
                 className
               )}
             >

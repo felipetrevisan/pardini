@@ -36,6 +36,9 @@ export function Items() {
           1024: {
             slidesPerView: 2,
           },
+          1920: {
+            slidesPerView: 4,
+          }
         }}
         className="w-full h-full !flex flex-col items-center justify-center gap-4"
       >

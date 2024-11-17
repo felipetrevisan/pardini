@@ -33,7 +33,7 @@ export default function Home({ featured }: Site) {
       </section>
       <section
         data-section="faqs"
-        className="section relative flex min-h-full items-center justify-center bg-faq lg:bg-faq-blend lg:bg-blend-multiply lg:bg-[cover,50vw] lg:bg-position-y-center-center lg:bg-repeat-no-repeat"
+        className="section relative flex min-h-full items-center justify-center bg-faq lg:bg-faq-blend lg:bg-blend-multiply lg:bg-[cover,50vw] xl:bg-[cover,40vw] lg:bg-position-y-center-center lg:bg-repeat-no-repeat"
       >
         <FaqComponent />
       </section>
