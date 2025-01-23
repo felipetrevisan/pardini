@@ -1,4 +1,4 @@
-import { MdGridView, MdSettings } from "react-icons/md";
+import { MdGridView, MdPages, MdSettings } from "react-icons/md";
 import { StructureBuilder } from "sanity/structure";
 
 const structure = (S: StructureBuilder) =>
@@ -37,11 +37,39 @@ const structure = (S: StructureBuilder) =>
 
       S.divider(),
 
+      S.listItem()
+        .title("Pages")
+        .icon(MdPages)
+        .child(
+          S.list()
+            .title("Pages")
+            .items([
+              S.listItem()
+                .title("Cidadania Italiana com a Pardini")
+                .child(S.document().schemaType("familyPage").documentId("familyPage")),
+              S.listItem()
+                .title("Jornada Italiana")
+                .child(S.document().schemaType("journeyPage").documentId("journeyPage")),
+              S.listItem().title("Sobre a Pardini").child(S.documentTypeList("about")),
+            ])
+        ),
+
+      S.divider(),
+
       ...S.documentTypeListItems().filter(
         (listItem) =>
-          !["post", "author", "category", "siteConfig", "navigation", "featured"].includes(
-            listItem.getId() || ""
-          )
+          ![
+            "post",
+            "author",
+            "category",
+            "siteConfig",
+            "navigation",
+            "featured",
+            "familyPage",
+            "journeyPage",
+            "about",
+            "tag",
+          ].includes(listItem.getId() || "")
       ),
     ]);
 

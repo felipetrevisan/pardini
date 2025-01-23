@@ -1,0 +1,15 @@
+lite-youtube {
+  background-color: #000;
+  position: relative;
+  display: flex !important;
+  contain: content;
+  background-position: center center;
+  background-size: cover;
+  cursor: pointer;
+  max-width: 100% !important;
+}
+
+.gradient-border {
+  --borderWidth: 3px;
+  border-radius: var(--borderWidth);
+}

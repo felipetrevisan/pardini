@@ -42,11 +42,6 @@ const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
 
   const logoSizeHeight = useTransform(scrollY, scrollYRange, ["60px", "56px", "56px"]);
   const logoSizeWidth = useTransform(scrollY, scrollYRange, ["220px", "174px", "174px"]);
-  const menuSize = useTransform(scrollY, scrollYRange, [
-    "circle(30px at 45vw 48px)",
-    "circle(28px at 45vw 43px)",
-    "circle(28px at 45vw 43px)",
-  ]);
   const iconScale = useTransform(scrollY, scrollYRange, ["1", ".75", ".75"]);
   const paddingHeaderX = useTransform(scrollY, scrollYRange, ["30px", "20px", "20px"]);
   const paddingHeaderY = useTransform(scrollY, scrollYRange, ["1.2rem", "1rem", "1rem"]);

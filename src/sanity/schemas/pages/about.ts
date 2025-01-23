@@ -1,21 +1,21 @@
-import { MdInfoOutline } from "react-icons/md";
+import { MdPages } from "react-icons/md";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "about",
   title: "Sobre a Pardini",
-  icon: MdInfoOutline,
+  icon: MdPages,
   type: "document",
   fields: [
     defineField({
       name: "title",
-      title: "Título",
+      title: "Title",
       type: "string",
       validation: (Rule) => Rule.required().warning("O título é obrigatório."),
     }),
     defineField({
       name: "order",
-      title: "Ordem de Exibição",
+      title: "Order",
       type: "number",
       initialValue: 0,
       validation: (Rule) =>
@@ -23,18 +23,18 @@ export default defineType({
     }),
     defineField({
       name: "content",
-      title: "Conteúdo",
+      title: "Content",
       type: "array",
       of: [
         {
           type: "block",
           marks: {
             decorators: [
-              { title: "Negrito", value: "strong" },
-              { title: "Ênfase", value: "em" },
-              { title: "Código", value: "code" },
+              { title: "Bold", value: "strong" },
+              { title: "Emphasis", value: "em" },
+              { title: "Code", value: "code" },
               {
-                title: "Destaque",
+                title: "Highlight",
                 value: "highlight",
                 icon: () => "H",
               },
@@ -46,14 +46,14 @@ export default defineType({
     }),
     defineField({
       name: "has_block_picture",
-      title: "Possui Bloco de Imagem?",
+      title: "Has Block Picture?",
       type: "boolean",
       initialValue: false,
       validation: (Rule) => Rule.required().warning("Esse campo precisa ser preenchido."),
     }),
     defineField({
       name: "picture",
-      title: "Imagem",
+      title: "Image",
       type: "image",
       hidden: ({ parent }) => !parent?.has_block_picture,
       validation: (Rule) =>
@@ -66,12 +66,12 @@ export default defineType({
     }),
     defineField({
       name: "picture_block_side",
-      title: "Lado da Imagem",
+      title: "Picture Side",
       type: "string",
       options: {
         list: [
-          { title: "Antes do Conteúdo", value: "BEFORE" },
-          { title: "Depois do Conteúdo", value: "AFTER" },
+          { title: "Before Content", value: "BEFORE" },
+          { title: "After Content", value: "AFTER" },
         ],
         layout: "radio",
       },
@@ -86,14 +86,14 @@ export default defineType({
     }),
     defineField({
       name: "has_button",
-      title: "Possui Botão?",
+      title: "Has Button?",
       type: "boolean",
       initialValue: false,
       validation: (Rule) => Rule.required().warning("Esse campo precisa ser preenchido."),
     }),
     defineField({
       name: "button_label",
-      title: "Rótulo do Botão",
+      title: "Button Label",
       type: "string",
       hidden: ({ parent }) => !parent?.has_button,
       validation: (Rule) =>
@@ -106,7 +106,7 @@ export default defineType({
     }),
     defineField({
       name: "link_button",
-      title: "Link do Botão",
+      title: "Button URL",
       type: "url",
       hidden: ({ parent }) => !parent?.has_button,
       validation: (Rule) =>
@@ -115,7 +115,11 @@ export default defineType({
             return "O botão precisa de um link quando ativado.";
           }
           return true;
-        }).warning(),
+        })
+          .uri({
+            scheme: ["https", "http"],
+          })
+          .warning("A URL do WhatsApp deve ser um link válido, começando com http ou https."),
     }),
   ],
   preview: {

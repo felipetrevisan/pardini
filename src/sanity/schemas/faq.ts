@@ -21,7 +21,7 @@ export default defineType({
       of: [
         {
           type: "block",
-          styles: [], // Definir estilos permitidos aqui se necessário
+          styles: [],
           marks: {
             decorators: [
               { title: "Strong", value: "strong" },

@@ -9,7 +9,6 @@ import tag from "./schemas/blog/tag";
 import service from "./schemas/services";
 import faq from "./schemas/faq";
 import testimonial from "./schemas/testimonials";
-import about from "./schemas/about";
 import siteConfig from "./schemas/siteConfig";
 import featured from "./schemas/featured";
 
@@ -20,6 +19,9 @@ import link from "./schemas/objects/link";
 
 // Social media schema
 import socialNetworksItem from "./schemas/objects/socialNetworksItem";
+import family from "./schemas/pages/family";
+import journey from "./schemas/pages/journey";
+import about from "./schemas/pages/about";
 
 // Define and export schema
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -36,6 +38,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     about,
     siteConfig,
     featured,
+
+    family,
+    journey,
 
     navigation,
     navigationItem,

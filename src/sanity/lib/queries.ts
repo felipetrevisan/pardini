@@ -119,6 +119,26 @@ export const testimonialsQuery = groq`
   }
 `;
 
+export const pageQuery = groq`*[slug.current == $slug] [0] {
+  "id": _id,
+  title,
+  description,
+  slug,
+  video,
+  background {
+    "asset": asset,
+    "metadata": {
+      "lqip": asset->metadata.lqip,
+      "dimensions": asset->metadata.dimensions
+    }
+  },
+  "hasButton": has_button,
+  "button": {
+    "label": button_label,
+    "link": link_button
+  }
+}`;
+
 const postFields = groq`
   "id": _id,
   "status": select(_originalId in path("drafts.**") => "draft", "published"),

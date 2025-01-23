@@ -35,10 +35,6 @@ export default {
         source: "/contato",
         destination: "/contact",
       },
-      {
-        source: "/apresentacao-familia",
-        destination: "/family",
-      },
     ];
   },
 } satisfies NextConfig;

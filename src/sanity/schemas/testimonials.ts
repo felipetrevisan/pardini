@@ -9,13 +9,13 @@ export default defineType({
   fields: [
     defineField({
       name: "author_name",
-      title: "Nome do Autor",
+      title: "Author Name",
       type: "string",
       validation: (Rule) => Rule.required().warning("O nome do autor é obrigatório."),
     }),
     defineField({
       name: "author_avatar",
-      title: "Avatar do Autor",
+      title: "Author Avatar",
       type: "image",
       options: {
         hotspot: true,
@@ -23,7 +23,7 @@ export default defineType({
     }),
     defineField({
       name: "order",
-      title: "Ordem de Exibição",
+      title: "Order",
       type: "number",
       initialValue: 0,
       validation: (Rule) =>
@@ -34,18 +34,18 @@ export default defineType({
     }),
     defineField({
       name: "show_home",
-      title: "Exibir na Página Inicial?",
+      title: "Show in Home?",
       type: "boolean",
       initialValue: false,
       validation: (Rule) => Rule.required().warning("Este campo é obrigatório."),
     }),
     defineField({
       name: "type",
-      title: "Tipo de Depoimento",
+      title: "Testimonial Type",
       type: "string",
       options: {
         list: [
-          { title: "Texto", value: "TEXT" },
+          { title: "Text", value: "TEXT" },
           { title: "Vídeo", value: "VIDEO" },
         ],
         layout: "radio",
@@ -55,7 +55,7 @@ export default defineType({
     }),
     defineField({
       name: "testimonial",
-      title: "Depoimento",
+      title: "Testimonial",
       type: "array",
       of: [
         {
@@ -82,7 +82,7 @@ export default defineType({
     }),
     defineField({
       name: "video",
-      title: "URL do Vídeo",
+      title: "Video URL",
       type: "url",
       hidden: ({ parent }) => parent?.type !== "VIDEO",
       validation: (Rule) =>
@@ -114,12 +114,12 @@ export default defineType({
   },
   orderings: [
     {
-      title: "Tipo",
+      title: "Type",
       name: "typeDesc",
       by: [{ field: "type", direction: "desc" }],
     },
     {
-      title: "Ordem",
+      title: "Order",
       name: "orderAsc",
       by: [{ field: "order", direction: "asc" }],
     },

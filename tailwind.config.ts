@@ -1,6 +1,5 @@
 import type { Config } from "tailwindcss";
-import plugin from "tailwindcss";
-import { PluginAPI, PluginCreator } from "tailwindcss/types/config";
+import { PluginCreator } from "tailwindcss/types/config";
 
 const clampPlugin: PluginCreator = ({ matchUtilities, theme }) =>
   matchUtilities(
@@ -112,7 +111,7 @@ export default {
         "multiply-center": "center, center",
       },
       keyframes: {
-        border: {
+        "border-gradient": {
           "0%, 100%": { "background-position": "0% 50%" },
           "50%": { "background-position": "100% 50%" },
         },
@@ -128,6 +127,7 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "border-gradient": "border-gradient 3s ease alternate infinite;",
       },
       dropShadow: {
         text: "0px 1px 2px var(--tw-shadow-color)",

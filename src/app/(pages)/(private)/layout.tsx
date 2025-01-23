@@ -13,10 +13,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <main className="relative z-[1] h-screen w-screen flex items-center flex-col justify-center bg-family before:absolute before:w-screen before:h-screen before:z-[2] before:bg-black/80 before:backdrop-blur-sm">
-      {children}
-      <FacebookPixel id={env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID_FAMILY_PAGE} />
-    </main>
-  );
+  return children;
 }
