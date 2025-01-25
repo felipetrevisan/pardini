@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         backgroundImage: `url("${!background ? "/assets/bg-page-title.jpg" : urlForImage(background.asset).url()}")`,
       }}
     >
-      <div className="after:absolute after:-z-[1] after:top-[calc(-1*var(--borderWidth))] after:left-[calc(-1*var(--borderWidth))] after:size-[calc(100%+var(--borderWidth)*2)] after:bg-gradient-to-t after:from-primary after:via-pink-500 after:to-secondary after:animate-border after:bg-[300%_300%] gradient-border relative flex flex-col items-center justify-center bg-white m-10 p-12 gap-2 md:max-w-4xl w-[80vw] max-h-[680px] h-full space-y-8">
+      <div className="after:absolute after:-z-[1] after:top-[calc(-1*var(--borderWidth))] after:left-[calc(-1*var(--borderWidth))] after:size-[calc(100%+var(--borderWidth)*2)] after:bg-gradient-to-t after:from-primary after:via-pink-500 after:to-secondary after:animate-border after:bg-[300%_300%] gradient-border relative flex flex-col items-center justify-center bg-white m-10 p-12 gap-2 md:max-w-4xl w-[80vw] max-h-[680px] md:h-full space-y-8">
         <App.Title className="text-xl md:text-2xl lg:text-3xl">{title}</App.Title>
         <div className="aspect-video !w-full overflow-hidden rounded-2xl">
           <YouTubeEmbed videoid={new URL(video!).pathname.split("/")[2] ?? ""} />
