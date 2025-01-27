@@ -13,8 +13,7 @@ import "./styles.scss";
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const [slug] = (await params).slug;
 
-  const { id, title, background, video, button, hasButton } =
-    await getPageBySlug(slug);
+  const { id, title, background, video, footer } = await getPageBySlug(slug);
 
   if (!id) {
     notFound();
@@ -30,16 +29,18 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <div className="after:absolute after:-z-[1] after:top-[calc(-1*var(--borderWidth))] after:left-[calc(-1*var(--borderWidth))] after:size-[calc(100%+var(--borderWidth)*2)] after:bg-gradient-to-t after:from-primary after:via-pink-500 after:to-secondary after:animate-border after:bg-[300%_300%] gradient-border relative flex flex-col items-center justify-center bg-white m-10 p-12 gap-2 md:max-w-4xl w-[80vw] max-h-[680px] md:h-full space-y-8">
         <App.Title className="text-xl md:text-2xl lg:text-3xl">{title}</App.Title>
         <div className="aspect-video !w-full overflow-hidden rounded-2xl">
-          <YouTubeEmbed videoid={new URL(video!).pathname.split("/")[2] ?? ""} />
+          <YouTubeEmbed videoid={video.id} />
         </div>
         <div className="flex justify-center items-center flex-col gap-2">
-          <h4 className="font-bold text-secondary text-md uppercase drop-shadow-text shadow-secondary/20">
-            Ficou com dúvidas?
-          </h4>
-          {hasButton && (
-            <Link href={new URL(button?.link ?? "/").href} passHref target="_blank">
+          {footer.hasTitle && (
+            <h4 className="font-bold text-secondary text-md uppercase drop-shadow-text shadow-secondary/20">
+              {footer.title ?? "Ficou com dúvidas?"}
+            </h4>
+          )}
+          {footer.hasButton && (
+            <Link href={new URL(footer.button?.link ?? "/").href} passHref target="_blank">
               <Button variant="whatsapp" size="2xl" rounded="2xl" hover="effect">
-                {button?.label}
+                {footer.button?.label}
               </Button>
             </Link>
           )}

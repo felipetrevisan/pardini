@@ -124,7 +124,10 @@ export const pageQuery = groq`*[slug.current == $slug] [0] {
   title,
   description,
   slug,
-  video,
+  "video": {
+    "url": video,
+    "id": video_id.current
+  },
   background {
     "asset": asset,
     "metadata": {
@@ -132,10 +135,14 @@ export const pageQuery = groq`*[slug.current == $slug] [0] {
       "dimensions": asset->metadata.dimensions
     }
   },
-  "hasButton": has_button,
-  "button": {
-    "label": button_label,
-    "link": link_button
+  "footer": {
+    "hasButton": has_button,
+    "hasTitle": show_title_footer,
+    "title": title_footer,
+    "button": {
+      "label": button_label,
+      "link": link_button
+    }
   }
 }`;
 
@@ -154,7 +161,7 @@ const postFields = groq`
     }
   },
   "date": coalesce(date, publishedAt),
-  "author": author->{"name": coalesce(name, "Anonimo"), picture},
+  "author": author-> {"name": coalesce(name, "Anonimo"), picture},
   "tags": tags[]-> {"id": _id,title},
   "categories": categories[]-> {"id": _id,title,slug},
 `;

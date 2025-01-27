@@ -39,11 +39,49 @@ export const fields = [
         .warning("Insira uma URL de vídeo válida."),
   }),
   defineField({
+    name: "video_id",
+    title: "Video ID",
+    type: "slug",
+    hidden: ({ parent }) => !parent?.video,
+    options: {
+      source: "video",
+      maxLength: 200, // will be ignored if slugify is set
+      slugify: (input) => new URL(input!).pathname.split("/")[2] ?? "",
+    },
+    validation: (Rule) =>
+      Rule.custom((field, context) => {
+        if (context?.document?.video && !field) {
+          return "O id do video precisa ser preenchido.";
+        }
+        return true;
+      }).warning(),
+  }),
+  defineField({
     name: "has_button",
     title: "Has Button?",
     type: "boolean",
     initialValue: false,
     validation: (Rule) => Rule.required().warning("Esse campo precisa ser preenchido."),
+  }),
+  defineField({
+    name: "show_title_footer",
+    title: "Show Title?",
+    type: "boolean",
+    initialValue: false,
+    hidden: ({ parent }) => !parent?.has_button,
+  }),
+  defineField({
+    name: "title_footer",
+    title: "Title Footer",
+    type: "string",
+    hidden: ({ parent }) => !parent?.has_button || !parent?.show_title_footer,
+    validation: (Rule) =>
+      Rule.custom((field, context) => {
+        if (context?.document?.has_button && context?.document?.show_title_footer && !field) {
+          return "O titulo é obrigatório quando ativado.";
+        }
+        return true;
+      }).warning(),
   }),
   defineField({
     name: "button_label",
