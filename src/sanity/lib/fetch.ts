@@ -36,9 +36,7 @@ export async function sanityFetch<QueryResponse>({
       next: { revalidate: 0 },
     });
   }
-
-  console.log(query);
-
+  
   return client.fetch<QueryResponse>(query, params, {
     stega,
     perspective: "published",
