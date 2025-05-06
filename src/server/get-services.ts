@@ -1,9 +1,9 @@
-"use server";
+'use server';
 
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { servicesQuery } from "@/sanity/lib/queries";
-import { Service } from "@/types/services";
+import { sanityFetch } from '@/sanity/lib/fetch';
+import { servicesQuery } from '@/sanity/lib/queries';
+import { Service } from '@/types/services';
 
 export async function getServices() {
-  return sanityFetch<Service[]>({ query: servicesQuery });
+	return sanityFetch<Service[]>({ query: servicesQuery });
 }

@@ -1,8 +1,8 @@
-import { getSiteConfig } from "@/server/get-site-config";
-import Home from "./home";
+import { getSiteConfig } from '@/server/get-site-config';
+import Home from './home';
 
 export default async function Page() {
-  const settings = await getSiteConfig();
+	const settings = await getSiteConfig();
 
-  return <Home {...settings} />;
+	return <Home {...settings} />;
 }

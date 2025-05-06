@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { Fragment } from "react";
-import { useFaq } from "@/hooks/use-faq";
-import { FaqSkeleton } from "./skeleton";
-import { Items } from "./items";
+import { Fragment } from 'react';
+import { useFaq } from '@/hooks/use-faq';
+import { FaqSkeleton } from './skeleton';
+import { Items } from './items';
 
 export function Questions() {
-  const { data, isLoading } = useFaq();
+	const { data, isLoading } = useFaq();
 
-  return (
-    <Fragment>
-      {isLoading ? (
-        <Fragment>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <FaqSkeleton key={index} />
-          ))}
-        </Fragment>
-      ) : (
-        <Items data={data ?? []} />
-      )}
-    </Fragment>
-  );
+	return (
+		<Fragment>
+			{isLoading ? (
+				<Fragment>
+					{Array.from({ length: 5 }).map((_, index) => (
+						<FaqSkeleton key={index} />
+					))}
+				</Fragment>
+			) : (
+				<Items data={data ?? []} />
+			)}
+		</Fragment>
+	);
 }

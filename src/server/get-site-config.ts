@@ -1,9 +1,9 @@
-"use server";
+'use server';
 
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { siteConfigQuery } from "@/sanity/lib/queries";
-import { Site } from "@/types/site";
+import { sanityFetch } from '@/sanity/lib/fetch';
+import { siteConfigQuery } from '@/sanity/lib/queries';
+import { Site } from '@/types/site';
 
 export async function getSiteConfig() {
-  return sanityFetch<Site>({ query: siteConfigQuery });
+	return sanityFetch<Site>({ query: siteConfigQuery });
 }

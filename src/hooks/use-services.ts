@@ -1,12 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { Service } from "@/types/services";
-import { getServices } from "@/server/get-services";
+import { useQuery } from '@tanstack/react-query';
+import { Service } from '@/types/services';
+import { getServices } from '@/server/get-services';
 
 export function useServices() {
-  const { data, isLoading, isPending } = useQuery<Service[]>({
-    queryKey: ["services"],
-    queryFn: () => getServices(),
-  });
+	const { data, isLoading, isPending } = useQuery<Service[]>({
+		queryKey: ['services'],
+		queryFn: () => getServices(),
+	});
 
-  return { data, isLoading, isPending };
+	return { data, isLoading, isPending };
 }
