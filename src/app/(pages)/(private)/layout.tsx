@@ -1,6 +1,4 @@
-import { Metadata } from 'next';
-import FacebookPixel from '@/components/facebook-pixel';
-import { env } from '@/config/env';
+import type { Metadata } from 'next';
 import '../../globals.scss';
 
 export async function generateMetadata(): Promise<Metadata> {

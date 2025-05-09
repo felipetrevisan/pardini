@@ -5,17 +5,37 @@ export default defineType({
 	name: 'service',
 	title: 'Serviços',
 	type: 'document',
+	groups: [
+		{
+			name: 'basic',
+			title: 'Basic Details',
+		},
+		{
+			name: 'ordering',
+			title: 'Ordering',
+		},
+		{
+			name: 'icon',
+			title: 'icon',
+		},
+		{
+			name: 'button',
+			title: 'Buttons',
+		},
+	],
 	fields: [
 		defineField({
 			name: 'title',
 			title: 'Title',
 			type: 'string',
+			group: 'basic',
 			validation: (Rule) => Rule.required().warning('O título é obrigatório'),
 		}),
 		defineField({
 			name: 'slug',
 			title: 'Slug',
 			type: 'slug',
+			group: 'basic',
 			options: {
 				source: 'title',
 				maxLength: 96,
@@ -26,6 +46,7 @@ export default defineType({
 			title: 'Display Order',
 			type: 'number',
 			initialValue: 0,
+			group: ['basic', 'ordering'],
 			validation: (Rule) =>
 				Rule.required()
 					.min(0)
@@ -36,11 +57,13 @@ export default defineType({
 			name: 'icon',
 			title: 'Icon',
 			type: 'string',
+			group: ['basic', 'icon'],
 		}),
 		defineField({
 			name: 'type',
 			title: 'Service Type',
 			type: 'string',
+			group: 'basic',
 			options: {
 				list: [
 					{ title: 'Já tenho Cidadania', value: 'HAVING' },
@@ -82,6 +105,7 @@ export default defineType({
 			title: 'See More Button?',
 			type: 'boolean',
 			initialValue: false,
+			group: 'button',
 			validation: (Rule) =>
 				Rule.required().warning(
 					"É necessário informar se há um botão de 'Ver mais'",
@@ -91,6 +115,7 @@ export default defineType({
 			name: 'link_see_more',
 			title: 'See More Button Link',
 			type: 'url',
+			group: 'button',
 			hidden: ({ parent }) => !parent?.has_see_more_button,
 			validation: (Rule) =>
 				Rule.custom((field, context) =>
@@ -104,6 +129,7 @@ export default defineType({
 			title: 'Whatsapp Button?',
 			type: 'boolean',
 			initialValue: false,
+			group: 'button',
 			validation: (Rule) =>
 				Rule.required().warning(
 					'É necessário informar se há um botão do WhatsApp',
@@ -113,6 +139,7 @@ export default defineType({
 			name: 'whatsapp_button_label',
 			title: 'Whatsapp Button Label',
 			type: 'string',
+			group: 'button',
 			options: {
 				list: [
 					{ title: 'Fale com um especialista', value: 'TALK_WITH_SPECIALIST' },
@@ -132,6 +159,7 @@ export default defineType({
 			name: 'link_whatsapp_button',
 			title: 'Whatsapp Button Link',
 			type: 'url',
+			group: 'button',
 			hidden: ({ parent }) => !parent?.has_whatsapp_button,
 			validation: (Rule) =>
 				Rule.custom((field, context) =>
@@ -149,7 +177,7 @@ export default defineType({
 		},
 		prepare(selection) {
 			const { title, media, subtitle } = selection;
-			const LucideIcon = icons[media as keyof typeof icons] ?? icons['Scale'];
+			const LucideIcon = icons[media as keyof typeof icons] ?? icons.Scale;
 			return {
 				title,
 				media: LucideIcon,

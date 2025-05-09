@@ -1,9 +1,9 @@
 'use client';
 
-import { Fragment } from 'react';
 import { useFaq } from '@/hooks/use-faq';
-import { FaqSkeleton } from './skeleton';
+import { Fragment } from 'react';
 import { Items } from './items';
+import { Skeleton } from './skeleton';
 
 export function Questions() {
 	const { data, isLoading } = useFaq();
@@ -13,7 +13,8 @@ export function Questions() {
 			{isLoading ? (
 				<Fragment>
 					{Array.from({ length: 5 }).map((_, index) => (
-						<FaqSkeleton key={index} />
+						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+						<Skeleton key={index} />
 					))}
 				</Fragment>
 			) : (

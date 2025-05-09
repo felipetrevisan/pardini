@@ -1,16 +1,16 @@
 'use client';
 
-import { Fragment } from 'react';
-import { QuoteIcon } from 'lucide-react';
-import { PortableText } from '@portabletext/react';
-import { Testimonial, TestimonialType } from '@/types/testimonial';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
+import { portableComponents } from '@/components/ui/portable-components';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn, getWordInitials } from '@/lib/utils';
 import { urlForImage } from '@/sanity/lib/utils';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { portableComponents } from '@/components/ui/portable-components';
+import { type Testimonial, TestimonialType } from '@/types/testimonial';
 import { YouTubeEmbed } from '@next/third-parties/google';
+import { PortableText } from '@portabletext/react';
+import { QuoteIcon } from 'lucide-react';
+import { Fragment } from 'react';
 
 type Props = Omit<Testimonial, 'showHome' | 'id'>;
 
@@ -60,9 +60,11 @@ export function Testimonials({ author, type, testimonial, video }: Props) {
 						</Fragment>
 					) : (
 						<div className="aspect-video h-full w-full overflow-hidden flex flex-col justify-center">
-							<YouTubeEmbed
-								videoid={new URL(video!).pathname.split('/')[2] ?? ''}
-							/>
+							{video && (
+								<YouTubeEmbed
+									videoid={new URL(video).pathname.split('/')[2] ?? ''}
+								/>
+							)}
 						</div>
 					)}
 				</figure>

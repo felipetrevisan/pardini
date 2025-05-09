@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import * as pixel from '@/lib/facebook-pixel';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
-import * as pixel from '@/lib/facebook-pixel';
+import { useEffect, useState } from 'react';
 
 const FacebookPixel = ({ id }: { id: string }) => {
 	const [loaded, setLoaded] = useState(false);
@@ -13,7 +13,7 @@ const FacebookPixel = ({ id }: { id: string }) => {
 		if (!loaded) return;
 
 		pixel.pageview();
-	}, [pathname, loaded]);
+	}, [loaded]);
 
 	return (
 		<div>

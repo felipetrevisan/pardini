@@ -1,17 +1,17 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { PortableText } from '@portabletext/react';
-import { ChevronLeftCircle } from 'lucide-react';
 import * as App from '@/components/app';
+import { portableComponents } from '@/components/ui/portable-components';
+import { Skeleton } from '@/components/ui/skeleton';
 import { usePost } from '@/hooks/use-posts';
 import { urlForImage } from '@/sanity/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
 import type { Post as PostType } from '@/types/post';
-import { PostDetails } from '../details';
-import { portableComponents } from '@/components/ui/portable-components';
+import { PortableText } from '@portabletext/react';
+import { motion } from 'framer-motion';
+import { ChevronLeftCircle } from 'lucide-react';
 import Link from 'next/link';
 import { Fragment } from 'react';
+import { PostDetails } from '../details';
 
 const MotionLink = motion(Link);
 
@@ -29,6 +29,7 @@ export function Post({
 						? urlForImage(data.coverImage.asset)?.url()
 						: undefined
 				}
+				className="text-center"
 			>
 				<div className="flex flex-row items-center gap-4 pb-10 md:leading-snug">
 					<MotionLink href="/blog" whileHover={{ scale: 1.2 }}>

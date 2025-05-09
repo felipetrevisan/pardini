@@ -1,27 +1,27 @@
-import { type SchemaTypeDefinition } from 'sanity';
+import type { SchemaTypeDefinition } from 'sanity';
 
+import author from './schemas/blog/author';
 import blockContent from './schemas/blog/blockContent';
 import category from './schemas/blog/category';
 import post from './schemas/blog/post';
-import author from './schemas/blog/author';
 import tag from './schemas/blog/tag';
 
-import service from './schemas/services';
 import faq from './schemas/faq';
-import testimonial from './schemas/testimonials';
-import siteConfig from './schemas/siteConfig';
 import featured from './schemas/featured';
+import service from './schemas/services';
+import settings from './schemas/settings';
+import testimonial from './schemas/testimonials';
 
 import navigation from './schemas/navigation';
+import link from './schemas/objects/link';
 import navigationItem from './schemas/objects/navigationItem';
 import navigationSubmenuItem from './schemas/objects/navigationSubmenuItem';
-import link from './schemas/objects/link';
 
 // Social media schema
 import socialNetworksItem from './schemas/objects/socialNetworksItem';
+import about from './schemas/pages/about';
 import family from './schemas/pages/family';
 import journey from './schemas/pages/journey';
-import about from './schemas/pages/about';
 
 // Define and export schema
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -36,7 +36,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		faq,
 		testimonial,
 		about,
-		siteConfig,
+		settings,
 		featured,
 
 		family,

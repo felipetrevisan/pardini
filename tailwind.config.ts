@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import { PluginCreator } from "tailwindcss/types/config";
+import type { PluginCreator } from "tailwindcss/types/config";
 
 const clampPlugin: PluginCreator = ({ matchUtilities, theme }) =>
   matchUtilities(
@@ -70,6 +70,10 @@ export default {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
+        tertiary: {
+          DEFAULT: "hsl(var(--tertiary))",
+          foreground: "hsl(var(--tertiary-foreground))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -77,6 +81,10 @@ export default {
         success: {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
+        },
+        tabs: {
+          DEFAULT: "hsl(var(--tabs))",
+          foreground: "hsl(var(--tabs-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",

@@ -1,25 +1,25 @@
-import { Fragment, useState } from 'react';
-import { motion } from 'framer-motion';
-import { PortableText } from '@portabletext/react';
-import { Button } from '@/components/ui/button';
-import {
-	DrawerTrigger,
-	DrawerContent,
-	DrawerHeader,
-	DrawerTitle,
-	DrawerFooter,
-	DrawerClose,
-	Drawer,
-} from '@/components/ui/drawer';
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
 } from '@/components/ui/accordion';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Faq } from '@/types/faq';
+import { Button } from '@/components/ui/button';
+import {
+	Drawer,
+	DrawerClose,
+	DrawerContent,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerTitle,
+	DrawerTrigger,
+} from '@/components/ui/drawer';
 import { portableComponents } from '@/components/ui/portable-components';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import type { Faq } from '@/types/faq';
+import { PortableText } from '@portabletext/react';
+import { motion } from 'framer-motion';
+import { Fragment, useState } from 'react';
 
 export function Items({ data }: { data: Faq[] }) {
 	const [currentItem, setCurrentItem] = useState<string | null>(null);

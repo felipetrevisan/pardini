@@ -1,5 +1,5 @@
-import { Contact } from './contact';
 import * as App from '@/components/app';
+import { Contact } from './contact';
 
 export default function Page() {
 	return (

@@ -1,9 +1,9 @@
-import { ComponentProps, forwardRef, HTMLAttributes } from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { VariantProps, cva } from 'class-variance-authority';
-import { HTMLMotionProps, motion, MotionValue } from 'framer-motion';
-import { cn } from '@/lib/utils';
 import { useApp } from '@/hooks/use-app';
+import { cn } from '@/lib/utils';
+import { Slot } from '@radix-ui/react-slot';
+import { type VariantProps, cva } from 'class-variance-authority';
+import { type HTMLMotionProps, type MotionValue, motion } from 'framer-motion';
+import { type ComponentProps, type HTMLAttributes, forwardRef } from 'react';
 
 const navbarVariants = cva('w-full h-auto sm:px-4 p-2', {
 	variants: {
@@ -64,6 +64,7 @@ const Brand = forwardRef<HTMLDivElement, NavBrandProps>(
 );
 Brand.displayName = 'Navbar.Brand';
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const Path = (props: any) => (
 	<motion.path
 		strokeWidth="3"
@@ -88,6 +89,7 @@ const Toggle = forwardRef<HTMLButtonElement, ComponentProps<'button'>>(
 				{...props}
 				onClick={() => toggleMenu()}
 			>
+				{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 				<svg width="23" height="23" viewBox="0 0 23 23">
 					<Path
 						variants={{

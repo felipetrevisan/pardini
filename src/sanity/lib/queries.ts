@@ -4,6 +4,15 @@ export const siteConfigQuery = groq`
   *[ _type == 'siteConfig' ][0] {
     title,
     description,
+    keywords,
+    "logo": logo {
+      "asset": asset,
+      "metadata": {
+        "lqip": asset->metadata.lqip,
+        "dimensions": asset->metadata.dimensions
+      }
+    },
+    "shortAbout": short_about,
     "whatsappUrl": whatsapp_url,
     "primaryNavigation": main_nav-> {
       "items": items[] {

@@ -1,11 +1,11 @@
 'use client';
 
-import { Author, Post } from '@/types/post';
-import { urlForImage } from '@/sanity/lib/utils';
-import { formatRelative, isDate } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getWordInitials } from '@/lib/utils';
+import { urlForImage } from '@/sanity/lib/utils';
+import type { Author, Post } from '@/types/post';
+import { formatRelative, isDate } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 
 type BlogDetailsProps = Author & Pick<Post, 'date'>;
 

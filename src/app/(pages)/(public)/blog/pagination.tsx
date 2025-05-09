@@ -40,7 +40,7 @@ export function PostsPagination({
 	const hasPreviousPage = page > 1;
 	const hasNextPage = page < pageLength;
 
-	if (pageLength == 0) return <></>;
+	if (pageLength === 0) return <></>;
 
 	return (
 		<div className="flex items-center justify-end mb-10">
@@ -56,6 +56,7 @@ export function PostsPagination({
 							/>
 						</PaginationItem>
 						{Array.from({ length: pageLength }).map((_, index) => (
+							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 							<PaginationItem key={index + 1}>
 								<PaginationLink
 									href={`/blog?${createQueryString('pageIndex', String(index))}`}

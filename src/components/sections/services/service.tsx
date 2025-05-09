@@ -1,18 +1,18 @@
 'use client';
 
-import { Fragment } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
-	CarouselPrevious,
 	CarouselNext,
+	CarouselPrevious,
 } from '@/components/ui/carousel';
-import { Item } from './item';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useServices } from '@/hooks/use-services';
-import { ServiceSkeleton } from './skeleton';
 import { ServiceType } from '@/types/services';
+import { Fragment } from 'react';
+import { Item } from './item';
+import { ServiceSkeleton } from './skeleton';
 
 export function ServicesItems() {
 	const { data, isLoading } = useServices();
@@ -35,9 +35,10 @@ export function ServicesItems() {
 								{Array.from({ length: 4 }).map((_, index) => (
 									<CarouselItem
 										className="basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+										// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 										key={index}
 									>
-										<ServiceSkeleton key={index} />
+										<ServiceSkeleton />
 									</CarouselItem>
 								))}
 							</Fragment>
@@ -72,9 +73,10 @@ export function ServicesItems() {
 								{Array.from({ length: 4 }).map((_, index) => (
 									<CarouselItem
 										className="basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+										// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 										key={index}
 									>
-										<ServiceSkeleton key={index} />
+										<ServiceSkeleton />
 									</CarouselItem>
 								))}
 							</Fragment>

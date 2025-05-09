@@ -1,6 +1,5 @@
 'use client';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
 import {
 	A11y,
 	EffectCoverflow,
@@ -8,6 +7,7 @@ import {
 	Navigation,
 	Pagination,
 } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { Testimonials as Item } from './testimonial';
 

@@ -1,4 +1,4 @@
-import { ContactFormSchema } from '@/types/contact';
+import type { ContactFormSchema } from '@/types/contact';
 import {
 	Body,
 	Container,
@@ -6,8 +6,8 @@ import {
 	Heading,
 	Html,
 	Img,
-	Text,
 	Tailwind,
+	Text,
 } from '@react-email/components';
 
 export function EmailTemplateContact({

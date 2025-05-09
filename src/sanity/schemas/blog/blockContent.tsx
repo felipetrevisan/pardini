@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { HighlightIcon, MenuIcon } from '@sanity/icons';
-import { defineType, defineArrayMember } from 'sanity';
+import { defineArrayMember, defineType } from 'sanity';
 
 export default defineType({
 	title: 'Block Content',
@@ -103,6 +103,7 @@ export default defineType({
 							},
 						],
 						components: {
+							// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 							annotation: (props: any) => (
 								<Button
 									variant={props.variant ?? 'default'}

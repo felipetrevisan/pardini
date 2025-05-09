@@ -2,7 +2,7 @@
 
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { postQuery, postSlugsQuery, postsQuery } from '@/sanity/lib/queries';
-import { PaginationQuery, Post, Posts } from '@/types/post';
+import type { PaginationQuery, Post, Posts } from '@/types/post';
 
 export async function getPosts({ pageIndex, pageSize }: PaginationQuery) {
 	return sanityFetch<Posts>({

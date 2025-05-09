@@ -1,6 +1,6 @@
-import { About } from './about';
-import { getAboutContent } from '@/server/get-about';
 import * as App from '@/components/app';
+import { getAboutContent } from '@/server/get-about';
+import { About } from './about';
 
 export default async function Page() {
 	const content = await getAboutContent();

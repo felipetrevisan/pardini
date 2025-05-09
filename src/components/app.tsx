@@ -1,8 +1,6 @@
 'use client';
 
-import { forwardRef, Fragment, HTMLAttributes, useRef, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Slot } from '@radix-ui/react-slot';
 import {
 	AnimatePresence,
 	motion,
@@ -11,23 +9,31 @@ import {
 	useScroll,
 	useTransform,
 } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import {
+	Fragment,
+	type HTMLAttributes,
+	forwardRef,
+	useRef,
+	useState,
+} from 'react';
 import { MdOutlineWhatsapp } from 'react-icons/md';
-import { Slot } from '@radix-ui/react-slot';
 import { Background, Parallax } from 'react-parallax';
 
-import { cn } from '@/lib/utils';
-import * as Navbar from '@/components/ui/navbar';
 import { Button } from '@/components/ui/button';
+import * as Navbar from '@/components/ui/navbar';
+import { useApp } from '@/hooks/use-app';
+import { useDimensions } from '@/hooks/use-dimensions';
 import { useServices } from '@/hooks/use-services';
 import { useSite } from '@/hooks/use-site';
-import { SocialNetworks } from './social-icons';
-import { Logo } from './logo';
-import { useDimensions } from '@/hooks/use-dimensions';
-import { useApp } from '@/hooks/use-app';
-import { DesktopNavigation } from './desktop-navigation';
-import { MobileNavigation } from './mobile-navigation';
-import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from './ui/drawer';
+import { cn } from '@/lib/utils';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import { DesktopNavigation } from './desktop-navigation';
+import { Logo } from './logo';
+import { MobileNavigation } from './mobile-navigation';
+import { SocialNetworks } from './social-icons';
+import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from './ui/drawer';
 
 const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className }, ref) => {
@@ -256,6 +262,7 @@ const Title = forwardRef<HTMLHeadingElement, TitleProps>(
 
 		return (
 			<Comp className="flex gap-1 items-center" {...props} ref={ref}>
+				{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="26"
@@ -311,15 +318,17 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
 			<Parallax strength={500} blur={{ min: -1, max: 3 }} className="w-screen">
 				<Background>
 					<div
-						className={cn(`w-screen h-screen bg-cover bg-center`)}
+						className="w-screen h-screen bg-cover bg-center"
 						style={{
-							backgroundImage: `url("${!background ? '/assets/bg-page-title.jpg' : background!}")`,
+							backgroundImage: `url("${
+								!background ? '/assets/bg-page-title.jpg' : background
+							}")`,
 						}}
 					/>
 				</Background>
 				<div
 					className={cn(
-						'overflow-hidden relative w-full h-[500px] md:h-[590px] flex items-center after:absolute after:z-[3] after:bg-gradient-to-b after:from-transparent after:via-secondary after:to-secondary after:w-full after:h-40 after:-bottom-20 before:absolute before:z-[2] before:bg-gradient-to-r before:from-black/90 before:via-secondary/40 before:to-black/40 before:w-full before:h-full',
+						'overflow-hidden relative w-full h-[500px] md:h-[590px] flex items-center after:absolute after:z-[3] after:bg-gradient-to-b after:from-transparent after:to-background after:w-full after:h-56 after:-bottom-10 before:absolute before:z-[2] before:top-0 before:bg-gradient-to-b before:from-black/60 before:to-transparent before:w-full before:h-full',
 						className,
 					)}
 					{...props}

@@ -1,5 +1,5 @@
-import { ServicesItems } from './service';
 import * as App from '@/components/app';
+import { ServicesItems } from './service';
 
 export async function Services() {
 	return (

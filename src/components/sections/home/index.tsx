@@ -1,16 +1,16 @@
 'use client';
 
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import { MailIcon } from 'lucide-react';
-import { slideUpVariants } from '@/config/animation';
+import { ContactFormDrawer } from '@/components/contact-form-drawer';
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerTrigger } from '@/components/ui/drawer';
-import { ContactFormDrawer } from '@/components/contact-form-drawer';
-import { Featured } from '@/types/site';
+import { slideUpVariants } from '@/config/animation';
 import { urlForImage } from '@/sanity/lib/utils';
+import type { Featured } from '@/types/site';
+import { motion } from 'framer-motion';
+import { MailIcon } from 'lucide-react';
+import Image from 'next/image';
+import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export function Home({ images }: { images: Featured[] }) {
 	return (
@@ -29,7 +29,7 @@ export function Home({ images }: { images: Featured[] }) {
 					{images?.map(({ id, title, subtitle, image }) => (
 						<SwiperSlide
 							key={id}
-							className="relative after:absolute after:z-[3] after:bg-gradient-to-b after:from-transparent after:to-secondary after:w-full after:h-56 after:-bottom-10 before:absolute before:z-[2] before:bg-gradient-to-r before:from-black/70 before:via-secondary/40 before:to-black/10 before:w-full before:h-full bg-primary"
+							className="relative after:absolute after:z-[3] after:bg-gradient-to-b after:from-transparent after:to-background after:w-full after:h-56 after:-bottom-10 before:absolute before:z-[2] before:top-0 before:bg-gradient-to-b before:from-black/60 before:to-transparent before:w-full before:h-[100px] bg-primary"
 						>
 							{image && (
 								<Image

@@ -1,5 +1,5 @@
-import { SanityImageSource } from '@sanity/asset-utils';
-import { ImageMetadata } from 'sanity';
+import type { SanityImageSource } from '@sanity/asset-utils';
+import type { ImageMetadata } from 'sanity';
 
 export type SanityAsset = {
 	asset: SanityImageSource;

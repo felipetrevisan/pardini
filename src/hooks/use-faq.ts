@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
-import { Faq } from '@/types/faq';
 import { getFaq } from '@/server/get-faq';
+import type { Faq } from '@/types/faq';
+import { useQuery } from '@tanstack/react-query';
 
 export function useFaq() {
 	const { data, isLoading, isPending } = useQuery<Faq[]>({

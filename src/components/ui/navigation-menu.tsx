@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { icons } from 'lucide-react';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { cva } from 'class-variance-authority';
+import { icons } from 'lucide-react';
+import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -106,7 +106,7 @@ const NavigationMenuLink = React.forwardRef<
 		ref={ref}
 		className={cn(className)}
 		{...props}
-	></NavigationMenuPrimitive.Link>
+	/>
 ));
 
 NavigationMenuLink.displayName = NavigationMenuPrimitive.Link.displayName;

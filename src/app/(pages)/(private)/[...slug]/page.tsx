@@ -1,12 +1,12 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import * as App from '@/components/app';
-import { getPageBySlug } from '@/server/get-page';
-import { notFound } from 'next/navigation';
-import { YouTubeEmbed } from '@next/third-parties/google';
-import { urlForImage } from '@/sanity/lib/utils';
 import FacebookPixel from '@/components/facebook-pixel';
+import { Button } from '@/components/ui/button';
 import { env } from '@/config/env';
+import { urlForImage } from '@/sanity/lib/utils';
+import { getPageBySlug } from '@/server/get-page';
+import { YouTubeEmbed } from '@next/third-parties/google';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 import './styles.scss';
 

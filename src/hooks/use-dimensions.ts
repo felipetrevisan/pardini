@@ -1,4 +1,4 @@
-import { useState, useEffect, MutableRefObject } from 'react';
+import { type MutableRefObject, useEffect, useState } from 'react';
 
 interface Dimensions {
 	width: number;

@@ -6,26 +6,65 @@ export default defineType({
 	title: 'Site Settings',
 	icon: MdSettingsApplications,
 	type: 'document',
+	groups: [
+		{
+			name: 'site',
+			title: 'Site',
+		},
+		{
+			name: 'seo',
+			title: 'SEO',
+		},
+		{
+			name: 'navigation',
+			title: 'Navigation',
+		},
+		{
+			name: 'others',
+			title: 'Others',
+		},
+		{
+			name: 'contact',
+			title: 'Contacts',
+		},
+	],
 	fields: [
 		defineField({
 			name: 'title',
-			title: 'Site Title',
+			title: 'Title',
 			type: 'string',
+			group: ['site', 'seo'],
 			validation: (Rule) =>
 				Rule.required().warning('O título do site é obrigatório.'),
 		}),
 		defineField({
 			name: 'description',
-			title: 'Site Description',
+			title: 'Description',
 			type: 'string',
+			group: ['site', 'seo'],
 			validation: (Rule) =>
 				Rule.required().warning('A descrição do site é obrigatória.'),
+		}),
+		defineField({
+			name: 'keywords',
+			title: 'Keywords',
+			type: 'string',
+			group: ['seo'],
+			validation: (Rule) =>
+				Rule.required().warning('As palavras chaves é obrigatória.'),
+		}),
+		defineField({
+			name: 'logo',
+			title: 'Logo',
+			type: 'image',
+			group: 'site',
 		}),
 		defineField({
 			name: 'main_nav',
 			title: 'Main Navigation',
 			description: 'Selecione o menu para a navegação principal do site.',
 			type: 'reference',
+			group: 'navigation',
 			to: { type: 'navigation' },
 			validation: (Rule) =>
 				Rule.custom((field, context) =>
@@ -39,6 +78,7 @@ export default defineType({
 			title: 'Social Navigation',
 			description: 'Selecione o menu para a navegação social do site.',
 			type: 'reference',
+			group: 'navigation',
 			to: { type: 'navigation' },
 			validation: (Rule) =>
 				Rule.custom((field, context) =>
@@ -52,6 +92,7 @@ export default defineType({
 			title: 'Featured Items',
 			description:
 				'Selecione os itens em destaque para o carrossel da página inicial.',
+			group: ['site', 'others'],
 			type: 'array',
 			of: [
 				{
@@ -61,9 +102,18 @@ export default defineType({
 			],
 		}),
 		defineField({
+			name: 'short_about',
+			title: 'Short About Us',
+			type: 'blockContent',
+			group: ['site', 'others'],
+			validation: (Rule) =>
+				Rule.required().warning('This field must not be empty.'),
+		}),
+		defineField({
 			name: 'whatsapp_url',
 			title: 'Whatsapp URL Button',
 			type: 'url',
+			group: 'contact',
 			description: 'Insira a URL para o botão de contato do WhatsApp.',
 			validation: (Rule) =>
 				Rule.required()

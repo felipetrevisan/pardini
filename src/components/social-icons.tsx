@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { icons } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { useSite } from '@/hooks/use-site';
+import { motion } from 'framer-motion';
+import { icons } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
 import { Button } from './ui/button';
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
@@ -22,7 +22,7 @@ const SocialNetworks = React.forwardRef<HTMLDivElement, Props>(
 		return (
 			<div className={className} ref={ref}>
 				{data?.socialNavigation?.items.map(({ id, icon, url, label }) => {
-					const Icon = icons[icon as keyof typeof icons] ?? icons['Link'];
+					const Icon = icons[icon as keyof typeof icons] ?? icons.Link;
 
 					return (
 						<MotionLink

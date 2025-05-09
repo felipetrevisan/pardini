@@ -2,16 +2,19 @@
   "name": "pardini",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.10.0",
   "scripts": {
     "dev:turbo": "next dev --turbo",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=false ./src",
+    "lint:organize": "pnpm biome check --formatter-enabled=false --linter-enabled=false --organize-imports-enabled=true --write ./src",
+    "lint:format": "pnpm biome format --write ./src",
     "prepare": "husky"
   },
   "dependencies": {
+    "@bprogress/next": "^3.2.12",
     "@hookform/resolvers": "^3.3.4",
     "@next/third-parties": "^15",
     "@portabletext/react": "^3.1.0",

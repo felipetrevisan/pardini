@@ -1,11 +1,10 @@
-import { Home as HomeComponent } from '@/components/sections/home';
 import { About as AboutComponent } from '@/components/sections/about';
+import { Faq as FaqComponent } from '@/components/sections/faq';
+import { Home as HomeComponent } from '@/components/sections/home';
 import { Services as ServicesComponent } from '@/components/sections/services';
 import { Testimonials as TestimonialsComponent } from '@/components/sections/testimonials';
-import { Faq as FaqComponent } from '@/components/sections/faq';
+import type { Site } from '@/types/site';
 import { Fragment } from 'react';
-
-import { Site } from '@/types/site';
 
 export default function Home({ featured }: Site) {
 	return (

@@ -1,11 +1,11 @@
+import { sanityFetch } from '@/sanity/lib/fetch';
+import { postQuery } from '@/sanity/lib/queries';
+import { resolveOpenGraphImage } from '@/sanity/lib/utils';
+import { getPost, getPostsSlug } from '@/server/get-posts';
+import type { Post as PostType } from '@/types/post';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 import { z } from 'zod';
-import { sanityFetch } from '@/sanity/lib/fetch';
-import { getPost, getPostsSlug } from '@/server/get-posts';
-import { resolveOpenGraphImage } from '@/sanity/lib/utils';
-import { postQuery } from '@/sanity/lib/queries';
-import type { Post as PostType } from '@/types/post';
 import { Post } from './post';
 
 const blogPageParams = z.object({

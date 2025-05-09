@@ -2,7 +2,7 @@
 
 import { EmailTemplateContact } from '@/components/email-template-contact';
 import { env } from '@/config/env';
-import { ContactFormSchema } from '@/types/contact';
+import type { ContactFormSchema } from '@/types/contact';
 import { Resend } from 'resend';
 
 const resend = new Resend(env.RESEND_API_KEY);

@@ -1,6 +1,6 @@
+import { Button } from '@/components/ui/button';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { useSwiper } from 'swiper/react';
-import { Button } from '@/components/ui/button';
 
 export function SliderPagination() {
 	const swiper = useSwiper();

@@ -1,19 +1,19 @@
 'use client';
 
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import type { Post as PostType } from '@/types/post';
-import { PostDetails } from './details';
-import { urlForImage } from '@/sanity/lib/utils';
+import { Badge, badgeVariants } from '@/components/ui/badge';
 import {
 	Card,
 	CardContent,
 	CardFooter,
 	CardHeader,
 } from '@/components/ui/card';
+import { urlForImage } from '@/sanity/lib/utils';
+import type { Post as PostType } from '@/types/post';
 import { getImageDimensions } from '@sanity/asset-utils';
-import { Badge, badgeVariants } from '@/components/ui/badge';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { PostDetails } from './details';
 
 type PostProps = PostType;
 

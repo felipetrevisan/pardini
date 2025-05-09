@@ -1,17 +1,17 @@
 'use client';
 
+import type { Service } from '@/types/services';
+import { type Cycle, useCycle } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import {
+	type Dispatch,
+	type SetStateAction,
 	createContext,
 	useCallback,
 	useContext,
-	useState,
-	Dispatch,
-	SetStateAction,
 	useEffect,
+	useState,
 } from 'react';
-import { Cycle, useCycle } from 'framer-motion';
-import { Service } from '@/types/services';
-import { usePathname } from 'next/navigation';
 
 type AppContextProps = {
 	isMenuOpen: boolean;
@@ -44,16 +44,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 		[currentUrl],
 	);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		setActiveMenu(currentUrl);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (isMenuOpen) {
 			toggleMenu();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentUrl]);
 
 	return (

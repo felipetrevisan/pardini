@@ -1,7 +1,7 @@
-import { z } from 'zod';
 import * as App from '@/components/app';
-import { Blog } from './blog';
 import { getPosts } from '@/server/get-posts';
+import { z } from 'zod';
+import { Blog } from './blog';
 
 const blogPageSearchParams = z.object({
 	pageIndex: z.coerce.number().default(0),

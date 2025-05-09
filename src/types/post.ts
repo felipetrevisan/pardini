@@ -1,6 +1,6 @@
-import { PortableTextBlock } from '@portabletext/react';
-import { SanityAsset } from './sanityAssets';
-import { SanityAssetSource } from '@sanity/asset-utils';
+import type { SanityAssetSource } from '@sanity/asset-utils';
+import type { PortableTextBlock } from 'sanity';
+import type { SanityAsset } from './sanityAssets';
 
 export type Posts = {
 	items: Post[];

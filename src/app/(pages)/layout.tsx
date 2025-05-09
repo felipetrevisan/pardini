@@ -1,11 +1,11 @@
-import { Metadata } from 'next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { Metadata } from 'next';
 
 import { Inter } from 'next/font/google';
 
 import '../globals.scss';
-import Providers from './providers';
 import { getSiteConfig } from '@/server/get-site-config';
+import Providers from './providers';
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -17,6 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
 	const settings = await getSiteConfig();
 	const title = settings?.title || 'Pardini Cidadania';
 	const description = settings?.description || '';
+	const keywords = settings?.keywords || '';
+
 
 	return {
 		title: {
@@ -24,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 			default: title,
 		},
 		description,
+		keywords
 	};
 }
 

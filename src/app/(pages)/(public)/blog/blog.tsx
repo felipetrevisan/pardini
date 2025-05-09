@@ -1,10 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { usePosts } from '@/hooks/use-posts';
-import { Post } from './post';
-import { Posts } from '@/types/post';
+import type { Posts } from '@/types/post';
+import { motion } from 'framer-motion';
 import { PostsPagination } from './pagination';
+import { Post } from './post';
 
 type BlogPostQuery = {
 	pageIndex: number;

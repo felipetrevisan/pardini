@@ -1,9 +1,6 @@
 'use client';
 
-import * as React from 'react';
-import { motion } from 'framer-motion';
-import { Fragment } from 'react';
-import Link from 'next/link';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import {
 	NavigationListItem,
 	NavigationMenu,
@@ -13,14 +10,17 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import { ServiceDetailsDialog } from './service-details-dialog';
 import { Skeleton } from '@/components/ui/skeleton';
-import { LinkType, Navigation } from '@/types/site';
-import { Service } from '@/types/services';
-import { cn } from '@/lib/utils';
 import { menuItemVariants } from '@/config/animation';
 import { useApp } from '@/hooks/use-app';
+import { cn } from '@/lib/utils';
+import type { Service } from '@/types/services';
+import { LinkType, type Navigation } from '@/types/site';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import * as React from 'react';
+import { Fragment } from 'react';
+import { ServiceDetailsDialog } from './service-details-dialog';
 
 type NavigationProps = {
 	navigation?: Navigation;
@@ -70,6 +70,7 @@ export const MobileNavigation = ({
 																	{Array.from({ length: 10 }).map(
 																		(_, index) => (
 																			<li
+																				// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 																				key={index}
 																				className="space-y-1 rounded-md p-3"
 																			>
@@ -113,6 +114,7 @@ export const MobileNavigation = ({
 									whileTap={{ scale: 0.95 }}
 								>
 									<Link
+										// biome-ignore lint/style/noNonNullAssertion: <explanation>
 										href={url.usePath ? url.path! : url.externalUrl!}
 										target={
 											!url.usePath && url.externalUrl ? '_blank' : undefined
@@ -121,6 +123,7 @@ export const MobileNavigation = ({
 										passHref
 									>
 										<NavigationMenuLink
+											// biome-ignore lint/style/noNonNullAssertion: <explanation>
 											active={(url.usePath && isMenuActive(url.path!)) || false}
 											className="data-[active]:text-accent relative"
 										>

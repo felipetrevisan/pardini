@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
-import { About } from '@/types/about';
 import { getAboutContent } from '@/server/get-about';
+import type { About } from '@/types/about';
+import { useQuery } from '@tanstack/react-query';
 
 export function useAbout(initialData: About[]) {
 	const { data, isLoading, isPending } = useQuery<About[]>({

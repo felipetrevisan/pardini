@@ -1,16 +1,16 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { InfoIcon, Loader2 } from 'lucide-react';
-import { MdEmail } from 'react-icons/md';
-import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from './ui/textarea';
-import { ContactFormSchema, contactFormSchema } from '@/types/contact';
-import { sendEmail } from '@/server/send-email';
 import { useToast } from '@/hooks/use-toast';
-import { DrawerFooter } from './ui/drawer';
+import { sendEmail } from '@/server/send-email';
+import { type ContactFormSchema, contactFormSchema } from '@/types/contact';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { InfoIcon, Loader2 } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { MdEmail } from 'react-icons/md';
 import { DialogTrigger } from './ui/dialog';
+import { DrawerFooter } from './ui/drawer';
+import { Textarea } from './ui/textarea';
 
 export function ContactForm({ isDrawer = false }: { isDrawer: boolean }) {
 	const { toast } = useToast();

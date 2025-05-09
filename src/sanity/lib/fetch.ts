@@ -1,6 +1,6 @@
-import type { ClientPerspective, QueryParams } from 'next-sanity';
-import { client } from '@/sanity/lib/client';
 import { env } from '@/config/env';
+import { client } from '@/sanity/lib/client';
+import type { ClientPerspective, QueryParams } from 'next-sanity';
 
 /**
  * Used to fetch data in Server Components, it has built in support for handling Draft Mode and perspectives.

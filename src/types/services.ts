@@ -1,5 +1,5 @@
-import { PortableTextBlock } from '@portabletext/react';
-import { icons } from 'lucide-react';
+import type { icons } from 'lucide-react';
+import type { PortableTextBlock } from 'sanity';
 
 export type Service = {
 	id: string;

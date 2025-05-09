@@ -48,6 +48,7 @@ export const fields = [
 		options: {
 			source: 'video',
 			maxLength: 200, // will be ignored if slugify is set
+			// biome-ignore lint/style/noNonNullAssertion: <explanation>
 			slugify: (input) => new URL(input!).pathname.split('/')[2] ?? '',
 		},
 		validation: (Rule) =>

@@ -1,7 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
-import { Post, Posts } from '@/types/post';
 import { getPost, getPosts } from '@/server/get-posts';
-import { PaginationQuery } from '@/types/post';
+import type { PaginationQuery, Post, Posts } from '@/types/post';
+import { useQuery } from '@tanstack/react-query';
 
 export function usePosts({
 	pageIndex,

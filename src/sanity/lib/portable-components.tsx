@@ -1,5 +1,8 @@
+import {
+	type SanityImageSource,
+	getImageDimensions,
+} from '@sanity/asset-utils';
 import Image from 'next/image';
-import { SanityImageSource, getImageDimensions } from '@sanity/asset-utils';
 import { urlForImage } from './utils';
 
 export const CustomImage = ({ value }: { value: SanityImageSource }) => {

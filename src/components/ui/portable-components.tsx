@@ -1,5 +1,5 @@
 import { CustomImage } from '@/sanity/lib/portable-components';
-import { PortableTextComponents } from '@portabletext/react';
+import type { PortableTextComponents } from '@portabletext/react';
 import Link from 'next/link';
 import { Button } from './button';
 

@@ -1,14 +1,14 @@
 'use client';
 
-import Image from 'next/image';
-import { motion } from 'framer-motion';
 import * as App from '@/components/app';
 import { aboutSectionVariants } from '@/config/animation';
+import { useAbout } from '@/hooks/use-about';
+import { cn } from '@/lib/utils';
+import { urlForImage } from '@/sanity/lib/utils';
 import { type About as AboutType, BlockSideType } from '@/types/about';
 import { PortableText } from '@portabletext/react';
-import { urlForImage } from '@/sanity/lib/utils';
-import { cn } from '@/lib/utils';
-import { useAbout } from '@/hooks/use-about';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export function About({ initialData }: { initialData: AboutType[] }) {
 	const { data } = useAbout(initialData);
@@ -53,7 +53,7 @@ export function About({ initialData }: { initialData: AboutType[] }) {
 													width={353}
 													height={470}
 													className={cn(
-														'shadow-[-.50rem_.75rem] shadow-secondary',
+														'shadow-[-.50rem_.75rem] shadow-tertiary',
 														{
 															'rounded-[16%_84%_22%_78%_/_73%_28%_72%_27%]':
 																idx === 0,
@@ -81,7 +81,7 @@ export function About({ initialData }: { initialData: AboutType[] }) {
 													width={353}
 													height={470}
 													className={cn(
-														'shadow-[-.50rem_.75rem] shadow-secondary',
+														'shadow-[-.50rem_.75rem] shadow-tertiary',
 														{
 															'rounded-[16%_84%_22%_78%_/_73%_28%_72%_27%]':
 																idx === 0,

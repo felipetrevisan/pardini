@@ -1,5 +1,5 @@
 import { MdGridView, MdPages, MdSettings } from 'react-icons/md';
-import { StructureBuilder } from 'sanity/structure';
+import type { StructureBuilder } from 'sanity/structure';
 
 const structure = (S: StructureBuilder) =>
 	S.list()
@@ -30,7 +30,7 @@ const structure = (S: StructureBuilder) =>
 						.title('Settings')
 						.items([
 							S.listItem()
-								.title('Config')
+								.title('Settings')
 								.child(
 									S.document()
 										.schemaType('siteConfig')
@@ -40,7 +40,7 @@ const structure = (S: StructureBuilder) =>
 								.title('Navigation')
 								.child(S.documentTypeList('navigation')),
 							S.listItem()
-								.title('Featured Content')
+								.title('Banners')
 								.child(S.documentTypeList('featured')),
 						]),
 				),

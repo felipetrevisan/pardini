@@ -1,12 +1,16 @@
-import { SanityAsset } from './sanityAssets';
+import type { PortableTextBlock } from 'sanity';
+import type { SanityAsset } from './sanityAssets';
 
 export type Site = {
 	id: string;
 	title: string;
 	description?: string;
+	keywords?: string;
+	logo: SanityAsset;
 	primaryNavigation?: Navigation;
 	socialNavigation?: SocialNetwork;
 	featured?: Featured[];
+	shortAbout: PortableTextBlock;
 	whatsappUrl: string;
 };
 

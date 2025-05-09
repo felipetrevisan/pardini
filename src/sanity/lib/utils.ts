@@ -1,5 +1,5 @@
+import type { SanityImageSource } from '@sanity/asset-utils';
 import createImageUrlBuilder from '@sanity/image-url';
-import { SanityImageSource } from '@sanity/asset-utils';
 import { dataset, projectId } from '../env';
 
 export const projectDetails = {
