@@ -31,8 +31,8 @@ export function Post({
 	//   : { width: 0, height: 0 };
 
 	return (
-		<Link href={`blog/${slug}`} passHref>
-			<Card className="flex flex-col rounded-xl shadow-lg relative overflow-hidden h-full min-h-[32rem] max-w-[390px] md:max-w-full">
+        <Link href={`blog/${slug}`} passHref legacyBehavior>
+            <Card className="flex flex-col rounded-xl shadow-lg relative overflow-hidden h-full min-h-[32rem] max-w-[390px] md:max-w-full">
 				<CardHeader className="relative h-[200px] overflow-hidden bg-secondary p-0">
 					{coverImage !== null && (
 						<Image
@@ -65,6 +65,6 @@ export function Post({
 					</div>
 				</CardFooter>
 			</Card>
-		</Link>
-	);
+        </Link>
+    );
 }

@@ -13,23 +13,23 @@ export const portableComponents: PortableTextComponents = {
 			const href = `/${slug.current}`;
 
 			return (
-				<Link href={href} passHref>
-					<Button variant="outline" rounded="full">
+                <Link href={href} passHref legacyBehavior>
+                    <Button variant="outline" rounded="full">
 						{children}
 					</Button>
-				</Link>
-			);
+                </Link>
+            );
 		},
 		link: ({ value, children }) => {
 			const { blank, href } = value;
 			return blank ? (
-				<Link href={href} passHref target="_blank" rel="noopener">
+				<Link href={href} passHref target="_blank" rel="noopener" legacyBehavior>
 					<Button variant="outline" rounded="full">
 						{children}
 					</Button>
 				</Link>
 			) : (
-				<Link href={href} passHref>
+				<Link href={href} passHref legacyBehavior>
 					<Button variant="outline" shadow>
 						{children}
 					</Button>

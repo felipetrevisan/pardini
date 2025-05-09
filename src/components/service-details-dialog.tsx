@@ -24,8 +24,8 @@ export function ServiceDetailsDialog({
 	const LucideIcon = icon !== null ? icons[icon] : icons.Scale;
 
 	return (
-		<DialogContent className="outline-none sm:max-w-[600px]">
-			<DialogHeader>
+        <DialogContent className="outline-none sm:max-w-[600px]">
+            <DialogHeader>
 				<DialogTitle>
 					<div className="flex flex-row items-center gap-3">
 						<LucideIcon className="bg-background text-primary-foreground p-2 size-12" />{' '}
@@ -33,14 +33,14 @@ export function ServiceDetailsDialog({
 					</div>
 				</DialogTitle>
 			</DialogHeader>
-			{description && (
+            {description && (
 				<ScrollArea className="grid gap-4 p-6 h-[400px]">
 					<PortableText value={description} components={portableComponents} />
 				</ScrollArea>
 			)}
-			<DialogFooter className="justify-between gap-2">
+            <DialogFooter className="justify-between gap-2">
 				{buttons.hasSeeMoreButton && buttons.linkSeeMore && (
-					<Link href={buttons.linkSeeMore} passHref target="_blank">
+					<Link href={buttons.linkSeeMore} passHref target="_blank" legacyBehavior>
 						<Button
 							variant="secondary"
 							size="xl"
@@ -52,7 +52,7 @@ export function ServiceDetailsDialog({
 					</Link>
 				)}
 				{buttons.hasWhatsappButton && buttons.linkWhatsappButton && (
-					<Link href={buttons.linkWhatsappButton} passHref target="_blank">
+					<Link href={buttons.linkWhatsappButton} passHref target="_blank" legacyBehavior>
 						<Button
 							variant="whatsapp"
 							size="xl"
@@ -69,6 +69,6 @@ export function ServiceDetailsDialog({
 					</Link>
 				)}
 			</DialogFooter>
-		</DialogContent>
-	);
+        </DialogContent>
+    );
 }

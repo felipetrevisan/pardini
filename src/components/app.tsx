@@ -206,14 +206,14 @@ const Footer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 		const { data, isLoading } = useSite();
 
 		return (
-			<AnimatePresence mode="sync">
-				<motion.footer
+            <AnimatePresence mode="sync">
+                <motion.footer
 					className="container flex flex-col space-y-10 w-full select-none items-center pb-10 lg:relative"
 					ref={ref}
 				>
 					{!isLoading && data?.whatsappUrl && (
 						<div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
-							<Link href={data.whatsappUrl} passHref target="_blank">
+							<Link href={data.whatsappUrl} passHref target="_blank" legacyBehavior>
 								<MotionButton
 									aria-label="Entre em contato por Whatsapp"
 									whileHover={{ scale: 1.1 }}
@@ -246,8 +246,8 @@ const Footer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 						</p>
 					</div>
 				</motion.footer>
-			</AnimatePresence>
-		);
+            </AnimatePresence>
+        );
 	},
 );
 Footer.displayName = 'Footer';

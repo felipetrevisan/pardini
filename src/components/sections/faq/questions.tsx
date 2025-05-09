@@ -9,17 +9,17 @@ export function Questions() {
 	const { data, isLoading } = useFaq();
 
 	return (
-		<Fragment>
-			{isLoading ? (
+        <Fragment>
+            {isLoading ? (
 				<Fragment>
 					{Array.from({ length: 5 }).map((_, index) => (
 						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-						<Skeleton key={index} />
+						(<Skeleton key={index} />)
 					))}
 				</Fragment>
 			) : (
 				<Items data={data ?? []} />
 			)}
-		</Fragment>
-	);
+        </Fragment>
+    );
 }
