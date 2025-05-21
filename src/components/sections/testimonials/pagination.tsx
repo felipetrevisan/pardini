@@ -9,9 +9,8 @@ export function SliderPagination() {
 		<div className="flex justify-center mt-4 gap-4 select-none p-2">
 			<Button
 				size="xl"
-				icon
+				variant="icon"
 				rounded="full"
-				variant="outline"
 				onClick={() => swiper.slidePrev()}
 			>
 				<ArrowLeftIcon className="size-4" />
@@ -19,9 +18,8 @@ export function SliderPagination() {
 			</Button>
 			<Button
 				size="xl"
-				icon
+				variant="icon"
 				rounded="full"
-				variant="outline"
 				onClick={() => swiper.slideNext()}
 			>
 				<ArrowRightIcon className="size-4" />

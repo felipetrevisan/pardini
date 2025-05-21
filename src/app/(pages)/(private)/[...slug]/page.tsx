@@ -47,12 +47,7 @@ export default async function Page({
 							passHref
 							target="_blank"
 						>
-							<Button
-								variant="whatsapp"
-								size="2xl"
-								rounded="2xl"
-								hover="effect"
-							>
+							<Button theme="whatsapp" size="2xl" rounded="2xl" hover="effect">
 								{footer.button?.label}
 							</Button>
 						</Link>
