@@ -36,7 +36,7 @@ export function About() {
 						))}
 					{!isLoading && data && (
 						<>
-							<div className="font-medium text-justify md:text-start">
+							<div className="font-medium text-justify flex flex-col gap-5">
 								<PortableText
 									value={data.shortAbout}
 									components={portableComponents}
