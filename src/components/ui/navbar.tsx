@@ -48,7 +48,9 @@ function Brand({
 }: React.ComponentProps<'div'> & { asChild?: boolean }) {
 	const Comp = asChild ? Slot : 'div';
 	return (
-		<Comp className={cn('flex items-center space-x-3', className)} {...props} />
+		<Comp className={cn('flex items-center space-x-3', className)} {...props}>
+			{children}
+		</Comp>
 	);
 }
 

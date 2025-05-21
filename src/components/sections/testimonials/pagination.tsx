@@ -8,7 +8,7 @@ export function SliderPagination() {
 	return (
 		<div className="flex justify-center mt-4 gap-4 select-none p-2">
 			<Button
-				size="xl"
+				size="lg"
 				variant="icon"
 				rounded="full"
 				onClick={() => swiper.slidePrev()}
@@ -17,7 +17,7 @@ export function SliderPagination() {
 				<span className="sr-only">Previous slide</span>
 			</Button>
 			<Button
-				size="xl"
+				size="lg"
 				variant="icon"
 				rounded="full"
 				onClick={() => swiper.slideNext()}
