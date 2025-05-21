@@ -8,7 +8,9 @@ export async function Services() {
 			data-section="services"
 		>
 			<div className="container w-full flex flex-col gap-14">
-				<App.Title>Nossos Serviços</App.Title>
+				<App.Title variant="secondary" size="lg">
+					Nossos Serviços
+				</App.Title>
 				<ServicesItems />
 			</div>
 		</div>

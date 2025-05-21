@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
 import { sendEmail } from '@/server/send-email';
 import { type ContactFormSchema, contactFormSchema } from '@/types/contact';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,7 +12,7 @@ import { DrawerFooter } from './ui/drawer';
 import { Textarea } from './ui/textarea';
 
 export function ContactForm({ isDrawer = false }: { isDrawer: boolean }) {
-	const { toast } = useToast();
+	// const { toast } = useToast();
 
 	const {
 		register,
@@ -34,19 +33,19 @@ export function ContactForm({ isDrawer = false }: { isDrawer: boolean }) {
 		const { data, error } = await sendEmail(formData);
 
 		if (error) {
-			toast({
-				title: 'Não foi possível enviar a mensagem',
-				variant: 'destructive',
-			});
+			// toast({
+			// 	title: 'Não foi possível enviar a mensagem',
+			// 	variant: 'destructive',
+			// });
 
 			return false;
 		}
 
 		if (data?.id) {
-			toast({
-				title: 'Mensagem enviada com sucesso',
-				variant: 'success',
-			});
+			// toast({
+			// 	title: 'Mensagem enviada com sucesso',
+			// 	variant: 'success',
+			// });
 			reset();
 		}
 	}
@@ -144,7 +143,7 @@ export function ContactForm({ isDrawer = false }: { isDrawer: boolean }) {
 			{isDrawer && (
 				<DrawerFooter>
 					<Button
-						variant="secondary"
+						theme="secondary"
 						size="xl"
 						type="submit"
 						rounded="full"
@@ -166,7 +165,7 @@ export function ContactForm({ isDrawer = false }: { isDrawer: boolean }) {
 			{!isDrawer && (
 				<div className="flex flex-row md:justify-end">
 					<Button
-						variant="secondary"
+						theme="secondary"
 						size="xl"
 						type="submit"
 						rounded="full"

@@ -4,55 +4,46 @@ import { useSite } from '@/hooks/use-site';
 import { motion } from 'framer-motion';
 import { icons } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
 import { Button } from './ui/button';
-
-type Props = React.HTMLAttributes<HTMLDivElement> & {
-	size: number;
-};
 
 const MotionLink = motion(Link);
 
-const SocialNetworks = React.forwardRef<HTMLDivElement, Props>(
-	({ size, className }, ref) => {
-		const { data, isLoading } = useSite();
+function SocialNetworks({ className, ...props }: React.ComponentProps<'div'>) {
+	const { data, isLoading } = useSite();
 
-		if (isLoading) return <></>;
+	if (isLoading) return <></>;
 
-		return (
-			<div className={className} ref={ref}>
-				{data?.socialNavigation?.items.map(({ id, icon, url, label }) => {
-					const Icon = icons[icon as keyof typeof icons] ?? icons.Link;
+	return (
+		<div className={className} {...props}>
+			{data?.socialNavigation?.items.map(({ id, icon, url, label }) => {
+				const Icon = icons[icon as keyof typeof icons] ?? icons.Link;
 
-					return (
-						<MotionLink
-							href={url}
-							target="_blank"
-							rel="noopener noreferrer"
-							whileTap={{ scale: 0.97 }}
-							key={id}
-							passHref
-							className="relative mx-1 inline-flex items-center justify-center"
+				return (
+					<MotionLink
+						href={url}
+						target="_blank"
+						rel="noopener noreferrer"
+						whileTap={{ scale: 0.97 }}
+						whileHover={{ scale: 1.1 }}
+						key={id}
+						passHref
+						className="relative mx-1 inline-flex items-center justify-center"
+					>
+						<Button
+							theme="secondary"
+							variant="icon"
+							size="lg"
+							rounded="full"
+							hover="effect"
 						>
-							<Button
-								variant="secondary"
-								size="xl"
-								rounded="full"
-								icon
-								shadow
-								hover="effect"
-							>
-								<Icon size={size} />
-								<span className="sr-only">{label}</span>
-							</Button>
-						</MotionLink>
-					);
-				})}
-			</div>
-		);
-	},
-);
-
-SocialNetworks.displayName = 'SocialNetworks';
+							<Icon />
+							<span className="sr-only">{label}</span>
+						</Button>
+					</MotionLink>
+				);
+			})}
+		</div>
+	);
+}
 
 export { SocialNetworks };

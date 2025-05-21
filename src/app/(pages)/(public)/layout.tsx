@@ -3,7 +3,7 @@
 import * as App from '@/components/app';
 
 import { Fragment } from 'react';
-import '../../globals.scss';
+import '../../globals.css';
 import FacebookPixel from '@/components/facebook-pixel';
 import { env } from '@/config/env';
 

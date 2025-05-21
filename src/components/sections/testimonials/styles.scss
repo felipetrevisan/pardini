@@ -4,7 +4,7 @@
 
     &.swiper-slide-active,
     &.swiper-slide-next {
-      @apply opacity-100 zoom-in-150 zoom-out-75;
+      @apply opacity-100;
     }
   }
 }

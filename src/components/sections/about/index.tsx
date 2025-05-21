@@ -16,21 +16,23 @@ export function About() {
 	const { data, isLoading } = useSite();
 
 	return (
-        <motion.div
+		<motion.div
 			layout
 			className="container h-full w-screen flex flex-col lg:flex-row my-20"
 			data-section="about"
 		>
-            <div className="container flex flex-col lg:flex-row items-center justify-around gap-10">
+			<div className="container flex flex-col lg:flex-row items-center justify-around gap-10">
 				<div className="size-full md:size-[436px] max-w-[436px] max-h-[436px] flex justify-center items-center relative">
 					<Image src="/assets/about.png" alt="" width={436} height={436} />
 				</div>
 				<div className="w-full lg:w-1/2 flex flex-col gap-5">
-					<App.Title className="text-2xl md:text-4xl">A Pardini</App.Title>
+					<App.Title variant="secondary" size="xl">
+						A Pardini
+					</App.Title>
 					{isLoading &&
 						Array.from({ length: 10 }).map((_, index) => (
 							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-							(<Skeleton className="h-4 w-full" key={index} />)
+							<Skeleton className="h-4 w-full" key={index} />
 						))}
 					{!isLoading && data && (
 						<>
@@ -40,7 +42,7 @@ export function About() {
 									components={portableComponents}
 								/>
 							</div>
-							<Link href="/quem-somos" passHref legacyBehavior>
+							<Link href="/quem-somos" passHref>
 								<Button
 									variant="default"
 									size="xl"
@@ -57,6 +59,6 @@ export function About() {
 					)}
 				</div>
 			</div>
-        </motion.div>
-    );
+		</motion.div>
+	);
 }

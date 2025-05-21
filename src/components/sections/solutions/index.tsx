@@ -16,7 +16,9 @@ export function Solutions() {
 		<div className="h-full w-screen flex my-20" data-section="solutions">
 			<div className="container flex items-center justify-start gap-1">
 				<div className="w-full flex flex-col gap-14">
-					<App.Title>Nossas Soluções</App.Title>
+					<App.Title variant="secondary" size="lg">
+						Nossas Soluções
+					</App.Title>
 					<div className="w-full flex justify-center">
 						<Carousel>
 							<CarouselContent>

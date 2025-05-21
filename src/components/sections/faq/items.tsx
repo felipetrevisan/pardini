@@ -67,11 +67,10 @@ export function Items({ data }: { data: Faq[] }) {
 			<Drawer>
 				<DrawerTrigger asChild>
 					<Button
-						variant="secondary"
+						theme="tertiary"
 						size="xl"
 						rounded="full"
 						hover="effect"
-						shadow
 						fullWidth
 						className="mt-6"
 					>
@@ -82,7 +81,7 @@ export function Items({ data }: { data: Faq[] }) {
 					<DrawerHeader>
 						<DrawerTitle>Perguntas Frequentes</DrawerTitle>
 					</DrawerHeader>
-					<ScrollArea className="h-full">
+					<ScrollArea className="h-full overflow-hidden">
 						<Accordion
 							type="single"
 							collapsible
@@ -120,12 +119,12 @@ export function Items({ data }: { data: Faq[] }) {
 						</Accordion>
 					</ScrollArea>
 					<DrawerFooter>
-						<DrawerClose>
+						<DrawerClose asChild>
 							<Button
-								variant="secondary"
+								theme="secondary"
 								rounded="full"
 								size="xl"
-								className="w-full md:w-[400px]"
+								className="w-full self-center md:w-[400px]"
 							>
 								Fechar
 							</Button>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
 import { env } from '@/config/env';
 import { AppProvider } from '@/hooks/use-app';
 import { Bar } from '@bprogress/next';
@@ -25,8 +25,9 @@ export default function Providers({ children }: { children: ReactNode }) {
 				<AppProvider>
 					<ProgressProvider
 						height="6px"
+						color="#570000"
 						options={{ showSpinner: false }}
-						shallowRouting				
+						shallowRouting
 					>
 						<Bar />
 						{children}

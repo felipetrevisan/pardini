@@ -15,7 +15,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 export function Home({ images }: { images: Featured[] }) {
 	return (
 		<motion.div layout className="w-screen" data-section="home">
-			<div className="aspect-[11/15] md:aspect-[10/7] lg:aspect-[7/4] xl:aspect-[12/4] flex items-center justify-start space-y-1 relative bg-white shadow-xl">
+			<div className="aspect-6/9 md:aspect-10/7 lg:aspect-7/4 xl:aspect-12/4 flex items-center justify-start space-y-1 relative bg-white shadow-xl">
 				<Swiper
 					slidesPerView={1}
 					loop={true}
@@ -29,11 +29,11 @@ export function Home({ images }: { images: Featured[] }) {
 					{images?.map(({ id, title, subtitle, image }) => (
 						<SwiperSlide
 							key={id}
-							className="relative after:absolute after:z-[3] after:bg-gradient-to-b after:from-transparent after:to-background after:w-full after:h-56 after:-bottom-10 before:absolute before:z-[2] before:top-0 before:bg-gradient-to-b before:from-black/60 before:to-transparent before:w-full before:h-[100px] bg-primary"
+							className="relative after:absolute after:z-3 after:bg-linear-to-b after:from-transparent after:to-background after:w-full after:h-56 after:-bottom-10 before:absolute before:z-2 before:top-0 before:bg-linear-to-b before:from-black/60 before:to-transparent before:w-full before:h-[100px] bg-primary"
 						>
 							{image && (
 								<Image
-									className="h-auto w-full z-[1]"
+									className="h-auto w-full z-1"
 									alt=""
 									src={urlForImage(image.asset).url()}
 									sizes="100vw"
@@ -58,12 +58,12 @@ export function Home({ images }: { images: Featured[] }) {
 									<Drawer>
 										<DrawerTrigger asChild>
 											<Button
-												variant="secondary"
+												theme="secondary"
 												size="xl"
 												rounded="full"
 												hover="effect"
 												shadow
-												className="flex items-center justify-center gap-2"
+												className="flex items-center justify-center gap-2 w-full md:w-sm"
 											>
 												<MailIcon fontSize={10} />
 												Entre em contato

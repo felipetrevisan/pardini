@@ -46,7 +46,7 @@ export function Items() {
 						slidesPerView: 3,
 					},
 				}}
-				className="w-full h-full !flex flex-col items-center justify-center gap-4"
+				className="w-full h-full flex! flex-col items-center justify-center gap-4"
 			>
 				{items.map(({ id, ...rest }) => (
 					<SwiperSlide key={id}>

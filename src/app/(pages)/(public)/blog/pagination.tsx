@@ -43,8 +43,8 @@ export function PostsPagination({
 	if (pageLength === 0) return <></>;
 
 	return (
-        <div className="flex items-center justify-end mb-10">
-            <div className="flex items-center space-x-6 lg:space-x-8">
+		<div className="flex items-center justify-end mb-10">
+			<div className="flex items-center space-x-6 lg:space-x-8">
 				<Pagination>
 					<PaginationContent>
 						<PaginationItem>
@@ -57,8 +57,8 @@ export function PostsPagination({
 						</PaginationItem>
 						{Array.from({ length: pageLength }).map((_, index) => (
 							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-							(<PaginationItem key={index + 1}>
-                                <PaginationLink
+							<PaginationItem key={index + 1}>
+								<PaginationLink
 									href={`/blog?${createQueryString('pageIndex', String(index))}`}
 									prefetch
 									scroll={false}
@@ -66,7 +66,7 @@ export function PostsPagination({
 								>
 									{index + 1}
 								</PaginationLink>
-                            </PaginationItem>)
+							</PaginationItem>
 						))}
 						<PaginationItem>
 							<PaginationNext
@@ -79,6 +79,6 @@ export function PostsPagination({
 					</PaginationContent>
 				</Pagination>
 			</div>
-        </div>
-    );
+		</div>
+	);
 }

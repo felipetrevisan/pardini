@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 import { Inter } from 'next/font/google';
 
-import '../globals.scss';
+import '../globals.css';
 import { getSiteConfig } from '@/server/get-site-config';
 import Providers from './providers';
 
@@ -19,14 +19,13 @@ export async function generateMetadata(): Promise<Metadata> {
 	const description = settings?.description || '';
 	const keywords = settings?.keywords || '';
 
-
 	return {
 		title: {
 			template: `%s | ${title}`,
 			default: title,
 		},
 		description,
-		keywords
+		keywords,
 	};
 }
 
@@ -35,6 +34,7 @@ export default function RootLayout({
 }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" className={`${inter.className}`} suppressHydrationWarning>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<body className="antialiased h-screen relative">
 				<Providers>{children}</Providers>
 				<SpeedInsights />

@@ -9,8 +9,10 @@ export function Testimonials() {
 		>
 			<div className="container w-full flex flex-col gap-14">
 				<div className="flex flex-col">
-					<App.Title>Depoimentos</App.Title>
-					<App.Subtitle>
+					<App.Title variant="secondary" size="lg">
+						Depoimentos
+					</App.Title>
+					<App.Subtitle size="lg">
 						O que{' '}
 						<span className="text-primary drop-shadow-[0px_1px_2px_var(--tw-shadow-color)] shadow-slate-200">
 							nossos clientes

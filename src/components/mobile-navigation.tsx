@@ -113,23 +113,18 @@ export const MobileNavigation = ({
 									whileHover={{ scale: 1.1 }}
 									whileTap={{ scale: 0.95 }}
 								>
-									<Link
+									<NavigationMenuLink
+										// biome-ignore lint/style/noNonNullAssertion: <explanation>
+										active={(url.usePath && isMenuActive(url.path!)) || false}
 										// biome-ignore lint/style/noNonNullAssertion: <explanation>
 										href={url.usePath ? url.path! : url.externalUrl!}
 										target={
 											!url.usePath && url.externalUrl ? '_blank' : undefined
 										}
-										legacyBehavior
-										passHref
+										className="data-active:text-accent relative"
 									>
-										<NavigationMenuLink
-											// biome-ignore lint/style/noNonNullAssertion: <explanation>
-											active={(url.usePath && isMenuActive(url.path!)) || false}
-											className="data-[active]:text-accent relative"
-										>
-											{label}
-										</NavigationMenuLink>
-									</Link>
+										{label}
+									</NavigationMenuLink>
 								</MenuItemMotion>
 							)}
 						</Fragment>

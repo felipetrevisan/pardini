@@ -11,7 +11,7 @@ type BlogDetailsProps = Author & Pick<Post, 'date'>;
 
 export function PostDetails({ name, picture, date }: BlogDetailsProps) {
 	return (
-		<figcaption className="flex items-center justify-center flex-shrink">
+		<figcaption className="flex items-center justify-center shrink">
 			<Avatar>
 				<AvatarImage src={picture ? urlForImage(picture).url() : undefined} />
 				<AvatarFallback>{getWordInitials(name)}</AvatarFallback>

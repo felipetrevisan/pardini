@@ -29,10 +29,14 @@ export function About({ initialData }: { initialData: AboutType[] }) {
 							viewport={{ once: true }}
 						>
 							<div className="px-10 w-full flex flex-col justify-center gap-5">
-								{title && <App.Title className="text-4xl">{title}</App.Title>}
+								{title && (
+									<App.Title variant="secondary" size="lg">
+										{title}
+									</App.Title>
+								)}
 								<div
 									className={cn(
-										'relative grid gap-16 before:bg-secondary/5 before:absolute before:w-full before:h-full before:-z-[1] before:rounded-lg backdrop-blur-xl p-10',
+										'relative grid gap-16 before:bg-secondary/5 before:absolute before:w-full before:h-full before:-z-1 before:rounded-lg backdrop-blur-xl p-10',
 										{
 											'md:grid-cols-[2fr_1fr]':
 												picture.hasPicture &&
@@ -55,11 +59,11 @@ export function About({ initialData }: { initialData: AboutType[] }) {
 													className={cn(
 														'shadow-[-.50rem_.75rem] shadow-tertiary',
 														{
-															'rounded-[16%_84%_22%_78%_/_73%_28%_72%_27%]':
+															'rounded-[16%_84%_22%_78%/73%_28%_72%_27%]':
 																idx === 0,
-															'rounded-[0%_100%_0%_100%_/_73%_29%_71%_27%]':
+															'rounded-[0%_100%_0%_100%/73%_29%_71%_27%]':
 																idx === 1,
-															'rounded-[16%_84%_19%_81%_/_88%_10%_90%_12%]':
+															'rounded-[16%_84%_19%_81%/88%_10%_90%_12%]':
 																idx === 2,
 														},
 													)}
@@ -83,11 +87,11 @@ export function About({ initialData }: { initialData: AboutType[] }) {
 													className={cn(
 														'shadow-[-.50rem_.75rem] shadow-tertiary',
 														{
-															'rounded-[16%_84%_22%_78%_/_73%_28%_72%_27%]':
+															'rounded-[16%_84%_22%_78%/73%_28%_72%_27%]':
 																idx === 0,
-															'rounded-[0%_100%_0%_100%_/_73%_29%_71%_27%]':
+															'rounded-[0%_100%_0%_100%/73%_29%_71%_27%]':
 																idx === 1,
-															'rounded-[16%_84%_19%_81%_/_88%_10%_90%_12%]':
+															'rounded-[16%_84%_19%_81%/88%_10%_90%_12%]':
 																idx === 2,
 														},
 													)}

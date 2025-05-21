@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export function ServiceSkeleton() {
 	return (
-		<Card className="shadow hover:shadow-xl group relative overflow-hidden select-none cursor-pointer bg-gradient-to-r hover:from-slate-500 hover:via-primary hover:to-secondary p-1">
+		<Card className="shadow hover:shadow-xl group relative overflow-hidden select-none cursor-pointer bg-linear-to-r hover:from-slate-500 hover:via-primary hover:to-secondary p-1">
 			<CardContent className="flex h-80 items-center justify-center p-6 w-full bg-white overflow-hidden rounded-lg">
 				<div className="flex flex-col items-center justify-start gap-5">
 					<div className="flex flex-col items-center justify-center gap-5">
