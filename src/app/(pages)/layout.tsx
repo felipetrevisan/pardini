@@ -26,6 +26,15 @@ export async function generateMetadata(): Promise<Metadata> {
 		},
 		description,
 		keywords,
+		robots: {
+			index: true,
+			follow: true,
+			googleBot: {
+				index: true,
+				follow: true,
+			},
+			
+		}
 	};
 }
 
